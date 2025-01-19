@@ -3,16 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../store/reducers/clientReducer'
 
-export default function SearchPage() {
+export default function TermsPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setCurrentPage('search'))
+        dispatch(setCurrentPage('terms'))
     }, [])
 
     return (
         <>
-            <p>SearchPage</p>
+            <p>TermsPage</p>
         </>
     )
 }
