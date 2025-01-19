@@ -30,3 +30,11 @@
     // переходы и анимации
     --transition-speed: 0.2s ease;
 }
+
+[data-theme='light'] {
+    --color-background: #FFFFFF;
+}
+
+[data-theme='dark'] {
+    --color-background: #1A1A1A;
+}
