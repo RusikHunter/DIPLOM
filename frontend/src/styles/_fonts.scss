@@ -1,0 +1,62 @@
+// файл для подключения шрифтов
+@use "mixins" as *;
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../assets/fonts/Inter18pt-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../assets/fonts/Inter18pt-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../assets/fonts/Inter18pt-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../assets/fonts/Inter18pt-Bold.woff2') format('woff2');
+}
+
+
+@font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../assets/fonts/Poppins-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../assets/fonts/Poppins-Medium.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../assets/fonts/Poppins-Bold.woff2') format('woff2');
+}
+
+// базовые настройки fz для заголовков h1, h2, h3 и дефолтного текста во всем приложении (тексту явно не указывается fz) 
+h1 { @include fluid-text(36, 38) }
+h2 { @include fluid-text(32, 24) }
+h3 { @include fluid-text(24, 16) }
+body { @include fluid-text(18, 14) }
+
+h1 {
+    color: red;
+}

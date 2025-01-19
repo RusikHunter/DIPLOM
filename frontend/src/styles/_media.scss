@@ -1,0 +1,36 @@
+// файл с миксинами медиазапросов
+
+// Миксин для обычного компьютера (1920px - 1440px)
+@mixin desktop {
+    @media (max-width: 1920px) and (min-width: 1440px) {
+      @content;
+    }
+}
+
+// Миксин для лаптопа (1439px - 1024px)
+@mixin laptop {
+    @media (max-width: 1439px) and (min-width: 1024px) {
+      @content;
+    }
+}
+  
+// Миксин для планшета (1023px - 768px)
+@mixin tablet {
+    @media (max-width: 1023px) and (min-width: 768px) {
+      @content;
+    }
+}
+  
+// Миксин для мобильного устройства (767px - 480px)
+@mixin mobile {
+    @media (max-width: 767px) and (min-width: 480px) {
+      @content;
+    }
+}
+  
+// Миксин для маленького мобильного устройства (479px - 360px)
+@mixin mobile-small {
+    @media (max-width: 479px) and (min-width: 360px) {
+      @content;
+    }
+}
