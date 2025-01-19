@@ -1,10 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import MainPage from './pages/MainPage/MainPage';
+import SearchPage from './pages/SearchPage/SearchPage';
 
 export default function App() {
     return (
-        <>
-            <h1>Hello world!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas veniam alias illum sapiente hic illo distinctio ut, magni doloremque repellendus quasi deleniti tempora obcaecati consequatur! Nostrum nobis alias molestiae error!</p>
-        </>
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/search" element={<SearchPage />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
     )
 }
