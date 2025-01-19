@@ -1,0 +1,63 @@
+.header {
+    background-color: var(--color-background);
+
+    &__inner {
+
+    }
+  
+    &__row {
+        max-width: 1720px;
+        margin-inline: auto;
+        justify-content: start;
+    }
+  
+    &__column {
+      &--1 {
+      }
+  
+      &--2 {
+      }
+  
+      &--3 {
+      }
+    }
+  
+    &__link--image {
+    }
+  
+    &__logo {
+    }
+  
+    &__navigation {
+
+      .header__list--navigation {
+
+        .header__list-item {
+
+          .header__link {
+
+          }
+        }
+      }
+    }
+  
+    &__tools {
+
+      .header__list--tools {
+  
+        .header__button--theme {
+
+        }
+  
+        .header__button--language {
+
+        }
+      }
+    }
+  
+    &__image--account {
+    }
+  
+    .header__button--enter {
+    }
+  }

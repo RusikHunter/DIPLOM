@@ -1,0 +1,40 @@
+// файл с css-переменными
+
+:root {
+    // цвета
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-gray: #767676;
+    --color-lightgray: #C1C1C1;
+    --color-orange: #FBA919;
+    --color-red: #F1595B;
+    --color-green: #6FD584;
+    --color-beige: #F2BB63;
+    --color-lightbeige: #F0CE9D;
+
+    // градиенты
+    --gradient-header: linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0) 100%);
+
+    // шрифты
+    --font-primary: "Poppins", Arial, sans-serif;
+    --font-secondary: "Inter", Arial, sans-serif;
+
+    // рамки
+    --border-radius: 10px;
+
+    // отступы
+    --padding-small: 30px;
+    --padding-medium: 60px;
+    --padding-big: 120px;
+
+    // переходы и анимации
+    --transition-speed: 0.2s ease;
+}
+
+[data-theme='light'] {
+    --color-background: #FFFFFF;
+}
+
+[data-theme='dark'] {
+    --color-background: #1A1A1A;
+}

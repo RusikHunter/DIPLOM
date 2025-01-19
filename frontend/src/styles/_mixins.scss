@@ -1,0 +1,31 @@
+// файл с миксинами; повторяющиеся куски css-свойств
+
+@use 'sass:math';
+
+// миксин для адаптивного размера шрифтов,
+//первый аргумент - максимальный размер при ширине экрана 1920px, второй - минимальный размер при ширине экрана 360px
+@mixin fluid-text($max: 48, $min: 16) {
+  $maxViewportWidth: 1920;
+  $minViewportWidth: 360;
+
+  $maxSize: math.div($max, 16);
+  $minSize: math.div($min, 16);
+  $maxWidth: math.div($maxViewportWidth, 16);
+  $minWidth: math.div($minViewportWidth, 16);
+
+  $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+  $yAxisIntersection: -$minWidth * $slope + $minSize;
+
+  font-size: clamp(
+    #{$minSize * 1rem},
+    #{$yAxisIntersection * 1rem} + #{$slope * 100vw},
+    #{$maxSize * 1rem}
+  );
+}
+
+// миксин для удобного задавания шрифта, его начертания и вертикальных отступов
+@mixin font($family, $weight, $line-height) {
+  font-family: $family;
+  font-weight: $weight;
+  line-height: $line-height; 
+}
