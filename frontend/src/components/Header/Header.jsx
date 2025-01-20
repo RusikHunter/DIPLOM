@@ -77,6 +77,8 @@ export default function Header() {
                     </div>
                 </div>
             </div>
+
+            <div id="burger-root"></div>
         </header>
     )
 }

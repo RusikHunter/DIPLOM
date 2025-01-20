@@ -2,7 +2,7 @@ import React from "react"
 import { useState } from "react"
 import './BurgerButton.scss'
 
-export default function BurgerMenu() {
+export default function BurgerButton() {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
