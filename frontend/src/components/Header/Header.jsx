@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import "./Header.scss"
 import logoVibixImage from '../../assets/icons/logo.svg';
-import searchIcon from '../../assets/icons/search.svg'
-import themeIcon from '../../assets/icons/theme.svg'
+import avatarIcon from '../../assets/icons/avatar.png'
 import { setLanguage, setTheme, setIsLogged } from '../../store/reducers/clientReducer'
 import { useDispatch } from 'react-redux';
+import BurgerMenu from './BurgerMenu/BurgerMenu';
 
 
 export default function Header() {
@@ -65,16 +65,15 @@ export default function Header() {
                     <div className="header__column header__column--3 column">
                         <div className="header__tools">
                             <ul className='header__list--tools'>
-                                <a href="#" className='header__link--image'>
-                                    <img src={searchIcon} alt="search" />
-                                </a>
-                                <button className="header__button--theme" onClick={() => dispatch(setTheme())}>T</button>
-                                <button className="header__button--language" onClick={() => dispatch(setLanguage())}>
-                                    {translations[language].languageSign}
+                                <button className="header__button--search">
                                 </button>
+                                <button className="header__button--theme" onClick={() => dispatch(setTheme())}></button>
+                                <button className="header__button--language" onClick={() => dispatch(setLanguage())}></button>
                             </ul>
                         </div>
-                        {isLogged === true ? <img className='header__image--account' src={themeIcon} alt='Account' /> : <button class='header__button--enter'>{translations[language].accountButton}</button>}
+                        {isLogged === true ? <img className='header__image--account' src={avatarIcon} alt='Account' /> : <button className='header__button--enter'>{translations[language].accountButton}</button>}
+
+                        <BurgerMenu />
                     </div>
                 </div>
             </div>
