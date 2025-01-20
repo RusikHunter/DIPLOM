@@ -1,3 +1,16 @@
 // файл с глобальными стилями только для селекторов тегов
 
 // ! in processing...
+
+a, a:link, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: var(--color-text)
+}
+
+button {
+    border: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}

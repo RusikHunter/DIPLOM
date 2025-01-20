@@ -6,7 +6,7 @@ const clientSlice = createSlice({
         language: 'ua',
         currentPage: 'main',
         theme: 'dark',
-        isLogged: false,
+        isLogged: true,
     },
     reducers: {
         setLanguage: (state) => {
