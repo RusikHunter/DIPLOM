@@ -6,7 +6,7 @@ import logoVibixImage from '../../assets/icons/logo.svg';
 import avatarIcon from '../../assets/icons/avatar.png'
 import { setLanguage, setTheme, setIsLogged } from '../../store/reducers/clientReducer'
 import { useDispatch } from 'react-redux';
-import BurgerMenu from './BurgerMenu/BurgerMenu';
+import BurgerButton from './BurgerButton/BurgerButton';
 
 
 export default function Header() {
@@ -73,7 +73,7 @@ export default function Header() {
                         </div>
                         {isLogged === true ? <img className='header__image--account' src={avatarIcon} alt='Account' /> : <button className='header__button--enter'>{translations[language].accountButton}</button>}
 
-                        <BurgerMenu />
+                        <BurgerButton />
                     </div>
                 </div>
             </div>

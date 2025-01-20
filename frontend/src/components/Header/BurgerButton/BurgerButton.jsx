@@ -1,5 +1,6 @@
 import React from "react"
 import { useState } from "react"
+import './BurgerButton.scss'
 
 export default function BurgerMenu() {
     const [isOpen, setIsOpen] = useState(false)

@@ -35,12 +35,16 @@
             padding-inline: 0;
             width: 250px;
         }
+
+        @include mobile-small {
+            width: 180px;
+        }
       }
   
       &--3 {
         flex-grow: 1;
         display: flex;
-        flex-direction: row;
+        flex-direction: row !important;
         justify-content: end;
         align-items: center;
         gap: var(--indent-small);
@@ -51,9 +55,18 @@
     }
   
     &__link--image {
+        transition: var(--transition-speed);
+
+        &:hover {
+            transform: scale(var(--scale-size));
+        }
     }
   
     &__logo {
+        @include mobile-small {
+            width: 70px;
+            height: auto;
+        }
     }
   
     &__navigation {
@@ -70,9 +83,13 @@
         }
 
         .header__list-item {
-            @include fluid-text(18, 14);
+            @include fluid-text(18, 10);
             @include font("Arial", 700, 1);
             color: var(--color-text);
+
+            @include mobile-small {
+
+            }
 
           .header__link {
 
