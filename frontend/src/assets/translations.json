@@ -1,0 +1,20 @@
+{
+    "ua": {
+        "navMain": "Головна",
+        "navFilms": "Фільми",
+        "navFavorites": "Збережене",
+        "accountButton": "Увійти",
+        "burgerSearch": "Пошук",
+        "burgerTheme": "Тема",
+        "burgerLanguage": "Мова"
+    },
+    "en": {
+        "navMain": "Main",
+        "navFilms": "Films",
+        "navFavorites": "Favorites",
+        "accountButton": "LogIn",
+        "burgerSearch": "Search",
+        "burgerTheme": "Theme",
+        "burgerLanguage": "Language"
+    }
+}

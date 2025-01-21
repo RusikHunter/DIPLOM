@@ -1,0 +1,72 @@
+.burger {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background-color: var(--color-background) !important;
+    padding-top: var(--indent-medium);
+
+    @include mobile-small {
+        padding-top: var(--indent-small);
+    }
+  
+    .burger__wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: var(--indent-small);
+
+      .burger__image--account {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+      }
+
+      .burger__button--account {
+        width: 96px;
+        border-radius: var(--border-radius-small);
+        background-color: var(--color-orange);
+        color: var(--color-text);
+        @include fluid-text(12, 12);
+        @include font('Arial', 700, 1);
+        padding-block: 10px;
+        margin: 32px;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        transform: scale(1.4);
+      }
+
+      .burger__tools-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--indent-minimum);
+        
+        .burger__tool-wrap {
+            display: flex;
+            gap: var(--indent-minimum);
+
+
+            .burger__tool-term {
+                @include fluid-text(18, 18);
+                @include font('Arial', 500, 1);
+                color: var(--color-text)
+            }
+    
+            .burger__tool-definition {
+              svg {
+                position: relative;
+                top: -1px;
+              }
+    
+              .burger__button--search, .burger__button--theme, .burger__button--language {
+                width: 20px;
+                height: 20px;
+                background-color: var(--color-background);
+                padding: 0;
+              }
+            }
+        }
+      }
+    }
+  }

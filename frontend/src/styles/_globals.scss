@@ -14,3 +14,9 @@ button {
 body::-webkit-scrollbar {
     display: none;
 }
+
+svg {
+    background: transparent;
+    color: var(--color-text);
+    background-color: var(--color-background) !important;
+}
