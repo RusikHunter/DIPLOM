@@ -6,7 +6,8 @@ const clientSlice = createSlice({
         language: 'ua',
         currentPage: 'main',
         theme: 'dark',
-        isLogged: true,
+        isLogged: false,
+        isBurgerOpen: false,
     },
     reducers: {
         setLanguage: (state) => {
@@ -21,8 +22,14 @@ const clientSlice = createSlice({
         setIsLogged: (state) => {
             state.isLogged = !state.isLogged
         },
+        setIsBurgerOpen: (state) => {
+            state.isBurgerOpen = !state.isBurgerOpen
+        },
+        resetBurgerMenu: (state) => {
+            state.isBurgerOpen = false;
+        },
     },
 })
 
-export const { setLanguage, setCurrentPage, setTheme, setIsLogged } = clientSlice.actions
+export const { setLanguage, setCurrentPage, setTheme, setIsLogged, setIsBurgerOpen, resetBurgerMenu } = clientSlice.actions
 export default clientSlice.reducer
