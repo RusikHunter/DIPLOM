@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage, setIsBurgerOpen } from '../../store/reducers/clientReducer'
+import './MainPage.scss'
 import temp from '../../assets/icons/temp.png'
 
 export default function MainPage() {

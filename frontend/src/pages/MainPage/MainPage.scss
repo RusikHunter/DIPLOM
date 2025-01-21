@@ -1,0 +1,127 @@
+.intro {
+    background-image: url('../../assets/icons/bg-temp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 700px;
+
+    &__inner {
+    }
+
+    &__row {
+        margin-top: 128px;
+        padding-inline: 178px 142px;
+        gap: var(--indent-small);
+    }
+
+    &__column {
+    }
+
+    &__column--1 {
+    }
+
+    &__column--2 {
+        justify-content: end;
+        gap: var(--indent-minimum);
+        flex: 1;
+    }
+
+    &__title-wrap {
+        display: flex;
+        gap: var(--indent-minimum);
+    }
+
+    &__title {
+        @include fluid-text(32, 24);
+        @include font('Arial', 700, 1);
+        color: var(--color-white); // ! здесь не использую --color-text из-за того, что он не меняется при смене темы
+    }
+
+    &__year {
+        position: relative;
+        top: 7px;
+        @include fluid-text(24, 18);
+        @include font('Arial', 700, 1);
+        color: var(--color-white);
+    }
+
+    &__statistic {
+        display: flex;
+        gap: var(--indent-minimum);
+        
+        & span {
+            @include fluid-text(16, 12);
+            @include font('Arial', 500, 1);
+            color: var(--color-white);
+            padding-left: 28px;
+
+            &::before {
+                content: "";
+                display: block;
+                position: relative;
+                top: 18px;
+                right: 28px;
+                width: 24px;
+                height: 24px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+
+    &__time {
+        &::before {
+            background-image: url('../../assets/icons/time.svg');
+        }
+    }
+
+    &__censure {
+        &::before {
+            background-image: url('../../assets/icons/censore.svg');
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &__rating {
+        &::before {
+            background-image: url('../../assets/icons/rating.svg');
+        }
+    }
+
+    &__genre-list {
+    }
+
+    &__genre {
+    }
+
+    &__genre-title {
+    }
+
+    &__description-wrap {
+    }
+
+    &__description {
+    }
+
+    &__tools {
+    }
+
+    &__button--play {
+    }
+
+    &__button--add-to-favorites {
+    }
+
+    &__button--like {
+    }
+
+    &__like--count {
+    }
+
+    &__button--dislike {
+    }
+
+    &__dislike--count {
+    }
+}
