@@ -5,25 +5,81 @@
     background-repeat: no-repeat;
     height: 700px;
 
+    @include laptop {
+        height: auto;
+        padding-bottom: 96px;
+    }
+
+    @include tablet {
+        padding-bottom: 64px;
+    }
+    
+    @include mobile {
+        padding-bottom: 128px;
+    }
+
+    @include mobile-small {
+        padding-bottom: 32px;
+    }
+
     &__inner {
     }
 
     &__row {
-        margin-top: 128px;
+        padding-top: 128px;
         padding-inline: 178px 142px;
         gap: var(--indent-small);
+
+        @include laptop {
+            padding-top: 96px;
+            padding-left: 150px;
+            padding-right: var(--indent-big);
+        }
+
+        @include tablet {
+            padding-top: 64px;
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-top: 32px;
+            padding-inline: var(--indent-small);
+        }
+
+        @include mobile-small {
+            flex-direction: column;
+        }
     }
 
     &__column {
     }
 
     &__column--1 {
+        @include laptop {
+            width: 33%;
+        }
+
+        @include mobile-small {
+            flex-direction: column;
+            margin-inline: auto;
+        }
     }
 
     &__column--2 {
         justify-content: end;
-        gap: var(--indent-minimum);
+        gap: 20px;
         flex: 1;
+
+        @include laptop {
+            flex: none;
+            width: 66%;
+        }
+
+        @include mobile-small {
+            width: 100%;
+            flex-direction: column;
+            gap: var(--indent-minimum);
+        }
     }
 
     &__title-wrap {
@@ -111,6 +167,10 @@
 
     &__description-wrap {
         width: 690px;
+
+        @include laptop {
+            width: 80%;
+        }
     }
 
     &__description {
@@ -123,6 +183,17 @@
         display: flex;
         align-items: center;
         gap: var(--indent-minimum);
+
+        @include mobile {
+            position: relative;
+            left: -90px;
+            top: 75px;
+        }
+
+        @include mobile-small {
+            position: static;
+            gap: 5px;
+        }
     }
 
     &__button--play {
@@ -130,8 +201,13 @@
         padding: 12px var(--indent-minimum);
         @include fluid-text(24, 24);
         @include font('Arial', 700, 1.2);
-        color: var(--color-text); // ! здесь логика тема предусматривает смену цвета у кнопки
+        color: var(--color-white);
         border-radius: var(--border-radius-small);
+
+        @include mobile {
+            @include fluid-text(14, 14);
+            padding: 6px 8px;
+        }
     }
 
     &__button--add-to-favorites {
@@ -139,6 +215,12 @@
 
         & svg {
             background-color: transparent !important;
+            color: var(--color-white);
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 
@@ -152,6 +234,12 @@
 
         & svg {
             background-color: transparent !important;
+            color: var(--color-white);
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 
@@ -171,6 +259,12 @@
 
         & svg {
             background-color: transparent !important;
+            color: var(--color-white);
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 
