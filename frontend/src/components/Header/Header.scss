@@ -235,16 +235,17 @@
     }
   }
 
-// [data-theme="light"] {
-//     --header-search-image: url('../../assets/icons/search-light.svg');
-//     --header-theme-image: url('../../assets/icons/theme-light.svg');
-//     --header-language-image: url('../../assets/icons/languageEN-light.svg')
-// }
+[data-page="main"] .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--gradient-wb);
+    color: var(--color-white) !important;
 
-// [data-theme="dark"] {
-//     --header-search-image: url('../../assets/icons/search-dark.svg');
-//     --header-theme-image: url('../../assets/icons/theme-dark.svg');
-//     --header-language-image: url('../../assets/icons/languageEN-dark.svg')
-// }
+    --color-text: var(--color-white);
+    --color-background: transparent;
 
-// ! todo languages -->
+    & svg {
+        background-color: transparent !important;
+    }
+}

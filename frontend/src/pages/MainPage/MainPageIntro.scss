@@ -5,6 +5,36 @@
     background-repeat: no-repeat;
     height: 700px;
 
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 65px; /* Ширина градиента по бокам */
+        height: 100%;
+        background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+        z-index: 10; /* Помещаем за хедер */
+
+        @include laptop {
+            width: 30px;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 65px; /* Ширина градиента по бокам */
+        height: 100%;
+        background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+        z-index: 10; /* Помещаем за хедер */
+
+        @include laptop {
+            width: 30px;
+        }
+    }
+
     @include laptop {
         height: auto;
         padding-bottom: 96px;
@@ -31,22 +61,23 @@
         gap: var(--indent-small);
 
         @include laptop {
-            padding-top: 96px;
+            padding-top: 176px;
             padding-left: 150px;
             padding-right: var(--indent-big);
         }
 
         @include tablet {
-            padding-top: 64px;
+            padding-top: 144px;
             padding-inline: var(--indent-medium);
         }
 
         @include mobile {
-            padding-top: 32px;
+            padding-top: 112px;
             padding-inline: var(--indent-small);
         }
 
         @include mobile-small {
+            padding-top: 72px;
             flex-direction: column;
         }
     }
@@ -194,6 +225,14 @@
             position: static;
             gap: 5px;
         }
+
+        button {
+            transition: var(--transition-speed);
+
+            &:hover {
+                transform: scale(var(--scale-size));
+            }
+        }
     }
 
     &__button--play {
@@ -216,6 +255,8 @@
         & svg {
             background-color: transparent !important;
             color: var(--color-white);
+            position: relative;
+            top: 4px;
 
             @include mobile-small {
                 width: 30px;
