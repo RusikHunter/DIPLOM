@@ -27,6 +27,8 @@
     }
 
     &__title-wrap {
+        position: relative;
+        top: 12px;
         display: flex;
         gap: var(--indent-minimum);
     }
@@ -90,38 +92,91 @@
     }
 
     &__genre-list {
+        display: flex;
+        gap: 10px;
     }
 
     &__genre {
+        background-color: none;
+        border: 2px solid var(--color-magenta);
+        padding-inline: var(--indent-minimum);
+        border-radius: var(--border-radius-small);
     }
 
     &__genre-title {
+        @include fluid-text(18, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
     }
 
     &__description-wrap {
+        width: 690px;
     }
 
     &__description {
+        @include fluid-text(18, 14);
+        @include font('Arial', 500, 1.2);
+        color: var(--color-white);
     }
 
     &__tools {
+        display: flex;
+        align-items: center;
+        gap: var(--indent-minimum);
     }
 
     &__button--play {
+        background-color: var(--color-orange);
+        padding: 12px var(--indent-minimum);
+        @include fluid-text(24, 24);
+        @include font('Arial', 700, 1.2);
+        color: var(--color-text); // ! здесь логика тема предусматривает смену цвета у кнопки
+        border-radius: var(--border-radius-small);
     }
 
     &__button--add-to-favorites {
+        background: none;
+
+        & svg {
+            background-color: transparent !important;
+        }
     }
 
     &__button--like {
+        display: flex;
+        background: none;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        top: -3px;
+
+        & svg {
+            background-color: transparent !important;
+        }
     }
 
     &__like--count {
+        @include fluid-text(16, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
     }
 
     &__button--dislike {
+        display: flex;
+        background: none;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        top: -3px;
+
+        & svg {
+            background-color: transparent !important;
+        }
     }
 
     &__dislike--count {
+        @include fluid-text(16, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
     }
 }
