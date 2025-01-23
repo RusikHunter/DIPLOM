@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage, setIsBurgerOpen } from '../../store/reducers/clientReducer'
 import './MainPageIntro.scss'
+import './MainPageCollections.scss'
 import temp from '../../assets/icons/temp.png'
+import FilmCardSlider from '../../components/FilmCardSlider/FilmCardSlider'
 
 export default function MainPage() {
     const dispatch = useDispatch()
@@ -89,9 +91,9 @@ export default function MainPage() {
 
             <section className='section section__collections collections'>
                 <div className="collections__inner container">
-                    <div className="collections__row row">
-
-                    </div>
+                    <FilmCardSlider title={'Новинки'} />
+                    <FilmCardSlider title={'Вам сподобається'} />
+                    <FilmCardSlider title={'Топ 250'} />
                 </div>
             </section>
         </main>
