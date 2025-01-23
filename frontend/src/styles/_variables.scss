@@ -15,7 +15,7 @@
     --color-lightbeige: #F0CE9D;
 
     // градиенты
-    --gradient-header: linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0) 100%);
+    --gradient-wb: linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0) 100%);
 
     // шрифты
     --font-primary: "Poppins", Arial, sans-serif;
@@ -33,7 +33,7 @@
 
     // переходы и анимации
     --transition-speed: 0.4s ease;
-    --scale-size: 1.1;
+    --scale-size: 1.05;
 }
 
 // переменные, меняющие свое значение при раздличных свойствах [data-theme]

@@ -1,0 +1,36 @@
+.film-card {
+    width: 245px;
+    background-color: var(--color-background);
+    
+    // ! todo
+    transition: transform var(--transition-speed);
+
+    &:hover {
+        transform: scale(var(--scale-size));
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__title {
+        @include fluid-text(24, 18);
+        @include font('Arial', 700, 1.2);
+        color: var(--color-text);
+        margin-block: var(--indent-minimum) var(--indent-small);
+        text-align: center;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    &__year, &__genre {
+        @include fluid-text(16, 14);
+        @include font('Arial', 400, 1);
+        color: var(--color-gray);
+    }
+}

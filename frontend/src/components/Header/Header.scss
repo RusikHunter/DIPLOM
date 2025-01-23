@@ -55,14 +55,15 @@
     }
   
     &__link--image {
+    }
+  
+    &__logo {
         transition: var(--transition-speed);
 
         &:hover {
             transform: scale(var(--scale-size));
         }
-    }
-  
-    &__logo {
+
         @include mobile-small {
             width: 70px;
             height: auto;
@@ -87,8 +88,10 @@
             @include font("Arial", 700, 1);
             color: var(--color-text);
 
-            @include mobile-small {
+            transition: var(--transition-speed);
 
+            &:hover {
+                transform: scale(var(--scale-size));
             }
 
           .header__link {
@@ -115,6 +118,12 @@
             background-color: transparent;
             width: 24px;
             height: 24px;
+
+            transition: var(--transition-speed);
+
+            &:hover {
+                transform: scale(1.2);
+            }
         }
 
         .header__button--search {
@@ -148,6 +157,11 @@
         height: 48px;
         border-radius: 50%;
         cursor: pointer;
+        transition: var(--transition-speed);
+
+        &:hover {
+            transform: scale(--scale-size);
+        }
 
         @include mobile {
             display: none;
@@ -166,6 +180,11 @@
         justify-content: center; 
         align-items: center;
         transform: scale(1.4);
+        transition: var(--transition-speed);
+
+        &:hover {
+            transform: scale(1.5);
+        }
 
         @include mobile {
             display: none;
@@ -216,16 +235,17 @@
     }
   }
 
-// [data-theme="light"] {
-//     --header-search-image: url('../../assets/icons/search-light.svg');
-//     --header-theme-image: url('../../assets/icons/theme-light.svg');
-//     --header-language-image: url('../../assets/icons/languageEN-light.svg')
-// }
+[data-page="main"] .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--gradient-wb);
+    color: var(--color-white) !important;
 
-// [data-theme="dark"] {
-//     --header-search-image: url('../../assets/icons/search-dark.svg');
-//     --header-theme-image: url('../../assets/icons/theme-dark.svg');
-//     --header-language-image: url('../../assets/icons/languageEN-dark.svg')
-// }
+    --color-text: var(--color-white);
+    --color-background: transparent;
 
-// ! todo languages -->
+    & svg {
+        background-color: transparent !important;
+    }
+}

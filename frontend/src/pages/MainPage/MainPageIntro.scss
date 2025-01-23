@@ -1,0 +1,317 @@
+.intro {
+    background-image: url('../../assets/icons/bg-temp.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 700px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 65px; /* Ширина градиента по бокам */
+        height: 100%;
+        background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+        z-index: 10; /* Помещаем за хедер */
+
+        @include laptop {
+            width: 30px;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 65px; /* Ширина градиента по бокам */
+        height: 100%;
+        background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+        z-index: 10; /* Помещаем за хедер */
+
+        @include laptop {
+            width: 30px;
+        }
+    }
+
+    @include laptop {
+        height: auto;
+        padding-bottom: 96px;
+    }
+
+    @include tablet {
+        padding-bottom: 64px;
+    }
+    
+    @include mobile {
+        padding-bottom: 128px;
+    }
+
+    @include mobile-small {
+        padding-bottom: 32px;
+    }
+
+    &__inner {
+    }
+
+    &__row {
+        padding-top: 128px;
+        padding-inline: 178px 142px;
+        gap: var(--indent-small);
+
+        @include laptop {
+            padding-top: 176px;
+            padding-left: 150px;
+            padding-right: var(--indent-big);
+        }
+
+        @include tablet {
+            padding-top: 144px;
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-top: 112px;
+            padding-inline: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-top: 72px;
+            flex-direction: column;
+        }
+    }
+
+    &__column {
+    }
+
+    &__column--1 {
+        @include laptop {
+            width: 33%;
+        }
+
+        @include mobile-small {
+            flex-direction: column;
+            margin-inline: auto;
+        }
+    }
+
+    &__column--2 {
+        justify-content: end;
+        gap: 20px;
+        flex: 1;
+
+        @include laptop {
+            flex: none;
+            width: 66%;
+        }
+
+        @include mobile-small {
+            width: 100%;
+            flex-direction: column;
+            gap: var(--indent-minimum);
+        }
+    }
+
+    &__title-wrap {
+        position: relative;
+        top: 12px;
+        display: flex;
+        gap: var(--indent-minimum);
+    }
+
+    &__title {
+        @include fluid-text(32, 24);
+        @include font('Arial', 700, 1);
+        color: var(--color-white); // ! здесь не использую --color-text из-за того, что он не меняется при смене темы
+    }
+
+    &__year {
+        position: relative;
+        top: 7px;
+        @include fluid-text(24, 18);
+        @include font('Arial', 700, 1);
+        color: var(--color-white);
+    }
+
+    &__statistic {
+        display: flex;
+        gap: var(--indent-minimum);
+        
+        & span {
+            @include fluid-text(16, 12);
+            @include font('Arial', 500, 1);
+            color: var(--color-white);
+            padding-left: 28px;
+
+            &::before {
+                content: "";
+                display: block;
+                position: relative;
+                top: 18px;
+                right: 28px;
+                width: 24px;
+                height: 24px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+
+    &__time {
+        &::before {
+            background-image: url('../../assets/icons/time.svg');
+        }
+    }
+
+    &__censure {
+        &::before {
+            background-image: url('../../assets/icons/censore.svg');
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &__rating {
+        &::before {
+            background-image: url('../../assets/icons/rating.svg');
+        }
+    }
+
+    &__genre-list {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__genre {
+        background-color: none;
+        border: 2px solid var(--color-magenta);
+        padding-inline: var(--indent-minimum);
+        border-radius: var(--border-radius-small);
+    }
+
+    &__genre-title {
+        @include fluid-text(18, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
+    }
+
+    &__description-wrap {
+        width: 690px;
+
+        @include laptop {
+            width: 80%;
+        }
+    }
+
+    &__description {
+        @include fluid-text(18, 14);
+        @include font('Arial', 500, 1.2);
+        color: var(--color-white);
+    }
+
+    &__tools {
+        display: flex;
+        align-items: center;
+        gap: var(--indent-minimum);
+
+        @include mobile {
+            position: relative;
+            left: -90px;
+            top: 75px;
+        }
+
+        @include mobile-small {
+            position: static;
+            gap: 5px;
+        }
+
+        button {
+            transition: var(--transition-speed);
+
+            &:hover {
+                transform: scale(var(--scale-size));
+            }
+        }
+    }
+
+    &__button--play {
+        background-color: var(--color-orange);
+        padding: 12px var(--indent-minimum);
+        @include fluid-text(24, 24);
+        @include font('Arial', 700, 1.2);
+        color: var(--color-white);
+        border-radius: var(--border-radius-small);
+
+        @include mobile {
+            @include fluid-text(14, 14);
+            padding: 6px 8px;
+        }
+    }
+
+    &__button--add-to-favorites {
+        background: none;
+
+        & svg {
+            background-color: transparent !important;
+            color: var(--color-white);
+            position: relative;
+            top: 4px;
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+
+    &__button--like {
+        display: flex;
+        background: none;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        top: -3px;
+
+        & svg {
+            background-color: transparent !important;
+            color: var(--color-white);
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+
+    &__like--count {
+        @include fluid-text(16, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
+    }
+
+    &__button--dislike {
+        display: flex;
+        background: none;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        top: -3px;
+
+        & svg {
+            background-color: transparent !important;
+            color: var(--color-white);
+
+            @include mobile-small {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+
+    &__dislike--count {
+        @include fluid-text(16, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-white);
+    }
+}

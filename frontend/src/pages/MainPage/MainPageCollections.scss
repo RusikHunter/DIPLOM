@@ -1,0 +1,11 @@
+.collections {
+    background-color: var(--color-background);
+    
+
+    &__inner {
+        flex-direction: column;
+        padding-left: 200px;
+        padding-top: var(--indent-medium);
+        gap: 40px;
+    }
+}

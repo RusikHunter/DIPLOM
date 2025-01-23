@@ -18,10 +18,15 @@ export default function Header() {
     const language = useSelector(state => state.client.language)
     const theme = useSelector(state => state.client.theme)
     const isLogged = useSelector(state => state.client.isLogged)
+    const currentPage = useSelector(state => state.client.currentPage)
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme)
     }, [theme])
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-page', currentPage)
+    }, [currentPage])
 
     return (
         <header className='header'>
@@ -98,6 +103,6 @@ export default function Header() {
             </div>
 
             <div id="burger-root"></div>
-        </header>
+        </header >
     )
 }
