@@ -1,11 +1,22 @@
 .collections {
     background-color: var(--color-background);
     
-
     &__inner {
         flex-direction: column;
         padding-left: 200px;
-        padding-top: var(--indent-medium);
+        padding-block: var(--indent-medium);
         gap: 40px;
+
+        @include laptop {
+            padding-left: 100px;
+        }
+
+        @include mobile {
+            padding-left: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-block: var(--indent-small);
+        }
     }
 }

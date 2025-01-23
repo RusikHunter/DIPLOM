@@ -1,13 +1,6 @@
 .film-card {
-    width: 245px;
+    width: 100%;
     background-color: var(--color-background);
-    
-    // ! todo
-    transition: transform var(--transition-speed);
-
-    &:hover {
-        transform: scale(var(--scale-size));
-    }
 
     &__image {
         width: 100%;
@@ -15,11 +8,15 @@
     }
 
     &__title {
-        @include fluid-text(24, 18);
+        @include fluid-text(24, 16);
         @include font('Arial', 700, 1.2);
         color: var(--color-text);
         margin-block: var(--indent-minimum) var(--indent-small);
         text-align: center;
+
+        @include mobile-small {
+            @include fluid-text(14, 14);
+        }
     }
 
     &__info {
@@ -29,7 +26,7 @@
     }
 
     &__year, &__genre {
-        @include fluid-text(16, 14);
+        @include fluid-text(16, 10);
         @include font('Arial', 400, 1);
         color: var(--color-gray);
     }
