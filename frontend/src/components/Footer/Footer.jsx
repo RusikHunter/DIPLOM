@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Footer.scss'
 import logoVibixImage from '../../assets/icons/logo.svg';
 
 
@@ -16,15 +17,15 @@ export default function Footer() {
                             </Link>
 
                             <div className="footer__social-networks-navigation">
-                                <a href="#" className='footer__social-network-link'>
+                                <a href="#" className='footer__social-network-link footer__social-network-link--facebook'>
 
                                 </a>
 
-                                <a href="#" className="footer__social-network-link">
+                                <a href="#" className="footer__social-network-link footer__social-network-link--instagram">
 
                                 </a>
 
-                                <a href="#" className="footer__social-network-link">
+                                <a href="#" className="footer__social-network-link footer__social-network-link--youtube">
 
                                 </a>
                             </div>
@@ -35,55 +36,55 @@ export default function Footer() {
                                     <a href="#" className="footer__link">Передоплати</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Програма лояльності</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Активувати промокод</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Способи оплати</a>
                                 </li>
                             </ul>
                         </div>
                         <div className="footer__column footer__column--3 column">
                             <ul className="footer__links-list">
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Умови користування</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Політика конфіденційності</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Про нас</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Пристрої</a>
                                 </li>
                             </ul>
                         </div>
                         <div className="footer__column footer__column--4 column">
                             <ul className="footer__links-list">
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Вихідні дані медіа</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Структура власності</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Передплата для закладів</a>
                                 </li>
                             </ul>
                         </div>
                         <div className="footer__column footer__column--5 column">
                             <ul className="footer__links-list">
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Партнерам</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Співпраця</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Вакансії</a>
                                 </li>
                             </ul>
                         </div>
@@ -95,10 +96,10 @@ export default function Footer() {
                                     </a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">Контакти</a>
                                 </li>
                                 <li className="footer__list-item">
-                                    <a href="#" className="footer__link">Передоплати</a>
+                                    <a href="#" className="footer__link">FAQ</a>
                                 </li>
                             </ul>
                         </div>
@@ -115,3 +116,4 @@ export default function Footer() {
         </>
     )
 }
+

@@ -1,0 +1,109 @@
+.footer {
+    width: 100%;
+    background-color: var(--color-background);
+
+    &__inner {
+        flex-direction: column;
+    }
+
+    &__row {
+        padding-inline: 200px;
+    }
+
+    &__row--1 {
+        padding-top: var(--indent-medium);
+        padding-inline: 200px;
+    }
+
+    &__column {
+        width: calc(100% / 6);
+    }
+
+    &__column--1 {
+        justify-content: space-between;
+        gap: 52px;
+    }
+
+    &__logo {
+    }
+
+    &__social-networks-navigation {
+        display: flex;
+        gap: var(--indent-minimum);
+    }
+
+    &__social-network-link {
+        width: 48px;
+        height: 48px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    &__social-network-link--facebook {
+        background-image: url('../../assets/icons/facebook.svg');
+    }   
+
+    &__social-network-link--instagram {
+        background-image: url('../../assets/icons/instagram.svg');
+    }
+
+    &__social-network-link--youtube {
+        background-image: url('../../assets/icons/youtube.svg');
+        background-size: contain;
+    }
+
+    &__column--2 {
+    }
+
+    &__links-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--indent-minimum);
+    }
+
+    &__list-item {
+        @include fluid-text(16, 12);
+        @include font('Arial', 400, 1.5);
+    }
+
+    &__link {
+
+        &:visited, &:active, &:hover, &:focus {
+            color: var(--color-gray);
+        }
+    }
+
+    &__column--3 {
+    }
+
+    &__column--4 {
+    }
+
+    &__column--5 {
+    }
+
+    &__column--6 {
+    }
+
+    &__link--mail {
+        @include fluid-text(24, 18);
+        font-weight: 700;
+        color: var(--color-text);
+    }
+
+    &__row--2 {
+        padding-block: var(--indent-small);
+    }
+
+    &__column-7 {
+        width: 100%;
+    }
+
+    &__title {
+        @include fluid-text(24, 18);
+        @include font('Arial', 700, 1);
+        color: var(--color-gray);
+        text-align: center;
+    }
+}
