@@ -1,0 +1,159 @@
+.footer {
+    width: 100%;
+    background-color: var(--color-background);
+
+    &__inner {
+        flex-direction: column;
+    }
+
+    &__row {
+        padding-inline: 200px;
+    }
+
+    &__row--1 {
+        padding-top: var(--indent-medium);
+        padding-inline: 200px;
+
+        @include laptop {
+            padding-inline: 100px;
+            gap: var(--indent-minimum);
+        }
+
+        @include tablet {
+            flex-wrap: wrap;
+            gap: var(--indent-small);
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-top: var(--indent-small);
+            padding-inline: var(--indent-small);
+            gap: 2%;
+        }
+    }
+
+    &__column {
+        width: calc(100% / 6);
+
+        @include tablet {
+            width: calc(100% / 4);
+        }
+
+        @include mobile {
+            width: 49%;
+            margin-bottom: var(--indent-small);
+        }
+    }
+
+    &__column--1 {
+        justify-content: space-between;
+        gap: 52px;
+
+        @include mobile{
+            gap: var(--indent-small);
+        }
+    }
+
+    &__logo {
+    }
+
+    &__social-networks-navigation {
+        display: flex;
+        gap: var(--indent-minimum);
+    }
+
+    &__social-network-link {
+        width: 48px;
+        height: 48px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        @include laptop {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    &__social-network-link--facebook {
+        background-image: url('../../assets/icons/facebook.svg');
+    }   
+
+    &__social-network-link--instagram {
+        background-image: url('../../assets/icons/instagram.svg');
+    }
+
+    &__social-network-link--youtube {
+        background-image: url('../../assets/icons/youtube.svg');
+        background-size: contain;
+    }
+
+    &__column--2 {
+    }
+
+    &__links-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--indent-minimum);
+
+        @include mobile{
+            gap: 10px;
+        }
+    }
+
+    &__list-item {
+        @include fluid-text(16, 12);
+        @include font('Arial', 400, 1.5);
+
+        @include mobile{
+            line-height: 1;
+        }
+    }
+
+    &__link {
+
+        &:visited, &:active, &:hover, &:focus {
+            color: var(--color-gray);
+        }
+    }
+
+    &__column--5 {
+    }
+
+    &__column--6 {
+    }
+
+    &__link--mail {
+        @include fluid-text(24, 18);
+        font-weight: 700;
+        color: var(--color-text);
+
+        @include laptop {
+            @include fluid-text(18, 12);
+        }
+    }
+
+    &__row--2 {
+        padding-block: var(--indent-small);
+
+        @include mobile {
+            padding-block: var(--indent-minimum);
+            padding-inline: var(--indent-small);
+        }
+    }
+
+    &__column-7 {
+        width: 100%;
+    }
+
+    &__title {
+        @include fluid-text(24, 18);
+        @include font('Arial', 700, 1);
+        color: var(--color-gray);
+        text-align: center;
+
+        @include mobile {
+
+        }
+    }
+}

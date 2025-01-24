@@ -16,18 +16,34 @@
         justify-content: start !important;
         gap: var(--indent-minimum);
         padding-right: 200px;
+
+        @include laptop {
+            padding-right: 100px;
+        }
+
+        @include mobile {
+            padding-right: var(--indent-small);
+        }
     }
 
     &__title {
-        @include fluid-text(32, 28);
+        @include fluid-text(32, 22);
         @include font('Arial', 700, 1);
         color: var(--color-text);
+
+        @include mobile-small {
+            @include fluid-text(16, 16);
+        }
     }
     
     &__link {
         @include fluid-text(18, 16);
         @include font('Arial', 500, 1);
         color: var(--color-text);
+
+        @include mobile-small {
+            @include fluid-text(10, 10);
+        }
     }
 
     &__row--2 {
@@ -44,6 +60,10 @@
         button {
             background-color: transparent;
         }
+
+        @include mobile-small {
+            gap: var(--indent-minimum);
+        }
     }
 
     &__navigation-button--left, &__navigation-button--right {
@@ -56,6 +76,44 @@
                 color: var(--color-text) !important;
             }
         }
+
+        @include mobile-small {
+            svg {
+                width: 5px !important;
+                height: 10px !important;
+            }
+        }
+    }
+
+    &__swiper {
+        padding-right: 200px !important;
+
+        @include laptop {
+            padding-right: 100px !important;
+        }
+
+        @include mobile {
+            padding-right: var(--indent-small) !important;
+        }
+    }
+
+    &__slide {
+        width: 245px !important;
+        transition: transform var(--transition-speed);
+
+        @include tablet {
+            width: 200px !important;
+        }
+
+        @include mobile {
+            width: 180px !important;
+        }
+
+        @include mobile-small {
+            width: 100px !important;
+        }
+
+        // ! todo :hover
     }
 
 }
