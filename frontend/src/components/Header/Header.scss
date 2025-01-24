@@ -235,7 +235,7 @@
     }
   }
 
-[data-page="main"] .header {
+[data-page="main"][data-burger="false"] .header {
     position: absolute;
     top: 0;
     left: 0;
@@ -248,4 +248,8 @@
     & svg {
         background-color: transparent !important;
     }
+}
+
+[data-burger="true"] body {
+    overflow: hidden;
 }

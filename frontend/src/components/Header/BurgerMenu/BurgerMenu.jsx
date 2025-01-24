@@ -30,6 +30,10 @@ export default function BurgerMenu() {
         dispatch(resetBurgerMenu())
     }, [currentPage, location])
 
+    useEffect(() => {
+        document.documentElement.setAttribute('data-burger', isBurgerOpen)
+    }, [isBurgerOpen])
+
     if (!burgerRoot) {
         return null
     }
