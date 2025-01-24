@@ -4,7 +4,7 @@
     &__inner {
         flex-direction: column;
         padding-left: 200px;
-        padding-block: var(--indent-medium);
+        padding-block: var(--indent-medium) var(--indend-big);
         gap: 40px;
 
         @include laptop {
@@ -16,7 +16,7 @@
         }
 
         @include mobile-small {
-            padding-block: var(--indent-small);
+            padding-block: var(--indent-small) var(--indend-medium);
         }
     }
 }
