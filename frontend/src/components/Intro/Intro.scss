@@ -5,35 +5,37 @@
     background-repeat: no-repeat;
     height: 700px;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 65px; /* Ширина градиента по бокам */
-        height: 100%;
-        background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
-        z-index: 10; /* Помещаем за хедер */
+    // ! todo -->
+    //
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 65px; /* Ширина градиента по бокам */
+    //     height: 100%;
+    //     background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+    //     z-index: 10; /* Помещаем за хедер */
 
-        @include laptop {
-            width: 30px;
-        }
-    }
+    //     @include laptop {
+    //         width: 30px;
+    //     }
+    // }
 
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 65px; /* Ширина градиента по бокам */
-        height: 100%;
-        background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
-        z-index: 10; /* Помещаем за хедер */
+    // &::after {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    //     width: 65px; /* Ширина градиента по бокам */
+    //     height: 100%;
+    //     background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+    //     z-index: 10; /* Помещаем за хедер */
 
-        @include laptop {
-            width: 30px;
-        }
-    }
+    //     @include laptop {
+    //         width: 30px;
+    //     }
+    // }
 
     @include laptop {
         height: auto;

@@ -5,20 +5,18 @@ import tempBG from '../../../assets/icons/tempBG.png'
 
 export default function FilmCard() {
     return (
-        <Link>
-            <div div className="film-card" >
-                <img src={tempBG} className="film-card__image" alt="temp" />
+        <div div className="film-card" >
+            <img src={tempBG} className="film-card__image" alt="temp" />
 
-                <h6 className="film-card__title">Каскадер</h6>
+            <h6 className="film-card__title">Каскадер</h6>
 
-                <div className="film-card__info">
-                    <span className="film-card__year">2024</span>
+            <div className="film-card__info">
+                <span className="film-card__year">2024</span>
 
-                    <span className="film-card__genre">Пригоди</span>
+                <span className="film-card__genre">Пригоди</span>
 
-                    <span className="film-card__genre">Комедiя</span>
-                </div>
+                <span className="film-card__genre">Комедiя</span>
             </div>
-        </Link>
+        </div>
     )
 }
