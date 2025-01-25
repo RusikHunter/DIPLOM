@@ -5,7 +5,6 @@ import './FilmCardSlider.scss'
 import FilmCard from "./FilmCard/FilmCard"
 import translationsJSON from "../../assets/translations.json"
 import { useSelector } from 'react-redux';
-import { fetchMovies2025 } from '../../api/fetchFunctions.js'
 
 // swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,7 +19,7 @@ import 'swiper/css/pagination';
 
 
 
-export default function FilmCardSlider({ title }) {
+export default function FilmCardSlider({ title, method, queryKey }) {
     const translations = translationsJSON
     const language = useSelector(state => state.client.language)
 
@@ -34,9 +33,9 @@ export default function FilmCardSlider({ title }) {
         swiperRef.current.swiper.slideNext()
     }
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['newFilms'],
-        queryFn: fetchMovies2025,
+    const { data } = useQuery({
+        queryKey: [queryKey],
+        queryFn: method,
     });
 
     if (!data || !data[0]) {

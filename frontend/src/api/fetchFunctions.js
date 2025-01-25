@@ -30,14 +30,14 @@ export async function fetchMainPageMovie() {
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Breaking Bad',
+                    query: 'Borat',
                     language: 'en-US',
                 },
             }),
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Breaking Bad',
+                    query: 'Borat',
                     language: 'uk-UA',
                 },
             }),
@@ -74,7 +74,9 @@ export async function fetchMainPageMovie() {
     }
 }
 
-export async function fetchMovies2025() {
+// ! todo дублирующийся код
+
+export async function fetchMoviesBy2025() {
     try {
         const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
             params: {
@@ -132,3 +134,125 @@ export async function fetchMovies2025() {
         return []
     }
 }
+
+export async function fetchMoviesByGenre() {
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+            params: {
+                api_key: APIkey,
+                language: 'en-US',
+                with_genres: '28,18',
+                with_original_language: 'en',
+                sort_by: 'popularity.desc',
+                page: 1,
+            },
+        });
+
+        const movies = response.data.results
+
+        const movieIds = movies.map(movie => movie.id)
+
+        const movieDetailsPromises = movieIds.map(id => {
+            return Promise.all([
+                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                    params: {
+                        api_key: APIkey,
+                        language: 'en-US',
+                    },
+                }),
+                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                    params: {
+                        api_key: APIkey,
+                        language: 'uk-UA',
+                    },
+                }),
+            ])
+        })
+
+        const moviesDetails = await Promise.all(movieDetailsPromises)
+
+        const moviesData = moviesDetails.map(([englishDetails, ukrainianDetails]) => {
+            const englishMovie = englishDetails.data
+            const ukrainianMovie = ukrainianDetails.data
+
+            return {
+                id: englishMovie.id,
+                posterPath: `${rootPath}${englishMovie.poster_path}`,
+                title: {
+                    en: englishMovie.title,
+                    ua: ukrainianMovie.title || englishMovie.title,
+                },
+                genres: englishMovie.genres.slice(0, 2).map(genre => genre.id),
+                releaseDate: englishMovie.release_date,
+            }
+        })
+
+        return moviesData
+
+    } catch (error) {
+        console.error('Ошибка при запросе данных о фильмах:', error.message)
+        return []
+    }
+}
+
+export async function fetchMoviesByTop() {
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+            params: {
+                api_key: APIkey,
+                language: 'en-US',
+                sort_by: 'popularity.desc',
+                with_original_language: 'en',
+                vote_count: 50000,
+            },
+        });
+
+        const movies = response.data.results
+
+        const movieIds = movies.map(movie => movie.id)
+
+        const movieDetailsPromises = movieIds.map(id => {
+            return Promise.all([
+                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                    params: {
+                        api_key: APIkey,
+                        language: 'en-US',
+                    },
+                }),
+                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                    params: {
+                        api_key: APIkey,
+                        language: 'uk-UA',
+                    },
+                }),
+            ])
+        })
+
+        const moviesDetails = await Promise.all(movieDetailsPromises)
+
+        const moviesData = moviesDetails.map(([englishDetails, ukrainianDetails]) => {
+            const englishMovie = englishDetails.data
+            const ukrainianMovie = ukrainianDetails.data
+
+            return {
+                id: englishMovie.id,
+                posterPath: `${rootPath}${englishMovie.poster_path}`,
+                title: {
+                    en: englishMovie.title,
+                    ua: ukrainianMovie.title || englishMovie.title,
+                },
+                genres: englishMovie.genres.slice(0, 2).map(genre => genre.id),
+                releaseDate: englishMovie.release_date,
+            }
+        })
+
+        return moviesData
+
+    } catch (error) {
+        console.error('Ошибка при запросе данных о фильмах:', error.message)
+        return []
+    }
+}
+
+
+

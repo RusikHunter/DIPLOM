@@ -9,12 +9,12 @@ export default function FilmCard({ params }) {
     const language = useSelector(state => state.client.language)
     const translations = translationsJSON
 
-    const { posterPath, title, release_date, genres } = params
+    const { posterPath, title, releaseDate, genres } = params
 
     const movieData = {
         posterPath: `${posterPath}`,
         title: language === 'en' ? title?.en : title?.ua,
-        year: release_date ? release_date.slice(0, 4) : '2024+',
+        year: releaseDate ? releaseDate.slice(0, 4) : '2024+',
         genres: getGenresByIDs(genres)
     }
 

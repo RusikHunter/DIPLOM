@@ -36,7 +36,7 @@
         "collections": {
             "novelty": "Новинки",
             "forYou": "Вам сподобається",
-            "top250": "Топ 250"
+            "top": "Популярні"
         },
         "filmCardSlider": {
             "seeAll": "Дивитись усе"
@@ -97,7 +97,7 @@
         "collections": {
             "novelty": "Novelty",
             "forYou": "You will like it",
-            "top250": "Top 250"
+            "top": "Popular"
         },
         "filmCardSlider": {
             "seeAll": "See all"
