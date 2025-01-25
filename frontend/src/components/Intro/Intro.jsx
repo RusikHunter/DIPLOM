@@ -1,96 +1,20 @@
 import React from "react"
-import { useState, useEffect } from "react"
-import temp from '../../assets/icons/temp.png'
-import axios from "axios"
 import { useQuery } from '@tanstack/react-query'
 import './Intro.scss'
-import { APIkey } from "../../assets/APIkey.js"
 import translationsJSON from "../../assets/translations.json"
 import { useSelector } from 'react-redux';
-
-async function fetchMovieDetails() {
-    try {
-        // Шаг 1: Получаем базовую информацию о фильме
-        const [englishResponse, ukrainianResponse] = await Promise.all([
-            axios.get('https://api.themoviedb.org/3/search/movie', {
-                params: {
-                    api_key: APIkey,
-                    query: 'Breaking Bad',
-                    language: 'en-US',
-                },
-            }),
-            axios.get('https://api.themoviedb.org/3/search/movie', {
-                params: {
-                    api_key: APIkey,
-                    query: 'Breaking Bad',
-                    language: 'uk-UA',
-                },
-            }),
-        ]);
-
-        const englishMovieId = englishResponse.data.results[0]?.id;
-        const ukrainianMovieId = ukrainianResponse.data.results[0]?.id;
-
-        if (!englishMovieId || !ukrainianMovieId) {
-            throw new Error("Movie IDs not found.");
-        }
-
-        // Шаг 3: Запрашиваем подробную информацию о фильмах по ID
-        const [englishMovieDetails, ukrainianMovieDetails] = await Promise.all([
-            axios.get(`https://api.themoviedb.org/3/movie/${englishMovieId}`, {
-                params: {
-                    api_key: APIkey,
-                    language: 'en-US',
-                },
-            }),
-            axios.get(`https://api.themoviedb.org/3/movie/${ukrainianMovieId}`, {
-                params: {
-                    api_key: APIkey,
-                    language: 'uk-UA',
-                },
-            }),
-        ]);
-
-        // Получаем runtime и другие данные
-        const englishMovie = englishMovieDetails.data;
-        const ukrainianMovie = ukrainianMovieDetails.data;
-
-        // Возвращаем оба фильма с полной информацией
-        return [englishMovie, ukrainianMovie, englishMovieId, ukrainianMovieId];
-    } catch (error) {
-        console.error('Error fetching movie details:', error.message);
-    }
-}
-
-function getGenresByIDs(genres, language = 'en') {
-    const IDs = genres.map(genre => genre.id)
-
-    const selectedGenres = []
-
-    IDs.forEach(ID => {
-        const genreKey = `genre_${ID}`
-        if (language === 'ua') {
-            selectedGenres.push(genreKey)
-        } else {
-            selectedGenres.push(genreKey)
-        }
-    })
-
-    return selectedGenres
-}
+import { getGenresByIDs, fetchMainPageMovie } from '../../api/fetchFunctions.js'
+import { rootPath } from "../../api/config";
 
 export default function Intro() {
     // localisation
     const translations = translationsJSON
     const language = useSelector(state => state.client.language)
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['posts'],
-        queryFn: fetchMovieDetails,
+    const { data } = useQuery({
+        queryKey: ['mainFilm'],
+        queryFn: fetchMainPageMovie,
     });
-
-    // if (isLoading) return <div>Loading...</div>
-    // if (isError) return <div>Error loading data</div>
 
     if (!data || !data[0]) {
         return <div>No data available</div>
@@ -99,8 +23,8 @@ export default function Intro() {
     console.log(data)
 
     const moviesData = {
-        backDropPath: `https://www.themoviedb.org/t/p/original/${data[0].backdrop_path}`,
-        posterPath: `https://www.themoviedb.org/t/p/original/${data[0].poster_path}`,
+        backDropPath: `${rootPath}${data[0].backdrop_path}`,
+        posterPath: `${rootPath}${data[0].poster_path}`,
         title: language === 'en' ? data[0].title : data[1].title,
         year: data[0].release_date.slice(0, 4),
         hours: Math.floor(data[0].runtime / 60),

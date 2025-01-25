@@ -13,8 +13,6 @@ export default function Collections() {
         <section className='section section__collections collections'>
             <div className="collections__inner container">
                 <FilmCardSlider title={translations[language].collections.novelty} />
-                <FilmCardSlider title={translations[language].collections.forYou} />
-                <FilmCardSlider title={translations[language].collections.top250} />
             </div>
         </section>
     )

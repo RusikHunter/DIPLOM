@@ -1,11 +1,11 @@
 import React from "react"
-import { useState, useRef } from "react"
+import { useRef } from "react"
+import { useQuery } from "@tanstack/react-query"
 import './FilmCardSlider.scss'
 import FilmCard from "./FilmCard/FilmCard"
-import tempBG from '../../assets/icons/tempBG.png'
 import translationsJSON from "../../assets/translations.json"
 import { useSelector } from 'react-redux';
-
+import { fetchMovies2025 } from '../../api/fetchFunctions.js'
 
 // swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,9 +16,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 
+
+
+
+
 export default function FilmCardSlider({ title }) {
     const translations = translationsJSON
-
     const language = useSelector(state => state.client.language)
 
     const swiperRef = useRef(null)
@@ -30,6 +33,17 @@ export default function FilmCardSlider({ title }) {
     const handleNext = () => {
         swiperRef.current.swiper.slideNext()
     }
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['newFilms'],
+        queryFn: fetchMovies2025,
+    });
+
+    if (!data || !data[0]) {
+        return <div>No data available</div>
+    }
+
+    console.log(data)
 
     return (
         <div className="film-card-slider">
@@ -59,35 +73,17 @@ export default function FilmCardSlider({ title }) {
                         ref={swiperRef}
                         spaceBetween={15} // Расстояние между слайдами
                         slidesPerView="auto" // Включаем авторазмер слайдов
-                        slidesPerGroup={6} // Прокручиваем по одному слайду
+                        slidesPerGroup={3} // Прокручиваем по одному слайду
                         loop={false} // Отключаем бесконечный цикл
-                        speed={700}
+                        speed={300}
                         simulateTouch={false}
                         allowTouchMove={false}
                     >
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
-                        <SwiperSlide className="film-card-slider__slide"><FilmCard /></SwiperSlide>
+                        {data.map((film, index) => (
+                            <SwiperSlide className="film-card-slider__slide" key={index}>
+                                <FilmCard params={film} />
+                            </SwiperSlide>
+                        ))}
                     </Swiper>
                 </div>
             </div>
