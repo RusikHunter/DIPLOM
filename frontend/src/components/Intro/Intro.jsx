@@ -4,8 +4,14 @@ import temp from '../../assets/icons/temp.png'
 import axios from "axios"
 import './Intro.scss'
 import { APIkey } from "../../assets/movieAPI.js"
+import translationsJSON from "../../assets/translations.json"
+import { useSelector } from 'react-redux';
 
 export default function Intro() {
+    const translations = translationsJSON
+
+    const language = useSelector(state => state.client.language)
+
     // useEffect(() => {
     //     axios
     //         .get(`https://api.themoviedb.org/3/search/movie`, {
@@ -37,7 +43,7 @@ export default function Intro() {
                         </div>
 
                         <div className="intro__statistic">
-                            <span className="intro__time">1 год. 50 хв.</span>
+                            <span className="intro__time">1 {translations[language].intro.hours} 50 {translations[language].intro.minutes}</span>
 
                             <span className="intro__censure">18+</span>
 
@@ -66,7 +72,7 @@ export default function Intro() {
 
                         <div className="intro__tools">
                             <button className="intro__button--play">
-                                Дивитись
+                                {translations[language].intro.view}
                             </button>
 
                             <button className="intro__button--add-to-favorites">

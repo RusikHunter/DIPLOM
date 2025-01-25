@@ -1,20 +1,86 @@
 {
     "ua": {
-        "navMain": "Головна",
-        "navFilms": "Фільми",
-        "navFavorites": "Збережене",
-        "accountButton": "Увійти",
-        "burgerSearch": "Пошук",
-        "burgerTheme": "Тема",
-        "burgerLanguage": "Мова"
+        "header": {
+            "navMain": "Головна",
+            "navFilms": "Фільми",
+            "navFavorites": "Збережене",
+            "accountButton": "Увійти",
+            "burgerSearch": "Пошук",
+            "burgerTheme": "Тема",
+            "burgerLanguage": "Мова"
+        },
+        "intro": {
+            "hours": "год.",
+            "minutes": "хв.",
+            "view": "Дивитись"
+        },
+        "collections": {
+            "novelty": "Новинки",
+            "forYou": "Вам сподобається",
+            "top250": "Топ 250"
+        },
+        "filmCardSlider": {
+            "seeAll": "Дивитись усе"
+        },
+        "footer": {
+            "linksPrepayments": "Передоплати",
+            "linksLoyaltyProgram": "Програма лояльності",
+            "linksPromo": "Активувати промокод",
+            "linksPaymentMethods": "Способи оплати",
+            "linksTerms": "Умови користування",
+            "linksPrivacyPolicy": "Політика конфіденційності",
+            "linksAboutUs": "Про нас",
+            "linksDecives": "Пристрої",
+            "linksMediaOutput": "Вихідні дані медіа",
+            "linksOwnStruct": "Структура власності",
+            "linksPrepInstitution": "Передплата для закладів",
+            "linksForPartners": "Партнерам",
+            "linksCollaboration": "Співпраця",
+            "linksVacancies": "Вакансії",
+            "linksContacts": "Контакти",
+            "allRightsReserved": "Всі права захищені"
+        }
     },
     "en": {
-        "navMain": "Main",
-        "navFilms": "Films",
-        "navFavorites": "Favorites",
-        "accountButton": "LogIn",
-        "burgerSearch": "Search",
-        "burgerTheme": "Theme",
-        "burgerLanguage": "Language"
+        "header": {
+            "navMain": "Main",
+            "navFilms": "Films",
+            "navFavorites": "Favorites",
+            "accountButton": "LogIn",
+            "burgerSearch": "Search",
+            "burgerTheme": "Theme",
+            "burgerLanguage": "Language"
+        },
+        "intro": {
+            "hours": "h.",
+            "minutes": "m.",
+            "view": "View"
+        },
+        "collections": {
+            "novelty": "Novelty",
+            "forYou": "You will like it",
+            "top250": "Top 250"
+        },
+        "filmCardSlider": {
+            "seeAll": "See all"
+        },
+        "footer": {
+            "linksPrepayments": "Prepayments",
+            "linksLoyaltyProgram": "Loyalty program",
+            "linksPromo": "Activate promo code",
+            "linksPaymentMethods": "Payment methods",
+            "linksTerms": "Terms of use",
+            "linksPrivacyPolicy": "Privacy policy",
+            "linksAboutUs": "About us",
+            "linksDecives": "Devices",
+            "linksMediaOutput": "Media output",
+            "linksOwnStruct": "Ownership structure",
+            "linksPrepInstitution": "Prepayment for institutions",
+            "linksForPartners": "For partners",
+            "linksCollaboration": "Collaboration",
+            "linksVacancies": "Vacancies",
+            "linksContacts": "Contacts",
+            "allRightsReserved": "All rights reserved"
+        }
     }
 }

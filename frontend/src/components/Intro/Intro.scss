@@ -238,6 +238,7 @@
     }
 
     &__button--play {
+        width: 145px;
         background-color: var(--color-orange);
         padding: 12px var(--indent-minimum);
         @include fluid-text(24, 24);
@@ -246,6 +247,7 @@
         border-radius: var(--border-radius-small);
 
         @include mobile {
+            width: 130px;
             @include fluid-text(14, 14);
             padding: 6px 8px;
         }

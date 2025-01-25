@@ -48,14 +48,14 @@ export default function BurgerMenu() {
                     </Link>
                     :
                     <Link to="/auth">
-                        <button className='burger__button--account'>{translations[language].accountButton}</button>
+                        <button className='burger__button--account'>{translations[language].header.accountButton}</button>
                     </Link>
                 }
 
                 <dl className="burger__tools-list">
                     <Link to="/search">
                         <div className="burger__tool-wrap">
-                            <dt className="burger__tool-term">{translations[language].burgerSearch}</dt>
+                            <dt className="burger__tool-term">{translations[language].header.burgerSearch}</dt>
                             <dd className="burger__tool-definition">
                                 <button className="burger__button--search">
 
@@ -71,7 +71,7 @@ export default function BurgerMenu() {
                     </Link>
 
                     <div className="burger__tool-wrap" onClick={() => dispatch(setTheme())}>
-                        <dt className="burger__tool-term">{translations[language].burgerTheme}</dt>
+                        <dt className="burger__tool-term">{translations[language].header.burgerTheme}</dt>
                         <dd className="burger__tool-definition">
                             <button className="burger__button--theme">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +84,7 @@ export default function BurgerMenu() {
                     </div>
 
                     <div className="burger__tool-wrap" onClick={() => dispatch(setLanguage())}>
-                        <dt className="burger__tool-term">{translations[language].burgerLanguage}</dt>
+                        <dt className="burger__tool-term">{translations[language].header.burgerLanguage}</dt>
                         <dd className="burger__tool-definition">
                             <button className="burger__button--language">
                                 {language === 'en' ? <svg width="21" height="14" viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">

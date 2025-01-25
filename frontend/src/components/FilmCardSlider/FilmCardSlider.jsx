@@ -3,6 +3,8 @@ import { useState, useRef } from "react"
 import './FilmCardSlider.scss'
 import FilmCard from "./FilmCard/FilmCard"
 import tempBG from '../../assets/icons/tempBG.png'
+import translationsJSON from "../../assets/translations.json"
+import { useSelector } from 'react-redux';
 
 
 // swiper
@@ -15,6 +17,10 @@ import 'swiper/css/pagination';
 
 
 export default function FilmCardSlider({ title }) {
+    const translations = translationsJSON
+
+    const language = useSelector(state => state.client.language)
+
     const swiperRef = useRef(null)
 
     const handlePrev = () => {
@@ -31,7 +37,7 @@ export default function FilmCardSlider({ title }) {
                 <div className="film-card-slider__row film-card-slider__row--1 row">
                     <h2 className="film-card-slider__title">{title}</h2>
 
-                    <a className="film-card-slider__link" href="#">Дивитись усе</a>
+                    <a className="film-card-slider__link" href="#">{translations[language].filmCardSlider.seeAll}</a>
 
                     <div className="film-card-slider__navigation-wrap">
                         <button className="film-card-slider__navigation-button--left" onClick={handlePrev}>
@@ -47,6 +53,7 @@ export default function FilmCardSlider({ title }) {
                     </div>
                 </div>
                 <div className="film-card-slider__row film-card-slider__row--2 row">
+                    {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! доделать slidesPerGroup */}
                     <Swiper
                         className="film-card-slider__swiper"
                         ref={swiperRef}

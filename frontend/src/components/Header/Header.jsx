@@ -43,17 +43,17 @@ export default function Header() {
                             <ul className="header__list--navigation">
                                 <li className="header__list-item">
                                     <Link to="/">
-                                        <p className="header__link">{translations[language].navMain}</p>
+                                        <p className="header__link">{translations[language].header.navMain}</p>
                                     </Link>
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="/films">
-                                        <p className="header__link">{translations[language].navFilms}</p>
+                                        <p className="header__link">{translations[language].header.navFilms}</p>
                                     </Link>
                                 </li>
                                 <li className="header__list-item">
                                     <Link to="/favorites">
-                                        <p className="header__link">{translations[language].navFavorites}</p>
+                                        <p className="header__link">{translations[language].header.navFavorites}</p>
                                     </Link>
                                 </li>
                             </ul>
@@ -93,7 +93,7 @@ export default function Header() {
                             </Link>
                             :
                             <Link to="/auth">
-                                <button className='header__button--enter'>{translations[language].accountButton}</button>
+                                <button className='header__button--enter'>{translations[language].header.accountButton}</button>
                             </Link>
                         }
 
