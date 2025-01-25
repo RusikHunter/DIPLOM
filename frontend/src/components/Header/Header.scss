@@ -240,10 +240,6 @@
     top: 0;
     left: 0;
     background: var(--gradient-wb);
-    color: var(--color-white) !important;
-
-    --color-text: var(--color-white);
-    --color-background: transparent;
 
     & svg {
         background-color: transparent !important;

@@ -1,20 +1,124 @@
 {
     "ua": {
-        "navMain": "Головна",
-        "navFilms": "Фільми",
-        "navFavorites": "Збережене",
-        "accountButton": "Увійти",
-        "burgerSearch": "Пошук",
-        "burgerTheme": "Тема",
-        "burgerLanguage": "Мова"
+        "header": {
+            "navMain": "Головна",
+            "navFilms": "Фільми",
+            "navFavorites": "Збережене",
+            "accountButton": "Увійти",
+            "burgerSearch": "Пошук",
+            "burgerTheme": "Тема",
+            "burgerLanguage": "Мова"
+        },
+        "intro": {
+            "hours": "год.",
+            "minutes": "хв.",
+            "view": "Дивитись",
+            "genre_28": "Бойовик",
+            "genre_12": "Пригоди",
+            "genre_16": "Анімація",
+            "genre_35": "Комедія",
+            "genre_80": "Кримінал",
+            "genre_99": "Документальний",
+            "genre_18": "Драма",
+            "genre_10751": "Сімейний",
+            "genre_14": "Фентезі",
+            "genre_36": "Історія",
+            "genre_27": "Жахи",
+            "genre_10402": "Музика",
+            "genre_9648": "Містика",
+            "genre_10749": "Романтика",
+            "genre_878": "Наукова фантастика",
+            "genre_10770": "Телевізійний фільм",
+            "genre_53": "Трилер",
+            "genre_10752": "Війна",
+            "genre_37": "Вестерн"
+        },
+        "collections": {
+            "novelty": "Новинки",
+            "forYou": "Вам сподобається",
+            "top": "Популярні"
+        },
+        "filmCardSlider": {
+            "seeAll": "Дивитись усе"
+        },
+        "footer": {
+            "linksPrepayments": "Передоплати",
+            "linksLoyaltyProgram": "Програма лояльності",
+            "linksPromo": "Активувати промокод",
+            "linksPaymentMethods": "Способи оплати",
+            "linksTerms": "Умови користування",
+            "linksPrivacyPolicy": "Політика конфіденційності",
+            "linksAboutUs": "Про нас",
+            "linksDecives": "Пристрої",
+            "linksMediaOutput": "Вихідні дані медіа",
+            "linksOwnStruct": "Структура власності",
+            "linksPrepInstitution": "Передплата для закладів",
+            "linksForPartners": "Партнерам",
+            "linksCollaboration": "Співпраця",
+            "linksVacancies": "Вакансії",
+            "linksContacts": "Контакти",
+            "allRightsReserved": "Всі права захищені"
+        }
     },
     "en": {
-        "navMain": "Main",
-        "navFilms": "Films",
-        "navFavorites": "Favorites",
-        "accountButton": "LogIn",
-        "burgerSearch": "Search",
-        "burgerTheme": "Theme",
-        "burgerLanguage": "Language"
+        "header": {
+            "navMain": "Main",
+            "navFilms": "Films",
+            "navFavorites": "Favorites",
+            "accountButton": "LogIn",
+            "burgerSearch": "Search",
+            "burgerTheme": "Theme",
+            "burgerLanguage": "Language"
+        },
+        "intro": {
+            "hours": "h.",
+            "minutes": "m.",
+            "view": "View",
+            "genre_28": "Action",
+            "genre_12": "Adventure",
+            "genre_16": "Animation",
+            "genre_35": "Comedy",
+            "genre_80": "Crime",
+            "genre_99": "Documentary",
+            "genre_18": "Drama",
+            "genre_10751": "Family",
+            "genre_14": "Fantasy",
+            "genre_36": "History",
+            "genre_27": "Horror",
+            "genre_10402": "Music",
+            "genre_9648": "Mystery",
+            "genre_10749": "Romance",
+            "genre_878": "Science Fiction",
+            "genre_10770": "TV Movie",
+            "genre_53": "Thriller",
+            "genre_10752": "War",
+            "genre_37": "Western"
+        },
+        "collections": {
+            "novelty": "Novelty",
+            "forYou": "You will like it",
+            "top": "Popular"
+        },
+        "filmCardSlider": {
+            "seeAll": "See all"
+        },
+        "footer": {
+            "linksPrepayments": "Prepayments",
+            "linksLoyaltyProgram": "Loyalty program",
+            "linksPromo": "Activate promo code",
+            "linksPaymentMethods": "Payment methods",
+            "linksTerms": "Terms of use",
+            "linksPrivacyPolicy": "Privacy policy",
+            "linksAboutUs": "About us",
+            "linksDecives": "Devices",
+            "linksMediaOutput": "Media output",
+            "linksOwnStruct": "Ownership structure",
+            "linksPrepInstitution": "Prepayment for institutions",
+            "linksForPartners": "For partners",
+            "linksCollaboration": "Collaboration",
+            "linksVacancies": "Vacancies",
+            "linksContacts": "Contacts",
+            "allRightsReserved": "All rights reserved"
+        }
     }
 }

@@ -1,39 +1,41 @@
 .intro {
-    background-image: url('../../assets/icons/bg-temp.png');
+    // background-image: url('../../assets/icons/bg-temp.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 700px;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 65px; /* Ширина градиента по бокам */
-        height: 100%;
-        background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
-        z-index: 10; /* Помещаем за хедер */
+    // ! todo -->
+    //
+    // &::before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 65px; /* Ширина градиента по бокам */
+    //     height: 100%;
+    //     background: linear-gradient(to right, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+    //     z-index: 10; /* Помещаем за хедер */
 
-        @include laptop {
-            width: 30px;
-        }
-    }
+    //     @include laptop {
+    //         width: 30px;
+    //     }
+    // }
 
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 65px; /* Ширина градиента по бокам */
-        height: 100%;
-        background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
-        z-index: 10; /* Помещаем за хедер */
+    // &::after {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0;
+    //     right: 0;
+    //     width: 65px; /* Ширина градиента по бокам */
+    //     height: 100%;
+    //     background: linear-gradient(to left, #1a1a1a 0%, rgba(26, 26, 26, 0)); /* Левый градиент */
+    //     z-index: 10; /* Помещаем за хедер */
 
-        @include laptop {
-            width: 30px;
-        }
-    }
+    //     @include laptop {
+    //         width: 30px;
+    //     }
+    // }
 
     @include laptop {
         height: auto;
@@ -117,13 +119,14 @@
         position: relative;
         top: 12px;
         display: flex;
+        flex-direction: column;
         gap: var(--indent-minimum);
     }
 
     &__title {
         @include fluid-text(32, 24);
         @include font('Arial', 700, 1);
-        color: var(--color-white); // ! здесь не использую --color-text из-за того, что он не меняется при смене темы
+        color: var(--color-text);
     }
 
     &__year {
@@ -131,7 +134,7 @@
         top: 7px;
         @include fluid-text(24, 18);
         @include font('Arial', 700, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__statistic {
@@ -141,7 +144,7 @@
         & span {
             @include fluid-text(16, 12);
             @include font('Arial', 500, 1);
-            color: var(--color-white);
+            color: var(--color-text);
             padding-left: 28px;
 
             &::before {
@@ -193,7 +196,7 @@
     &__genre-title {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__description-wrap {
@@ -207,7 +210,7 @@
     &__description {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1.2);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__tools {
@@ -236,14 +239,16 @@
     }
 
     &__button--play {
+        width: 145px;
         background-color: var(--color-orange);
         padding: 12px var(--indent-minimum);
         @include fluid-text(24, 24);
         @include font('Arial', 700, 1.2);
-        color: var(--color-white);
+        color: var(--color-text);
         border-radius: var(--border-radius-small);
 
         @include mobile {
+            width: 130px;
             @include fluid-text(14, 14);
             padding: 6px 8px;
         }
@@ -254,7 +259,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
             position: relative;
             top: 4px;
 
@@ -275,7 +280,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
 
             @include mobile-small {
                 width: 30px;
@@ -287,7 +292,7 @@
     &__like--count {
         @include fluid-text(16, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__button--dislike {
@@ -300,7 +305,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
 
             @include mobile-small {
                 width: 30px;
@@ -312,6 +317,6 @@
     &__dislike--count {
         @include fluid-text(16, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 }

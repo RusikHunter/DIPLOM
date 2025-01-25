@@ -4,7 +4,23 @@
 
     &__image {
         width: 100%;
-        height: auto;
+        height: 367px;
+
+        @include laptop {
+            height: 350px;
+        }
+
+        @include tablet {
+            height: 300px;
+        }
+
+        @include mobile {
+            height: 270px;
+        }
+
+        @include mobile-small {
+            height: 170px;
+        }
     }
 
     &__title {
@@ -29,5 +45,6 @@
         @include fluid-text(16, 10);
         @include font('Arial', 400, 1);
         color: var(--color-gray);
+        white-space: nowrap;
     }
 }
