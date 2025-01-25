@@ -1,5 +1,5 @@
 .intro {
-    background-image: url('../../assets/icons/bg-temp.png');
+    // background-image: url('../../assets/icons/bg-temp.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -119,13 +119,14 @@
         position: relative;
         top: 12px;
         display: flex;
+        flex-direction: column;
         gap: var(--indent-minimum);
     }
 
     &__title {
         @include fluid-text(32, 24);
         @include font('Arial', 700, 1);
-        color: var(--color-white); // ! здесь не использую --color-text из-за того, что он не меняется при смене темы
+        color: var(--color-text);
     }
 
     &__year {
@@ -133,7 +134,7 @@
         top: 7px;
         @include fluid-text(24, 18);
         @include font('Arial', 700, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__statistic {
@@ -143,7 +144,7 @@
         & span {
             @include fluid-text(16, 12);
             @include font('Arial', 500, 1);
-            color: var(--color-white);
+            color: var(--color-text);
             padding-left: 28px;
 
             &::before {
@@ -195,7 +196,7 @@
     &__genre-title {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__description-wrap {
@@ -209,7 +210,7 @@
     &__description {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1.2);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__tools {
@@ -243,7 +244,7 @@
         padding: 12px var(--indent-minimum);
         @include fluid-text(24, 24);
         @include font('Arial', 700, 1.2);
-        color: var(--color-white);
+        color: var(--color-text);
         border-radius: var(--border-radius-small);
 
         @include mobile {
@@ -258,7 +259,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
             position: relative;
             top: 4px;
 
@@ -279,7 +280,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
 
             @include mobile-small {
                 width: 30px;
@@ -291,7 +292,7 @@
     &__like--count {
         @include fluid-text(16, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__button--dislike {
@@ -304,7 +305,7 @@
 
         & svg {
             background-color: transparent !important;
-            color: var(--color-white);
+            color: var(--color-text);
 
             @include mobile-small {
                 width: 30px;
@@ -316,6 +317,6 @@
     &__dislike--count {
         @include fluid-text(16, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 }

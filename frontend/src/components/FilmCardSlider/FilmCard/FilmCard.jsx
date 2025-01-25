@@ -5,7 +5,7 @@ import tempBG from '../../../assets/icons/tempBG.png'
 
 export default function FilmCard() {
     return (
-        <div div className="film-card" >
+        <div className="film-card" >
             <img src={tempBG} className="film-card__image" alt="temp" />
 
             <h6 className="film-card__title">Каскадер</h6>
