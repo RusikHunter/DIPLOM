@@ -31,7 +31,8 @@
             "genre_10770": "Телевізійний фільм",
             "genre_53": "Трилер",
             "genre_10752": "Війна",
-            "genre_37": "Вестерн"
+            "genre_37": "Вестерн",
+            "genreAll": "Усі"
         },
         "collections": {
             "novelty": "Новинки",
@@ -96,7 +97,8 @@
             "genre_10770": "TV Movie",
             "genre_53": "Thriller",
             "genre_10752": "War",
-            "genre_37": "Western"
+            "genre_37": "Western",
+            "genreAll": "All"
         },
         "collections": {
             "novelty": "Novelty",

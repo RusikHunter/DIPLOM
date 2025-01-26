@@ -24,20 +24,27 @@ export function getGenresByIDs(genres, language) {
     return selectedGenres
 }
 
-export async function fetchMainPageMovie() {
+export async function fetchMainPageMovie(genres) {
+    console.log(genres)
+    const genresString = genres.join(',')
+
+    console.log(genresString)
+
     try {
         const [englishResponse, ukrainianResponse] = await Promise.all([
-            axios.get('https://api.themoviedb.org/3/search/movie', {
+            axios.get('https://api.themoviedb.org/3/discover/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Breaking Bad',
+                    with_genres: genresString,
+                    with_original_language: "en",
                     language: 'en-US',
                 },
             }),
-            axios.get('https://api.themoviedb.org/3/search/movie', {
+            axios.get('https://api.themoviedb.org/3/discover/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Breaking Bad',
+                    with_genres: genresString,
+                    with_original_language: "en",
                     language: 'uk-UA',
                 },
             }),

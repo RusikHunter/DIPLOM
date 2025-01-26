@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage, setIsBurgerOpen } from '../../store/reducers/clientReducer'
 import Intro from '../../components/Intro/Intro';
+import GenreFilter from '../../components/GenreFilter/GenreFilter';
 import Collections from '../../components/Collections/Collections';
 
 export default function FilmsPage() {
@@ -15,8 +16,8 @@ export default function FilmsPage() {
     return (
         <>
             <main className="main">
-                <Intro />
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda provident suscipit iure veritatis quas, exercitationem cupiditate necessitatibus corporis adipisci aliquam voluptas quia repellat eius laudantium. Deleniti nesciunt consectetur commodi amet!
+                <Intro isGenreFilter={true} />
+                <GenreFilter />
                 <Collections />
             </main>
         </>

@@ -8,6 +8,7 @@ const clientSlice = createSlice({
         theme: 'dark',
         isLogged: false,
         isBurgerOpen: false,
+        filmsPageGenresArray: []
     },
     reducers: {
         setLanguage: (state) => {
@@ -28,8 +29,20 @@ const clientSlice = createSlice({
         resetBurgerMenu: (state) => {
             state.isBurgerOpen = false;
         },
+        changeFilmsPageGenresArray: (state, action) => {
+            state.filmsPageGenresArray = action.payload
+        }
     },
 })
 
-export const { setLanguage, setCurrentPage, setTheme, setIsLogged, setIsBurgerOpen, resetBurgerMenu } = clientSlice.actions
+export const {
+    setLanguage,
+    setCurrentPage,
+    setTheme,
+    setIsLogged,
+    setIsBurgerOpen,
+    resetBurgerMenu,
+    changeFilmsPageGenresArray
+} = clientSlice.actions
+
 export default clientSlice.reducer

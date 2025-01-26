@@ -18,9 +18,6 @@ export default function FilmCard({ params }) {
         genres: getGenresByIDs(genres),
     };
 
-    console.log(genres)
-
-
     return (
         <div className="film-card">
             <img src={movieData.posterPath} className="film-card__image" alt={movieData.title} />
