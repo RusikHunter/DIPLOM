@@ -6,7 +6,8 @@ import BurgerMenu from "./components/Header/BurgerMenu/BurgerMenu";
 import MainPage from './pages/MainPage/MainPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import FilmsPage from './pages/FilmsPage/FilmsPage';
-import NewPage from './pages/NewPage/NewPage';
+import CategoryPage from './pages/CategoryPage/CategoryPage';
+import MoviePage from './pages/MoviePage/MoviePage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import AccountPage from './pages/AccoutPage/AccountPage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
@@ -26,7 +27,8 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/films" element={<FilmsPage />} />
-                <Route path="/new" element={<NewPage />} />
+                <Route path="/category" element={<CategoryPage />} />
+                <Route path='/movie' element={<MoviePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/account" element={<AccountPage />} />

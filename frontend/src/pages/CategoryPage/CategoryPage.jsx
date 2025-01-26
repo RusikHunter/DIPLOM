@@ -3,16 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../store/reducers/clientReducer'
 
-export default function NewPage() {
+export default function CategoryPage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setCurrentPage('new'))
+        dispatch(setCurrentPage('category'))
     }, [])
 
     return (
         <>
-            <p>NewPage</p>
+            <p>CategoryPage</p>
         </>
     )
 }
