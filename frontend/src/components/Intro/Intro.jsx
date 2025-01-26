@@ -20,8 +20,6 @@ export default function Intro() {
         return <div>No data available</div>
     }
 
-    console.log(data)
-
     const moviesData = {
         backDropPath: `${rootPath}${data[0].backdrop_path}`,
         posterPath: `${rootPath}${data[0].poster_path}`,

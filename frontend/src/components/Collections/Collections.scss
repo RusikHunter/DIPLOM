@@ -17,4 +17,24 @@
             padding-block: var(--indent-small) var(--indent-small);
         }
     }
+
+    &__button--add-more {
+        margin-inline: auto;
+        background-color: transparent;
+        @include fluid-text(24, 14);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+        display: flex;
+        gap: var(--indent-minimum);
+        align-items: center;
+
+        svg {
+            color: var(--color-text);
+
+            @include mobile {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
 }

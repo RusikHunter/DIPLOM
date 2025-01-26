@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCurrentPage } from '../../store/reducers/clientReducer'
+import { setCurrentPage, setIsBurgerOpen } from '../../store/reducers/clientReducer'
 
 export default function MoviePage() {
     const dispatch = useDispatch()
@@ -12,7 +12,9 @@ export default function MoviePage() {
 
     return (
         <>
-            <p>MoviePage</p>
+            <main className="main">
+                MoviePage
+            </main>
         </>
     )
 }

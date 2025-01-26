@@ -1,27 +1,20 @@
-import React from "react"
-import { useRef } from "react"
-import { useQuery } from "@tanstack/react-query"
-import './FilmCardSlider.scss'
-import FilmCard from "./FilmCard/FilmCard"
-import translationsJSON from "../../assets/translations.json"
-import { useSelector } from 'react-redux';
+// FilmCardSlider.jsx
+import React from "react";
+import { useRef } from "react";
+import "./FilmCardSlider.scss";
+import FilmCard from "./FilmCard/FilmCard";
+import translationsJSON from "../../assets/translations.json";
+import { useSelector } from "react-redux";
 
-// swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-// import Swiper and modules styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+// Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-
-
-
-
-
-export default function FilmCardSlider({ title, method, queryKey }) {
-    const translations = translationsJSON
-    const language = useSelector(state => state.client.language)
+export default function FilmCardSlider({ title, movies }) {
+    const translations = translationsJSON;
+    const language = useSelector((state) => state.client.language);
 
     const swiperRef = useRef(null)
 
@@ -33,24 +26,14 @@ export default function FilmCardSlider({ title, method, queryKey }) {
         swiperRef.current.swiper.slideNext()
     }
 
-    const { data } = useQuery({
-        queryKey: [queryKey],
-        queryFn: method,
-    });
-
-    if (!data || !data[0]) {
-        return <div>No data available</div>
-    }
-
-    console.log(data)
-
     return (
         <div className="film-card-slider">
             <div className="film-card-slider__wrap">
                 <div className="film-card-slider__row film-card-slider__row--1 row">
                     <h2 className="film-card-slider__title">{title}</h2>
-
-                    <a className="film-card-slider__link" href="#">{translations[language].filmCardSlider.seeAll}</a>
+                    <a className="film-card-slider__link" href="#">
+                        {translations[language].filmCardSlider.seeAll}
+                    </a>
 
                     <div className="film-card-slider__navigation-wrap">
                         <button className="film-card-slider__navigation-button--left" onClick={handlePrev}>
@@ -66,26 +49,23 @@ export default function FilmCardSlider({ title, method, queryKey }) {
                     </div>
                 </div>
                 <div className="film-card-slider__row film-card-slider__row--2 row">
-                    {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! доделать slidesPerGroup */}
-                    <Swiper
-                        className="film-card-slider__swiper"
-                        ref={swiperRef}
-                        spaceBetween={15} // Расстояние между слайдами
-                        slidesPerView="auto" // Включаем авторазмер слайдов
-                        slidesPerGroup={3} // Прокручиваем по одному слайду
-                        loop={false} // Отключаем бесконечный цикл
+                    <Swiper ref={swiperRef}
+                        spaceBetween={15}
+                        slidesPerView="auto"
+                        slidesPerGroup={3}
+                        loop={false}
                         speed={300}
                         simulateTouch={false}
                         allowTouchMove={false}
                     >
-                        {data.map((film, index) => (
-                            <SwiperSlide className="film-card-slider__slide" key={index}>
+                        {movies.map((film) => (
+                            <SwiperSlide className="film-card-slider__slide" key={film.id}>
                                 <FilmCard params={film} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </div>
             </div>
-        </div>
-    )
+        </div >
+    );
 }

@@ -74,185 +74,69 @@ export async function fetchMainPageMovie() {
     }
 }
 
-// ! todo дублирующийся код
+export async function fetchAllMovies() {
+    // Функция для генерации параметров запроса в зависимости от метода (new, genre, top)
+    const fetchParams = (method, page, language) => ({
+        api_key: APIkey,
+        language,
+        sort_by: "popularity.desc",
+        page,
+        ...(method === "new" && { primary_release_year: 2025, with_original_language: "en" }),
+        ...(method === "genre" && { with_genres: "28,18", with_original_language: "en" }),
+        ...(method === "top" && { vote_count: 500000 }),
+    })
 
-export async function fetchMoviesBy2025() {
     try {
-        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
-            params: {
-                api_key: APIkey,
-                language: 'en-US',
-                primary_release_year: 2025,
-                sort_by: 'popularity.desc',
-                page: 1,
-            },
-        });
+        const fetchPromises = []
+        const methods = ["new", "genre", "top"]
 
-        const movies = response.data.results
-
-        const movieIds = movies.map(movie => movie.id)
-
-        const movieDetailsPromises = movieIds.map(id => {
-            return Promise.all([
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'en-US',
-                    },
-                }),
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'uk-UA',
-                    },
-                }),
-            ])
-        })
-
-        const moviesDetails = await Promise.all(movieDetailsPromises)
-
-        const moviesData = moviesDetails.map(([englishDetails, ukrainianDetails]) => {
-            const englishMovie = englishDetails.data
-            const ukrainianMovie = ukrainianDetails.data
-
-            return {
-                id: englishMovie.id,
-                posterPath: `${rootPath}${englishMovie.poster_path}`,
-                title: {
-                    en: englishMovie.title,
-                    ua: ukrainianMovie.title || englishMovie.title,
-                },
-                genres: englishMovie.genres.slice(0, 2).map(genre => genre.id),
-                releaseDate: englishMovie.release_date,
+        // Генерируем массив промисов для запросов как на английском, так и на украинском языке
+        methods.forEach((method) => {
+            for (let i = 1; i <= 3; i++) {
+                fetchPromises.push(
+                    axios.get("https://api.themoviedb.org/3/discover/movie", {
+                        params: fetchParams(method, i, "en-US"),
+                    }),
+                    axios.get("https://api.themoviedb.org/3/discover/movie", {
+                        params: fetchParams(method, i, "uk-UA"),
+                    })
+                )
             }
         })
 
-        return moviesData
+        // Выполняем все запросы одновременно
+        const responses = await Promise.all(fetchPromises)
 
-    } catch (error) {
-        console.error('Ошибка при запросе данных о фильмах:', error.message)
-        return []
-    }
-}
+        // Разделяем фильмы по языкам для обработки
+        const englishMovies = responses.filter((_, index) => index % 2 === 0).map((response) => response.data.results)
+        const ukrainianMovies = responses.filter((_, index) => index % 2 !== 0).map((response) => response.data.results)
 
-export async function fetchMoviesByGenre() {
-    try {
-        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
-            params: {
-                api_key: APIkey,
-                language: 'en-US',
-                with_genres: '28,18',
-                with_original_language: 'en',
-                sort_by: 'popularity.desc',
-                page: 1,
+        // Форматируем результаты, добавляя украинские названия
+        const formattedMovies = englishMovies.flat().map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                en: movie.title,
+                ua: ukrainianMovies.flat()[index]?.title || movie.title // Если украинский перевод отсутствует, используем английское название
             },
-        });
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
 
-        const movies = response.data.results
+        // Результаты сортируются по категориям (new, genre, top)
+        const result = {
+            new: formattedMovies.slice(0, 3 * 20),
+            genre: formattedMovies.slice(3 * 20, 6 * 20),
+            top: formattedMovies.slice(6 * 20),
+        }
 
-        const movieIds = movies.map(movie => movie.id)
+        console.log(result)
 
-        const movieDetailsPromises = movieIds.map(id => {
-            return Promise.all([
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'en-US',
-                    },
-                }),
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'uk-UA',
-                    },
-                }),
-            ])
-        })
-
-        const moviesDetails = await Promise.all(movieDetailsPromises)
-
-        const moviesData = moviesDetails.map(([englishDetails, ukrainianDetails]) => {
-            const englishMovie = englishDetails.data
-            const ukrainianMovie = ukrainianDetails.data
-
-            return {
-                id: englishMovie.id,
-                posterPath: `${rootPath}${englishMovie.poster_path}`,
-                title: {
-                    en: englishMovie.title,
-                    ua: ukrainianMovie.title || englishMovie.title,
-                },
-                genres: englishMovie.genres.slice(0, 2).map(genre => genre.id),
-                releaseDate: englishMovie.release_date,
-            }
-        })
-
-        return moviesData
-
+        return result
     } catch (error) {
-        console.error('Ошибка при запросе данных о фильмах:', error.message)
-        return []
+        // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
+        console.error("Ошибка при запросе фильмов:", error.message)
+        return { new: [], genre: [], top: [] }
     }
 }
-
-export async function fetchMoviesByTop() {
-    try {
-        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
-            params: {
-                api_key: APIkey,
-                language: 'en-US',
-                sort_by: 'popularity.desc',
-                with_original_language: 'en',
-                vote_count: 50000,
-            },
-        });
-
-        const movies = response.data.results
-
-        const movieIds = movies.map(movie => movie.id)
-
-        const movieDetailsPromises = movieIds.map(id => {
-            return Promise.all([
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'en-US',
-                    },
-                }),
-                axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
-                    params: {
-                        api_key: APIkey,
-                        language: 'uk-UA',
-                    },
-                }),
-            ])
-        })
-
-        const moviesDetails = await Promise.all(movieDetailsPromises)
-
-        const moviesData = moviesDetails.map(([englishDetails, ukrainianDetails]) => {
-            const englishMovie = englishDetails.data
-            const ukrainianMovie = ukrainianDetails.data
-
-            return {
-                id: englishMovie.id,
-                posterPath: `${rootPath}${englishMovie.poster_path}`,
-                title: {
-                    en: englishMovie.title,
-                    ua: ukrainianMovie.title || englishMovie.title,
-                },
-                genres: englishMovie.genres.slice(0, 2).map(genre => genre.id),
-                releaseDate: englishMovie.release_date,
-            }
-        })
-
-        return moviesData
-
-    } catch (error) {
-        console.error('Ошибка при запросе данных о фильмах:', error.message)
-        return []
-    }
-}
-
-
 
