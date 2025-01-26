@@ -30,14 +30,14 @@ export async function fetchMainPageMovie() {
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Borat',
+                    query: 'Breaking Bad',
                     language: 'en-US',
                 },
             }),
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: APIkey,
-                    query: 'Borat',
+                    query: 'Breaking Bad',
                     language: 'uk-UA',
                 },
             }),

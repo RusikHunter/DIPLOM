@@ -41,6 +41,9 @@
         "filmCardSlider": {
             "seeAll": "Дивитись усе"
         },
+        "filmsSlider": {
+            "title": "Фільми"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -101,6 +104,9 @@
         },
         "filmCardSlider": {
             "seeAll": "See all"
+        },
+        "filmsSlider": {
+            "title": "Films"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

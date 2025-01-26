@@ -235,7 +235,32 @@
     }
   }
 
-[data-page="main"][data-burger="false"] .header {
+[data-page="main"][data-burger="false"]
+ .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--gradient-wb);
+
+    & svg {
+        background-color: transparent !important;
+    }
+}
+
+[data-page="films"][data-burger="false"]
+ .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--gradient-wb);
+
+    & svg {
+        background-color: transparent !important;
+    }
+}
+
+[data-page="movie"][data-burger="false"]
+ .header {
     position: absolute;
     top: 0;
     left: 0;

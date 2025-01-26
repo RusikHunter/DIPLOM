@@ -3,16 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../store/reducers/clientReducer'
 
-export default function NewPage() {
+export default function MoviePage() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setCurrentPage('new'))
+        dispatch(setCurrentPage('movie'))
     }, [])
 
     return (
         <>
-            <p>NewPage</p>
+            <p>MoviePage</p>
         </>
     )
 }
