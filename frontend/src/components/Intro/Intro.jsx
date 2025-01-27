@@ -6,6 +6,7 @@ import translationsJSON from "../../assets/translations.json"
 import { useSelector } from 'react-redux';
 import { getGenresByIDs, fetchMainPageMovie } from '../../api/fetchFunctions.js'
 import { rootPath } from "../../api/config";
+import { legacy_createStore } from "redux"
 
 export default function Intro() {
     // localisation
@@ -13,31 +14,35 @@ export default function Intro() {
     const language = useSelector(state => state.client.language)
     const filmsPageGenresArray = useSelector(state => state.client.filmsPageGenresArray)
 
-    const { data } = useQuery({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['mainFilm', filmsPageGenresArray],
         queryFn: () => fetchMainPageMovie(filmsPageGenresArray.length === '0' ? ['18'] : filmsPageGenresArray),
     });
 
     // ! todo доделать эти компоненты, потому что когда рендерится, то происходит смещение, ну крч я пойму 100%
     // ! а то щас непонятно объясняю
-    if (!data || !data[0]) {
-        return <div>No data available</div>
-    }
+    if (isLoading) return <div>Loading...</div>
+    if (error) return <div>Error occurred while fetching data: {error.message}</div>
+
+    console.log('Data!!!', data);
+
 
     const moviesData = {
-        backDropPath: `${rootPath}${data[0].backdrop_path}`,
-        posterPath: `${rootPath}${data[0].poster_path}`,
-        title: language === 'en' ? data[0].title : data[1].title,
-        year: data[0].release_date.slice(0, 4),
-        hours: Math.floor(data[0].runtime / 60),
-        minutes: data[0].runtime - (Math.floor(data[0].runtime / 60) * 60),
-        adult: data[0].adult ? '18+' : '0+',
-        rating: data[0].vote_average.toFixed(1),
-        description: language === "en" ? data[0].overview : data[1].overview,
-        likes: Math.ceil(data[0].vote_count * 0.85),
-        dislikes: data[0].vote_count - Math.ceil(data[0].vote_count * 0.85),
-        genres: getGenresByIDs(data[0].genres)
+        backDropPath: `${rootPath}${data.backdrop_path}`,
+        posterPath: `${rootPath}${data.poster_path}`,
+        title: language === 'en' ? data.title.en : data.title.ua,
+        year: data.release_date.slice(0, 4),
+        hours: Math.floor(data.runtime / 60),
+        minutes: data.runtime - (Math.floor(data.runtime / 60) * 60),
+        adult: data.adult ? '18+' : '0+',
+        rating: data.vote_average.toFixed(1),
+        description: language === "en" ? data.overview.en : data.overview.ua,
+        likes: Math.ceil(data.vote_count * 0.85),
+        dislikes: data.vote_count - Math.ceil(data.vote_count * 0.85),
+        genres: getGenresByIDs(data.genres)
     }
+
+    console.log("Data to work", moviesData)
 
     return (
         <>

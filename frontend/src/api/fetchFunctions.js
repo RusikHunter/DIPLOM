@@ -25,46 +25,35 @@ export function getGenresByIDs(genres, language) {
 }
 
 export async function fetchMainPageMovie(genres) {
-    console.log(genres)
     const genresString = genres.join(',')
 
-    console.log(genresString)
-
     try {
-        const [englishResponse, ukrainianResponse] = await Promise.all([
-            axios.get('https://api.themoviedb.org/3/discover/movie', {
-                params: {
-                    api_key: APIkey,
-                    with_genres: genresString,
-                    with_original_language: "en",
-                    language: 'en-US',
-                },
-            }),
-            axios.get('https://api.themoviedb.org/3/discover/movie', {
-                params: {
-                    api_key: APIkey,
-                    with_genres: genresString,
-                    with_original_language: "en",
-                    language: 'uk-UA',
-                },
-            }),
-        ])
+        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+            params: {
+                api_key: APIkey,
+                with_genres: genresString,
+                with_original_language: "en",
+                language: 'uk-UA',
+            },
+        })
 
-        const englishMovieId = englishResponse.data.results[0]?.id
-        const ukrainianMovieId = ukrainianResponse.data.results[0]?.id
+        console.log(response);
 
-        if (!englishMovieId || !ukrainianMovieId) {
+
+        const movieID = response.data.results[0]?.id
+
+        if (!movieID) {
             throw new Error("Movie IDs not found.")
         }
 
         const [englishMovieDetails, ukrainianMovieDetails] = await Promise.all([
-            axios.get(`https://api.themoviedb.org/3/movie/${englishMovieId}`, {
+            axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
                 params: {
                     api_key: APIkey,
                     language: 'en-US',
                 },
             }),
-            axios.get(`https://api.themoviedb.org/3/movie/${ukrainianMovieId}`, {
+            axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
                 params: {
                     api_key: APIkey,
                     language: 'uk-UA',
@@ -72,10 +61,27 @@ export async function fetchMainPageMovie(genres) {
             }),
         ])
 
-        const englishMovie = englishMovieDetails.data
-        const ukrainianMovie = ukrainianMovieDetails.data
+        console.log('englishMovieDetails', englishMovieDetails);
+        console.log('ukrainianMovieDetails', ukrainianMovieDetails);
 
-        return [englishMovie, ukrainianMovie, englishMovieId, ukrainianMovieId]
+        const movieDetails = {
+            id: movieID,
+            backdrop_path: englishMovieDetails.data.backdrop_path,
+            poster_path: englishMovieDetails.data.poster_path,
+            title: { en: englishMovieDetails.data.title, ua: ukrainianMovieDetails.data.title ? ukrainianMovieDetails.data.title : englishMovieDetails.data.title },
+            release_date: englishMovieDetails.data.release_date,
+            runtime: englishMovieDetails.data.runtime,
+            adult: englishMovieDetails.data.adult,
+            vote_average: englishMovieDetails.data.vote_average,
+            overview: { en: englishMovieDetails.data.overview, ua: ukrainianMovieDetails.data.overview ? ukrainianMovieDetails.data.overview : englishMovieDetails.data.overview },
+            vote_count: englishMovieDetails.data.vote_count,
+            genres: englishMovieDetails.data.genres,
+        }
+
+        console.log('movieDetails', movieDetails);
+
+
+        return movieDetails
     } catch (error) {
         console.error('Error fetching movie details:', error.message)
     }
@@ -154,8 +160,6 @@ export async function fetchAllMovies() {
             genre: formattedMovies.slice(3 * 20, 6 * 20),
             top: formattedMovies.slice(6 * 20),
         }
-
-        console.log(result)
 
         return result
     } catch (error) {
