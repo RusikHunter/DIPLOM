@@ -92,7 +92,7 @@
     &__info-description-definition {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__column--2 {
@@ -257,7 +257,7 @@
     &__reviews-count {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__reviews-wrap {
@@ -367,7 +367,7 @@
     &__review-text {
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
-        color: var(--color-white);
+        color: var(--color-text);
     }
 
     &__row--4 {
