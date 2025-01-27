@@ -9,10 +9,35 @@
         width: 100%;
         padding-inline: 200px;
         padding-top: var(--indent-medium);
+
+        @include laptop {
+            padding-inline: 100px;
+        }
+
+        @include tablet {
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-inline: var(--indent-small);
+            padding-top: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-inline: var(--indent-minimum);
+        }
     }
 
     &__row--1 {
+        @include laptop {
+            gap: 6%;
+        }
         
+        @include mobile {
+            padding-inline: var(--indent-small);
+            flex-direction: column;
+            gap: var(--indent-small);
+        }
     }
 
     &__column {
@@ -20,6 +45,14 @@
 
     &__column--1 {
         width: 50%;
+
+        @include laptop {
+            width: 47%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
     }
 
     &__info-wrap {
@@ -39,6 +72,10 @@
         flex-direction: column;
         padding-right: var(--indent-medium); 
         gap: 10px;
+
+        @include mobile {
+            padding-right: 0;
+        }
     }
 
     &__info-description-list-item-wrap {
@@ -61,6 +98,14 @@
     &__column--2 {
         width: 50%;
         gap: var(--indent-small);
+
+        @include laptop {
+            width: 47%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
     }
 
     &__info-list {
@@ -75,20 +120,51 @@
     }
 
     &__row--2 {
+        
     }
 
     &__column--3 {
         gap: var(--indent-small);
+        width: 100%;
     }
 
     &__images-block {
         display: grid;
+        width: 100%;
         gap: 10px;
-        grid-template-rows: 130px 130px;
-        grid-template-columns: 500px 245px 245px 245px 245px;
+        grid-template-rows: auto auto;
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
         grid-template-areas:
             "a b c d e"
             "a f g h i";
+
+        @include tablet {
+            grid-template-rows: auto auto auto;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas:
+            "a b c"
+            "d e f"
+            "g h i";
+        }
+
+        @include mobile {
+            grid-template-rows: auto auto auto auto auto;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+            "a a"
+            "b c"
+            "d e"
+            "f g"
+            "h i";
+        }
+
+        @include mobile-small {
+            grid-template-rows: auto auto;
+            grid-template-columns: 1fr 1fr;
+            grid-template-areas:
+            "a a"
+            "b c";
+        }
     }
 
     &__image {
@@ -110,26 +186,50 @@
 
     &__image--d {
         grid-area: d;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__image--e {
         grid-area: e;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__image--f {
         grid-area: f;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__image--g {
         grid-area: g;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__image--h {
         grid-area: h;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__image--i {
         grid-area: i;
+
+        @include mobile-small {
+            display: none;
+        }
     }
 
     &__row--3 {
@@ -138,6 +238,14 @@
     &__column--4 {
         width: 55%;
         gap: var(--indent-small);
+
+        @include laptop {
+            width: 70%;
+        }
+
+        @include tablet {
+            width: 100%;
+        }
     }
 
     &__text-wrap {
@@ -156,6 +264,10 @@
         display: flex;
         flex-direction: column;
         gap: var(--indent-medium);
+
+        @include mobile {
+            gap: var(--indent-small);
+        }
     }
 
     &__review-form {
@@ -163,6 +275,11 @@
         display: flex;
         align-items: center;
         gap: var(--indent-minimum);
+
+        @include mobile-small {
+            position: relative;
+            padding-bottom: 39px;
+        }
     }
 
     &__review-image--my-account {
@@ -177,6 +294,10 @@
         padding-inline: var(--indent-minimum);
         @include font('Arial', 400, 1);
         color: var(--color-text);
+
+        @include mobile {
+            height: 29px;
+        }
 
         &::placeholder {
             @include font('Arial', 400, 1);
@@ -201,9 +322,17 @@
         border-radius: var(--border-radius-small);
 
         @include mobile {
-            width: 130px;
+            width: 100px;
             @include fluid-text(14, 14);
             padding: 6px 8px;
+        }
+
+        // костыль
+        @include mobile-small {
+            width: 100%;
+            position: absolute;
+            top: 65px;
+            left: 0;
         }
     }
 
