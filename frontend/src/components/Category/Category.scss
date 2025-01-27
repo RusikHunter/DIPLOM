@@ -1,0 +1,72 @@
+.category {
+    background-color: var(--color-background);
+    
+    &__inner {
+        flex-direction: column;
+        padding-inline: 200px;
+        padding-block: var(--indent-medium) var(--indent-big);
+        gap: 40px;
+
+        @include laptop {
+            padding-inline: 100px;
+            padding-block: var(--indent-medium) var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-inline: var(--indent-small);
+            padding-block: var(--indent-small) var(--indent-small);
+        }
+    }
+
+    &__title {
+        @include fluid-text(32, 22);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+
+        @include mobile-small {
+            @include fluid-text(16, 16);
+        }
+    }
+
+    &__row {
+        gap: var(--indent-minimum);
+        width: 100%;
+
+        @include laptop {
+            flex-wrap: wrap;
+        }
+    }
+
+    & .film-card {
+        width: calc((100% - 4 * 15px) / 6) !important;
+        aspect-ratio: 241 / 457 !important;
+
+        @include laptop {
+            width: calc((100% - 2 * 15px) / 3) !important;
+        }
+    }
+
+    & .film-card__image {
+        height: auto;
+    }
+
+    &__button--add-more {
+        margin-inline: auto;
+        background-color: transparent;
+        @include fluid-text(24, 14);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+        display: flex;
+        gap: var(--indent-minimum);
+        align-items: center;
+
+        svg {
+            color: var(--color-text);
+
+            @include mobile {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+}

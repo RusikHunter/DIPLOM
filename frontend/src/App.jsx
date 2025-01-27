@@ -12,6 +12,7 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import AccountPage from './pages/AccoutPage/AccountPage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 import TermsPage from './pages/TermsPage/TermsPage';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 // ! все элементы (текст, фоны, бордеры), сменяющие цвет по смене темы - сменяются через scss 
 // ! весь текст, меняющийся при смене языка - меняется через условный рендеринг в jsx компонентах
@@ -27,7 +28,8 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/films" element={<FilmsPage />} />
-                <Route path="/category" element={<CategoryPage />} />
+                <Route path="/category" element={<NotFoundPage />} />
+                <Route path="/category/:name" element={<CategoryPage />} />
                 <Route path='/movie' element={<MoviePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/auth" element={<AuthPage />} />

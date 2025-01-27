@@ -81,11 +81,33 @@ export async function fetchMainPageMovie(genres) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function fetchAllMovies() {
     // Функция для генерации параметров запроса в зависимости от метода (new, genre, top)
-    const fetchParams = (method, page, language) => ({
+    const fetchParams = (method, page) => ({
         api_key: APIkey,
-        language,
+        language: 'uk-UA',
         sort_by: "popularity.desc",
         page,
         ...(method === "new" && { primary_release_year: 2025, with_original_language: "en" }),
@@ -102,10 +124,7 @@ export async function fetchAllMovies() {
             for (let i = 1; i <= 3; i++) {
                 fetchPromises.push(
                     axios.get("https://api.themoviedb.org/3/discover/movie", {
-                        params: fetchParams(method, i, "en-US"),
-                    }),
-                    axios.get("https://api.themoviedb.org/3/discover/movie", {
-                        params: fetchParams(method, i, "uk-UA"),
+                        params: fetchParams(method, i),
                     })
                 )
             }
@@ -115,16 +134,15 @@ export async function fetchAllMovies() {
         const responses = await Promise.all(fetchPromises)
 
         // Разделяем фильмы по языкам для обработки
-        const englishMovies = responses.filter((_, index) => index % 2 === 0).map((response) => response.data.results)
-        const ukrainianMovies = responses.filter((_, index) => index % 2 !== 0).map((response) => response.data.results)
+        const movies = responses.map((response) => response.data.results)
 
         // Форматируем результаты, добавляя украинские названия
-        const formattedMovies = englishMovies.flat().map((movie, index) => ({
+        const formattedMovies = movies.flat().map((movie, index) => ({
             id: movie.id,
             posterPath: `${rootPath}${movie.poster_path}`,
             title: {
-                en: movie.title,
-                ua: ukrainianMovies.flat()[index]?.title || movie.title // Если украинский перевод отсутствует, используем английское название
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
             },
             genres: movie.genre_ids.slice(0, 2),
             releaseDate: movie.release_date
@@ -147,3 +165,63 @@ export async function fetchAllMovies() {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMoviesByParams(method) {
+    const fetchParams = (pageNumber) => ({
+        api_key: APIkey,
+        sort_by: "popularity.desc",
+        with_original_language: "en",
+        language: 'uk-UA',
+        page: pageNumber,
+        ...(method === "new" && { primary_release_year: 2025 }),
+        ...(method === "genre" && { with_genres: "28,18" }),
+        ...(method === "top" && { vote_count: 500000 })
+    })
+
+    try {
+        const fetchPromises = []
+
+        for (let i = 1; i <= 5; ++i) {
+            fetchPromises.push(
+                axios.get("https://api.themoviedb.org/3/discover/movie", {
+                    params: fetchParams(i),
+                })
+            )
+        }
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data.results)
+
+        const formattedMovies = movies.flat().map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+
+        return formattedMovies
+    } catch (error) {
+        // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
+        console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}

@@ -1,6 +1,7 @@
 // FilmCardSlider.jsx
 import React from "react";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import "./FilmCardSlider.scss";
 import FilmCard from "./FilmCard/FilmCard";
 import translationsJSON from "../../assets/translations.json";
@@ -30,10 +31,10 @@ export default function FilmCardSlider({ title, movies }) {
         <div className="film-card-slider">
             <div className="film-card-slider__wrap">
                 <div className="film-card-slider__row film-card-slider__row--1 row">
-                    <h2 className="film-card-slider__title">{title}</h2>
-                    <a className="film-card-slider__link" href="#">
+                    <h2 className="film-card-slider__title">{translations[language].collections[title]}</h2>
+                    <Link to={`/category/${title}`} state={{ title }} className="film-card-slider__link">
                         {translations[language].filmCardSlider.seeAll}
-                    </a>
+                    </Link>
 
                     <div className="film-card-slider__navigation-wrap">
                         <button className="film-card-slider__navigation-button--left" onClick={handlePrev}>
@@ -50,6 +51,7 @@ export default function FilmCardSlider({ title, movies }) {
                 </div>
                 <div className="film-card-slider__row film-card-slider__row--2 row">
                     <Swiper ref={swiperRef}
+                        className="film-card-slider__swiper"
                         spaceBetween={15}
                         slidesPerView="auto"
                         slidesPerGroup={3}
