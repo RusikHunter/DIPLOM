@@ -37,9 +37,6 @@ export async function fetchMainPageMovie(genres) {
             },
         })
 
-        console.log(response);
-
-
         const movieID = response.data.results[0]?.id
 
         if (!movieID) {
@@ -61,9 +58,6 @@ export async function fetchMainPageMovie(genres) {
             }),
         ])
 
-        console.log('englishMovieDetails', englishMovieDetails);
-        console.log('ukrainianMovieDetails', ukrainianMovieDetails);
-
         const movieDetails = {
             id: movieID,
             backdrop_path: englishMovieDetails.data.backdrop_path,
@@ -77,9 +71,6 @@ export async function fetchMainPageMovie(genres) {
             vote_count: englishMovieDetails.data.vote_count,
             genres: englishMovieDetails.data.genres,
         }
-
-        console.log('movieDetails', movieDetails);
-
 
         return movieDetails
     } catch (error) {
