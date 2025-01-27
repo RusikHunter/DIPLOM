@@ -45,9 +45,6 @@ export default function Category({ title }) {
 
     const rows = []
 
-    console.log('rows', rows);
-
-
     for (let i = 0; i < moviesToRender.length; i += moviesPerRow) {
         rows.push(moviesToRender.slice(i, i + moviesPerRow))
     }
@@ -65,6 +62,7 @@ export default function Category({ title }) {
                             <FilmCard
                                 key={movie.id}
                                 params={{
+                                    id: movie.id,
                                     title: movie.title,
                                     posterPath: movie.posterPath,
                                     genres: movie.genres,

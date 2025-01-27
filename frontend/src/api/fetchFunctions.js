@@ -1,6 +1,19 @@
 import axios from "axios"
 import { APIkey, rootPath } from "./config"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function getGenresByIDs(genres, language) {
     let IDs = null
 
@@ -23,6 +36,28 @@ export function getGenresByIDs(genres, language) {
 
     return selectedGenres
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export async function fetchMainPageMovie(genres) {
     const genresString = genres.join(',')
@@ -78,6 +113,57 @@ export async function fetchMainPageMovie(genres) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMovieByID(id) {
+    try {
+        const [responseUA, responseEN] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'uk-UA',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'en-US',
+                },
+            })
+        ])
+
+        const responseData = responseEN.data
+
+        const title = {
+            ua: responseUA.data.title ? responseUA.data.title : responseEN.data.title,
+            en: responseEN.data.title
+        }
+
+        const overview = {
+            ua: responseUA.data.overview ? responseUA.data.overview : responseEN.data.overview,
+            en: responseEN.data.overview
+        }
+
+        const result = { ...responseData, title, overview }
+
+        return result
+    } catch (error) {
+        console.error('Error fetching movie details:', error.message)
+    }
+}
 
 
 

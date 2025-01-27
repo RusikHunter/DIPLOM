@@ -45,7 +45,7 @@ export default function Intro() {
                 <div className="intro__inner container">
                     <div className="intro__row row">
                         <div className="intro__column intro__column--1 column">
-                            <Link to={`/movie/${movieData.id}`} state={{ id: movieData.id }} >
+                            <Link to={`/movie/${movieData.id}`} >
                                 <img src={movieData.posterPath} width={345} height={511} />
                             </Link>
                         </div>
@@ -80,7 +80,7 @@ export default function Intro() {
 
                             <div className="intro__tools">
                                 <button className="intro__button--play">
-                                    <Link to={`/movie/${movieData.id}`} state={{ id: movieData.id }} >
+                                    <Link to={`/movie/${movieData.id}`} >
                                         {translations[language].intro.view}
                                     </Link>
                                 </button>

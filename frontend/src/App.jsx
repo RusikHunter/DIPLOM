@@ -29,7 +29,7 @@ export default function App() {
                 <Route path="/" element={<MainPage />} />
                 <Route path="/films" element={<FilmsPage />} />
                 <Route path="/category" element={<NotFoundPage />} />
-                <Route path="/category/:name" element={<CategoryPage />} />
+                <Route path="/category/:title" element={<CategoryPage />} />
                 <Route path='/movie' element={<NotFoundPage />} />
                 <Route path='/movie/:id' element={<MoviePage />} />
                 <Route path="/search" element={<SearchPage />} />

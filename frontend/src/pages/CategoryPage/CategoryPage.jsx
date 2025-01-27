@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../store/reducers/clientReducer'
 import Category from '../../components/Category/Category'
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function CategoryPage() {
-    const location = useLocation()
-    const { title } = location.state || {}
-
     const dispatch = useDispatch()
+    const { title } = useParams()
+
+    console.log(title);
+
 
     useEffect(() => {
         dispatch(setCurrentPage('category'))

@@ -21,8 +21,8 @@ export default function FilmCard({ params }) {
     };
 
     return (
-        <Link to={`/movie/${movieData.id}`} state={{ id: movieData.id }} >
-            <div className="film-card">
+        <div className="film-card">
+            <Link to={`/movie/${movieData.id}`} >
                 <img src={movieData.posterPath} className="film-card__image" alt={movieData.title} />
                 <h6 className="film-card__title">{movieData.title}</h6>
                 <div className="film-card__info">
@@ -33,7 +33,7 @@ export default function FilmCard({ params }) {
                         </span>
                     ))}
                 </div>
-            </div>
-        </Link >
+            </Link >
+        </div >
     );
 }
