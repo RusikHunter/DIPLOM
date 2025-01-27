@@ -159,6 +159,9 @@ export async function fetchMovieByID(id) {
 
         const result = { ...responseData, title, overview }
 
+        console.log('result', result);
+
+
         return result
     } catch (error) {
         console.error('Error fetching movie details:', error.message)

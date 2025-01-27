@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchMovieByID } from '../../api/fetchFunctions';
 import { useParams } from 'react-router-dom';
 import IntroDetails from '../../components/IntroDetails/IntroDetails';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import { rootPath } from '../../api/config';
 import translationsJSON from '../../assets/translations.json'
 import { getGenresByIDs } from '../../api/fetchFunctions';
@@ -51,9 +52,7 @@ export default function MoviePage() {
         <>
             <main className="main">
                 <IntroDetails data={movieData} />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati est fugiat voluptatem iure deserunt eos dignissimos sint vero, minus molestias unde odit cum nemo. Aliquid beatae officiis quibusdam accusamus? Consequatur?
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati est fugiat voluptatem iure deserunt eos dignissimos sint vero, minus molestias unde odit cum nemo. Aliquid beatae officiis quibusdam accusamus? Consequatur?
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati est fugiat voluptatem iure deserunt eos dignissimos sint vero, minus molestias unde odit cum nemo. Aliquid beatae officiis quibusdam accusamus? Consequatur?
+                <MovieDetails />
             </main>
         </>
     )
