@@ -19,7 +19,7 @@ export default function MovieDetails({ data }) {
     for (let i = 0; i < movieData.reviewsCount; ++i) {
         reviews.push({
             author: 'author123',
-            text: `Bullshit. Worst I'd ever seen, i hope, fuckin author will die by rock in his mf face`
+            text: `Nice movie`
         })
     }
 

@@ -60,7 +60,11 @@ export function getGenresByIDs(genres, language) {
 
 
 export async function fetchMainPageMovie(genres) {
-    const genresString = genres.join(',')
+    let genresString = genres
+
+    if (typeof genres === "object") {
+        genresString = genres.join(',')
+    }
 
     try {
         const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
@@ -106,6 +110,9 @@ export async function fetchMainPageMovie(genres) {
             vote_count: englishMovieDetails.data.vote_count,
             genres: englishMovieDetails.data.genres,
         }
+
+        console.log(movieDetails);
+
 
         return movieDetails
     } catch (error) {

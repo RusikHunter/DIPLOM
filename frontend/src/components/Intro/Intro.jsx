@@ -15,7 +15,7 @@ export default function Intro() {
 
     const { data, isLoading, error } = useQuery({
         queryKey: ['mainFilm', filmsPageGenresArray],
-        queryFn: () => fetchMainPageMovie(filmsPageGenresArray.length === '0' ? ['18'] : filmsPageGenresArray),
+        queryFn: () => fetchMainPageMovie(filmsPageGenresArray.length === 0 ? '80,18' : filmsPageGenresArray),
     });
 
     // ! todo доделать эти компоненты, потому что когда рендерится, то происходит смещение, ну крч я пойму 100%
