@@ -11,6 +11,8 @@ import FilmCardSlider from '../../components/FilmCardSlider/FilmCardSlider';
 import { rootPath } from '../../api/config';
 import translationsJSON from '../../assets/translations.json'
 import { getGenresByIDs } from '../../api/fetchFunctions';
+import SliderDetails from '../../components/SliderDetails/SliderDetails';
+import { setSimilarGenres } from '../../store/reducers/clientReducer';
 
 
 export default function MoviePage() {
@@ -23,25 +25,23 @@ export default function MoviePage() {
         dispatch(setCurrentPage('movie'))
     }, [])
 
+    // Запрос для получения данных фильма
     const { data, isLoading, error } = useQuery({
         queryKey: ['movie', id],
         queryFn: () => fetchMovieByID(id),
     })
 
-    const { dataToSlider, isLoadingToSlider, errorToSlider } = useQuery({
-        queryKey: ['movies-to-slider'],
+    // Запрос для получения фильмов по жанрам, активируется только после получения `data`
+    const { data: dataToSlider, isLoading: isLoadingToSlider, error: errorToSlider } = useQuery({
+        queryKey: ['movies-to-slider', data?.genres],
         queryFn: () => fetchMoviesByGenres(`${data.genres[0].id},${data.genres[1].id}`),
-        enabled: !!data
-    })
+        enabled: !!data && data.genres.length >= 2,
+    });
 
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error occurred while fetching data: {error.message}</div>
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error occurred while fetching data: {error.message}</div>;
 
-    if (isLoadingToSlider) return <div>Loading...</div>
-    if (errorToSlider) return <div>Error occurred while fetching data: {error.message}</div>
-
-    console.log('dataToSlider', dataToSlider);
-
+    dispatch(setSimilarGenres(`${data.genres[0].id},${data.genres[1].id}`))
 
     const movieData = {
         id: data.id,
@@ -70,7 +70,11 @@ export default function MoviePage() {
             <main className="main">
                 <IntroDetails data={movieData} />
                 <MovieDetails data={movieData} />
-                {/* <FilmCardSlider /> */}
+                {!isLoadingToSlider && dataToSlider ? (
+                    <SliderDetails data={dataToSlider} />
+                ) : (
+                    <div>Loading related movies...</div>
+                )}
             </main>
         </>
     )

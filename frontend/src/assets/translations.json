@@ -38,6 +38,7 @@
             "novelty": "Новинки",
             "forYou": "Вам сподобається",
             "top": "Популярні",
+            "similar": "Схожі",
             "showMore": "Показати ще"
         },
         "filmCardSlider": {
@@ -119,6 +120,7 @@
             "novelty": "Novelty",
             "forYou": "You will like it",
             "top": "Popular",
+            "similar": "Similar",
             "showMore": "Show more"
         },
         "filmCardSlider": {

@@ -10,25 +10,33 @@ export default function Category({ title }) {
     const translations = translationsJSON
     const language = useSelector((state) => state.client.language)
 
-    let genre = null
+    const similarGenres = useSelector(state => state.client.similarGenres)
+
+    let method = null
 
     switch (title) {
         case 'novelty':
-            genre = 'new'
+            method = 'new'
             break
         case 'forYou':
-            genre = 'genre'
+            method = 'genre'
             break
         case 'top':
-            genre = 'top'
+            method = 'top'
+            break
+        case 'similar':
+            method = 'similar'
             break
         default:
-            genre = 'new'
+            method = 'new'
     }
+
+    console.log(similarGenres);
+
 
     const { data, isError, isLoading } = useQuery({
         queryKey: [`movies-${title}`],
-        queryFn: async () => fetchMoviesByParams(genre),
+        queryFn: async () => fetchMoviesByParams(method, method === 'similar' && similarGenres),
     });
 
     const [visibleRows, setVisibleRows] = useState(5)

@@ -1,0 +1,20 @@
+.slider-details {
+    background-color: var(--color-background);
+    
+    &__inner {
+        flex-direction: column;
+        padding-left: 200px;
+        padding-block: var(--indent-medium) var(--indent-big);
+        gap: 40px;
+
+        @include laptop {
+            padding-left: 100px;
+            padding-block: var(--indent-medium) var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-left: var(--indent-small);
+            padding-block: var(--indent-small) var(--indent-small);
+        }
+    }
+}

@@ -298,7 +298,7 @@ export async function fetchAllMovies() {
 
 
 
-export async function fetchMoviesByParams(method) {
+export async function fetchMoviesByParams(method, similarGenres = "18") {
     const fetchParams = (pageNumber) => ({
         api_key: APIkey,
         sort_by: "popularity.desc",
@@ -307,7 +307,8 @@ export async function fetchMoviesByParams(method) {
         page: pageNumber,
         ...(method === "new" && { primary_release_year: 2025 }),
         ...(method === "genre" && { with_genres: "28,18" }),
-        ...(method === "top" && { vote_count: 500000 })
+        ...(method === "top" && { vote_count: 500000 }),
+        ...(method === "similar" && { with_genres: similarGenres })
     })
 
     try {

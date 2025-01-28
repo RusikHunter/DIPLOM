@@ -3,12 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const clientSlice = createSlice({
     name: 'client',
     initialState: {
-        language: 'ua',
-        currentPage: 'main',
-        theme: 'dark',
-        isLogged: false,
-        isBurgerOpen: false,
-        filmsPageGenresArray: []
+        language: 'ua', // локализация для всего приложения
+        currentPage: 'main', // текущая страница
+        theme: 'dark', // текущая тема
+        isLogged: false, // авторизирован ли пользователь
+        isBurgerOpen: false, // открыто ли бургер меню
+        filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
+        similarGenres: '', // строка похожих жанров на MoviePage 
     },
     reducers: {
         setLanguage: (state) => {
@@ -31,6 +32,9 @@ const clientSlice = createSlice({
         },
         changeFilmsPageGenresArray: (state, action) => {
             state.filmsPageGenresArray = action.payload
+        },
+        setSimilarGenres: (state, action) => {
+            state.similarGenres = action.payload
         }
     },
 })
@@ -42,7 +46,8 @@ export const {
     setIsLogged,
     setIsBurgerOpen,
     resetBurgerMenu,
-    changeFilmsPageGenresArray
+    changeFilmsPageGenresArray,
+    setSimilarGenres
 } = clientSlice.actions
 
 export default clientSlice.reducer
