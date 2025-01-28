@@ -1,6 +1,19 @@
 import axios from "axios"
 import { APIkey, rootPath } from "./config"
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export function getGenresByIDs(genres, language) {
     let IDs = null
 
@@ -24,47 +37,55 @@ export function getGenresByIDs(genres, language) {
     return selectedGenres
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function fetchMainPageMovie(genres) {
-    console.log(genres)
     const genresString = genres.join(',')
 
-    console.log(genresString)
-
     try {
-        const [englishResponse, ukrainianResponse] = await Promise.all([
-            axios.get('https://api.themoviedb.org/3/discover/movie', {
-                params: {
-                    api_key: APIkey,
-                    with_genres: genresString,
-                    with_original_language: "en",
-                    language: 'en-US',
-                },
-            }),
-            axios.get('https://api.themoviedb.org/3/discover/movie', {
-                params: {
-                    api_key: APIkey,
-                    with_genres: genresString,
-                    with_original_language: "en",
-                    language: 'uk-UA',
-                },
-            }),
-        ])
+        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+            params: {
+                api_key: APIkey,
+                with_genres: genresString,
+                with_original_language: "en",
+                language: 'uk-UA',
+            },
+        })
 
-        const englishMovieId = englishResponse.data.results[0]?.id
-        const ukrainianMovieId = ukrainianResponse.data.results[0]?.id
+        const movieID = response.data.results[0]?.id
 
-        if (!englishMovieId || !ukrainianMovieId) {
+        if (!movieID) {
             throw new Error("Movie IDs not found.")
         }
 
         const [englishMovieDetails, ukrainianMovieDetails] = await Promise.all([
-            axios.get(`https://api.themoviedb.org/3/movie/${englishMovieId}`, {
+            axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
                 params: {
                     api_key: APIkey,
                     language: 'en-US',
                 },
             }),
-            axios.get(`https://api.themoviedb.org/3/movie/${ukrainianMovieId}`, {
+            axios.get(`https://api.themoviedb.org/3/movie/${movieID}`, {
                 params: {
                     api_key: APIkey,
                     language: 'uk-UA',
@@ -72,20 +93,140 @@ export async function fetchMainPageMovie(genres) {
             }),
         ])
 
-        const englishMovie = englishMovieDetails.data
-        const ukrainianMovie = ukrainianMovieDetails.data
+        const movieDetails = {
+            id: movieID,
+            backdrop_path: englishMovieDetails.data.backdrop_path,
+            poster_path: englishMovieDetails.data.poster_path,
+            title: { en: englishMovieDetails.data.title, ua: ukrainianMovieDetails.data.title ? ukrainianMovieDetails.data.title : englishMovieDetails.data.title },
+            release_date: englishMovieDetails.data.release_date,
+            runtime: englishMovieDetails.data.runtime,
+            adult: englishMovieDetails.data.adult,
+            vote_average: englishMovieDetails.data.vote_average,
+            overview: { en: englishMovieDetails.data.overview, ua: ukrainianMovieDetails.data.overview ? ukrainianMovieDetails.data.overview : englishMovieDetails.data.overview },
+            vote_count: englishMovieDetails.data.vote_count,
+            genres: englishMovieDetails.data.genres,
+        }
 
-        return [englishMovie, ukrainianMovie, englishMovieId, ukrainianMovieId]
+        return movieDetails
     } catch (error) {
         console.error('Error fetching movie details:', error.message)
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMovieByID(id) {
+    try {
+        const [movieResponseUA, movieResponseEN, creditsResponse] = await Promise.all([
+            axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'uk-UA',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'en-US',
+                },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+                params: {
+                    api_key: APIkey,
+                },
+            })
+        ])
+
+        const movieData = movieResponseEN.data;
+
+        const title = {
+            ua: movieResponseUA.data.title || movieResponseEN.data.title,
+            en: movieResponseEN.data.title,
+        }
+
+        const overview = {
+            ua: movieResponseUA.data.overview || movieResponseEN.data.overview,
+            en: movieResponseEN.data.overview,
+        }
+
+        const credits = creditsResponse.data
+
+        const actors = credits.cast.slice(0, 10).map(actor => ({
+            id: actor.id,
+            name: actor.name,
+            character: actor.character,
+            profile_path: actor.profile_path,
+        }))
+
+        const crew = credits.crew
+        const directors = crew.filter(member => member.job === 'Director').map(director => ({
+            id: director.id,
+            name: director.name,
+        }))
+
+        const writers = crew.filter(member => member.job === 'Screenplay' || member.job === 'Writer').map(writer => ({
+            id: writer.id,
+            name: writer.name,
+        }))
+
+        const result = {
+            ...movieData,
+            title,
+            overview,
+            credits: {
+                actors,
+                directors,
+                writers,
+            },
+        };
+
+        // console.log('result', result);
+
+        return result;
+    } catch (error) {
+        console.error('Error fetching movie details:', error.message);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function fetchAllMovies() {
     // Функция для генерации параметров запроса в зависимости от метода (new, genre, top)
-    const fetchParams = (method, page, language) => ({
+    const fetchParams = (method, page) => ({
         api_key: APIkey,
-        language,
+        language: 'uk-UA',
         sort_by: "popularity.desc",
         page,
         ...(method === "new" && { primary_release_year: 2025, with_original_language: "en" }),
@@ -102,10 +243,7 @@ export async function fetchAllMovies() {
             for (let i = 1; i <= 3; i++) {
                 fetchPromises.push(
                     axios.get("https://api.themoviedb.org/3/discover/movie", {
-                        params: fetchParams(method, i, "en-US"),
-                    }),
-                    axios.get("https://api.themoviedb.org/3/discover/movie", {
-                        params: fetchParams(method, i, "uk-UA"),
+                        params: fetchParams(method, i),
                     })
                 )
             }
@@ -115,16 +253,15 @@ export async function fetchAllMovies() {
         const responses = await Promise.all(fetchPromises)
 
         // Разделяем фильмы по языкам для обработки
-        const englishMovies = responses.filter((_, index) => index % 2 === 0).map((response) => response.data.results)
-        const ukrainianMovies = responses.filter((_, index) => index % 2 !== 0).map((response) => response.data.results)
+        const movies = responses.map((response) => response.data.results)
 
         // Форматируем результаты, добавляя украинские названия
-        const formattedMovies = englishMovies.flat().map((movie, index) => ({
+        const formattedMovies = movies.flat().map((movie, index) => ({
             id: movie.id,
             posterPath: `${rootPath}${movie.poster_path}`,
             title: {
-                en: movie.title,
-                ua: ukrainianMovies.flat()[index]?.title || movie.title // Если украинский перевод отсутствует, используем английское название
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
             },
             genres: movie.genre_ids.slice(0, 2),
             releaseDate: movie.release_date
@@ -137,8 +274,6 @@ export async function fetchAllMovies() {
             top: formattedMovies.slice(6 * 20),
         }
 
-        console.log(result)
-
         return result
     } catch (error) {
         // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
@@ -147,3 +282,116 @@ export async function fetchAllMovies() {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMoviesByParams(method, similarGenres = "18") {
+    const fetchParams = (pageNumber) => ({
+        api_key: APIkey,
+        sort_by: "popularity.desc",
+        with_original_language: "en",
+        language: 'uk-UA',
+        page: pageNumber,
+        ...(method === "new" && { primary_release_year: 2025 }),
+        ...(method === "genre" && { with_genres: "28,18" }),
+        ...(method === "top" && { vote_count: 500000 }),
+        ...(method === "similar" && { with_genres: similarGenres })
+    })
+
+    try {
+        const fetchPromises = []
+
+        for (let i = 1; i <= 5; ++i) {
+            fetchPromises.push(
+                axios.get("https://api.themoviedb.org/3/discover/movie", {
+                    params: fetchParams(i),
+                })
+            )
+        }
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data.results)
+
+        const formattedMovies = movies.flat().map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+
+        return formattedMovies
+    } catch (error) {
+        // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
+        console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMoviesByGenres(genres) {
+    try {
+        const fetchPromises = await Promise.all([
+            axios.get("https://api.themoviedb.org/3/discover/movie", {
+                params: {
+                    api_key: APIkey,
+                    sort_by: "popularity.desc",
+                    with_original_language: "en",
+                    language: 'uk-UA',
+                    with_genres: genres,
+                    page: 1,
+                    vote_count: 500000
+                },
+            })
+        ])
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data.results)
+
+        const formattedMovies = movies[0].map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+
+        console.log('formattedMovies', formattedMovies);
+
+        return formattedMovies
+    } catch (error) {
+        console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}

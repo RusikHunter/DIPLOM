@@ -184,13 +184,25 @@
     &__genre-list {
         display: flex;
         gap: 10px;
+
+        @include mobile {
+            & :nth-child(4) {
+                display: none;
+            }
+        }
     }
 
     &__genre {
-        background-color: none;
+        background: none;
         border: 2px solid var(--color-magenta);
         padding-inline: var(--indent-minimum);
         border-radius: var(--border-radius-small);
+        overflow: hidden;
+        white-space: nowrap;
+
+        @include tablet {
+            max-width: 96px;
+        }
     }
 
     &__genre-title {

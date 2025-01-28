@@ -55,7 +55,7 @@ export default function Collections() {
                         {["novelty", "forYou", "top"].map((type) => (
                             <FilmCardSlider
                                 key={`${type}-${index}`}
-                                title={translations[language].collections[type]}
+                                title={type}
                                 movies={slideSet[type]}
                             />
                         ))}
