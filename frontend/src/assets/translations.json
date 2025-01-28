@@ -46,6 +46,21 @@
         "filmsSlider": {
             "title": "Фільми"
         },
+        "movieDetails": {
+            "info": "Інформація",
+            "director": "Режисер",
+            "writers": "Сценаристи",
+            "actors": "Актори",
+            "countries": "Країни",
+            "translate": "Переклад",
+            "subtitles": "Субтитри",
+            "trailerAndImages": "Трейлер та світлини",
+            "reviews": "Відгуки",
+            "writeReview": "Написати відгук",
+            "send": "Надіслати",
+            "showMore": "Показати ще",
+            "noReviews": "Нема відгуків"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -111,6 +126,21 @@
         },
         "filmsSlider": {
             "title": "Films"
+        },
+        "movieDetails": {
+            "info": "Information",
+            "director": "Director",
+            "writers": "Writers",
+            "actors": "Actors",
+            "countries": "Countries",
+            "translate": "Localisation",
+            "subtitles": "Subtitles",
+            "trailerAndImages": "Trailer and images",
+            "reviews": "Review",
+            "writeReview": "Write review",
+            "send": "Send",
+            "showMore": "Show more",
+            "noReviews": "No reviews"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

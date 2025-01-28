@@ -1,85 +1,112 @@
 import React from "react"
 import './MovieDetails.scss'
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import translationsJSON from '../../assets/translations.json'
 import tempBG from '../../assets/icons/bg-temp.png'
 import avatar from '../../assets/icons/avatar.png'
 
-export default function MovieDetails() {
+export default function MovieDetails({ data }) {
+    const language = useSelector(state => state.client.language)
+    const translations = translationsJSON
+    const movieData = data
+    const reviewsProSite = 5
+
+    const [visibleReviewsCount, setVisibleReviewsCount] = useState(reviewsProSite)
+
+    const reviews = []
+
+    for (let i = 0; i < movieData.reviewsCount; ++i) {
+        reviews.push({
+            author: 'author123',
+            text: `Bullshit. Worst I'd ever seen, i hope, fuckin author will die by rock in his mf face`
+        })
+    }
+
+    const handleAddMore = () => {
+        setVisibleReviewsCount(prev => prev + reviewsProSite)
+    }
+
+    const visibleReviews = reviews.slice(0, visibleReviewsCount)
+
     return (
         <section className="section section__movie-details movie-details">
             <div className="movie-details__inner container">
                 <div className="movie-details__row movie-details__row--1 row">
                     <div className="movie-details__column movie-details__column--1 column">
                         <div className="movie-details__info-wrap">
-                            <h5 className="movie-details__title">Інформація</h5>
+                            <h5 className="movie-details__title">{translations[language].movieDetails.info}</h5>
 
                             <dl className="movie-details__info-description-list">
                                 <div className="movie-details__info-description-list-item-wrap">
-                                    <dt className="movie-details__info-description-term">Режисер:</dt>
-                                    <dd className="movie-details__info-description-definition">Роберт Еггерс</dd>
+                                    <dt className="movie-details__info-description-term">{translations[language].movieDetails.director}:</dt>
+                                    <dd className="movie-details__info-description-definition">
+                                        {movieData.directors.map((director, index) => (
+                                            <span key={index}>{director.name}</span>
+                                        ))}
+                                    </dd>
                                 </div>
 
                                 <div className="movie-details__info-description-list-item-wrap">
-                                    <dt className="movie-details__info-description-term">Сценаристи:</dt>
-                                    <dd className="movie-details__info-description-definition">Роберт Еггерс Генрік Галеєн Брем Стокер</dd>
+                                    <dt className="movie-details__info-description-term">{translations[language].movieDetails.writers}:</dt>
+                                    <dd className="movie-details__info-description-definition">
+                                        {movieData.writers.map((writer, index) => (
+                                            <span key={index}>{writer.name}</span>
+                                        ))}
+                                    </dd>
                                 </div>
 
 
                                 <div className="movie-details__info-description-list-item-wrap">
-                                    <dt className="movie-details__info-description-term">Актори:</dt>
-                                    <dd className="movie-details__info-description-definition">Лілі-Роуз Депп Ніколас Голт Білл Скашгорд Аарон Тейлор-Джонсон Віллем Дефо</dd>
+                                    <dt className="movie-details__info-description-term">{translations[language].movieDetails.actors}:</dt>
+                                    <dd className="movie-details__info-description-definition">
+                                        {movieData.actors.map((actor, index) => (
+                                            <span key={index}>{actor.name}</span>
+                                        ))}
+                                    </dd>
                                 </div>
 
 
                                 <div className="movie-details__info-description-list-item-wrap">
-                                    <dt className="movie-details__info-description-term">Країни:</dt>
-                                    <dd className="movie-details__info-description-definition">Чехія США</dd>
+                                    <dt className="movie-details__info-description-term">{translations[language].movieDetails.countries}:</dt>
+                                    <dd className="movie-details__info-description-definition">
+                                        {movieData.countries.map((country, index) => (
+                                            <span key={index}>{country.name}</span>
+                                        ))}
+                                    </dd>
                                 </div>
                             </dl>
                         </div>
                     </div>
                     <div className="movie-details__column movie-details__column--2 column">
                         <div className="movie-details__info-wrap">
-                            <h5 className="movie-details__title">Переклад</h5>
+                            <h5 className="movie-details__title">{translations[language].movieDetails.translate}</h5>
 
                             <ul className="movie-details__info-list">
-                                <li className="movie-details__info-list-item">
-                                    <span>Українська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Англійська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Польська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Німецька</span>
-                                </li>
+                                {movieData.languages.map((language, index) => (
+                                    <li className="movie-details__info-list-item" key={index}>
+                                        <span>{language.name}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
                         <div className="movie-details__info-wrap">
-                            <h5 className="movie-details__title">Субтитри</h5>
+                            <h5 className="movie-details__title">{translations[language].movieDetails.subtitles}</h5>
 
                             <ul className="movie-details__info-list">
-                                <li className="movie-details__info-list-item">
-                                    <span>Українська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Англійська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Польська</span>
-                                </li>
-                                <li className="movie-details__info-list-item">
-                                    <span>Німецька</span>
-                                </li>
+                                {movieData.languages.map((language, index) => (
+                                    <li className="movie-details__info-list-item" key={index}>
+                                        <span>{language.name}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div className="movie-details__row movie-details__row--2 row">
                     <div className="movie-details__column movie-details__column--3 column">
-                        <h5 className="movie-details__title">Трейлер та світлини</h5>
+                        <h5 className="movie-details__title">{translations[language].movieDetails.trailerAndImages}</h5>
 
                         <div className="movie-details__images-block">
                             <img src={tempBG} className="movie-details__image movie-details__image--a" alt="image" width={245} height={131} />
@@ -105,74 +132,52 @@ export default function MovieDetails() {
                 <div className="movie-details__row movie-details__row--3 row">
                     <div className="movie-details__column movie-details__column--4 column">
                         <div className="movie-details__text-wrap">
-                            <h5 className="movie-details__title">Відгуки</h5>
+                            <h5 className="movie-details__title">{translations[language].movieDetails.reviews}</h5>
 
-                            <span className="movie-details__reviews-count">44</span>
+                            <span className="movie-details__reviews-count">{movieData.reviewsCount}</span>
                         </div>
 
                         <div className="movie-details__reviews-wrap">
                             <form className="movie-details__review-form">
                                 <img src={avatar} className="movie-details__review-image--my-account" alt="avatar" />
 
-                                <input className="movie-details__review-input--text" type="text" placeholder="Відгук" />
+                                <input className="movie-details__review-input--text" type="text" placeholder={translations[language].movieDetails.writeReview} />
 
                                 <button className="movie-details__review-button--submit">
-                                    Надіслати
+                                    {translations[language].movieDetails.send}
                                 </button>
                             </form>
 
                             <ul className="movie-details__review-list">
-                                <li className="movie-details__review">
-                                    <img src={avatar} className="movie-details__review-image" alt="avatar" />
+                                {reviews.length > 0
+                                    ? (
+                                        visibleReviews.map((review, index) => (
+                                            <li className="movie-details__review" key={index}>
+                                                <img src={avatar} className="movie-details__review-image" alt="avatar" width={48} height={48} />
 
-                                    <div className="movie-details__review-author-info-wrap">
-                                        <span className="movie-details__review-author-username">
-                                            Author123
-                                        </span>
+                                                <div className="movie-details__review-author-info-wrap">
+                                                    <span className="movie-details__review-author-username">
+                                                        {review.author}
+                                                    </span>
 
-                                        <p className="movie-details__review-text">
-                                            Bullshit. Worst I'd ever seen, i hope, fuckin author will die by rock in his mf face
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className="movie-details__review">
-                                    <img src={avatar} className="movie-details__review-image" alt="avatar" />
-
-                                    <div className="movie-details__review-author-info-wrap">
-                                        <span className="movie-details__review-author-username">
-                                            Author123
-                                        </span>
-
-                                        <p className="movie-details__review-text">
-                                            Bullshit. Worst I'd ever seen, i hope, fuckin author will die by rock in his mf face
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className="movie-details__review">
-                                    <img src={avatar} className="movie-details__review-image" alt="avatar" width={48} height={48} />
-
-                                    <div className="movie-details__review-author-info-wrap">
-                                        <span className="movie-details__review-author-username">
-                                            Author123
-                                        </span>
-
-                                        <p className="movie-details__review-text">
-                                            Bullshit. Worst I'd ever seen, i hope, fuckin author will die by rock in his mf face
-                                        </p>
-                                    </div>
-                                </li>
+                                                    <p className="movie-details__review-text">
+                                                        {review.text}
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        ))
+                                    )
+                                    : (<span className="movie-details__review--no-reviews">{translations[language].movieDetails.noReviews}</span>)
+                                }
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div className="movie-details__row movie-details__row--4 row">
+                {reviews.length > 0 && visibleReviews.length < reviews.length && <div className="movie-details__row movie-details__row--4 row">
                     <button
                         className="movie-details__button--add-more"
-                    // style={{
-                    //     display: visibleSlideSets >= slideSets.length ? "none" : "flex",
-                    // }}
-                    // onClick={handleAddMore}
+                        onClick={handleAddMore}
                     >
                         <svg
                             width="38"
@@ -189,11 +194,11 @@ export default function MovieDetails() {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        Показати ще
+                        {translations[language].movieDetails.showMore}
                     </button>
-                </div>
+                </div>}
             </div>
-        </section>
+        </section >
     )
 }
 

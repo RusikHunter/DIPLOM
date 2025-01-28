@@ -9,12 +9,6 @@ export default function IntroDetails({ data }) {
 
     const movieData = data
 
-    console.log('movieData', movieData);
-
-    console.log(movieData.backDropPath);
-    console.log(movieData.posterPath);
-
-
     return (
         <section className="section section__intro intro" style={{ backgroundImage: `url(${movieData.backDropPath})` }}>
             <div className="intro__inner container">

@@ -130,7 +130,7 @@ export async function fetchMainPageMovie(genres) {
 
 export async function fetchMovieByID(id) {
     try {
-        const [responseUA, responseEN] = await Promise.all([
+        const [movieResponseUA, movieResponseEN, creditsResponse] = await Promise.all([
             axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
                 params: {
                     api_key: APIkey,
@@ -142,29 +142,62 @@ export async function fetchMovieByID(id) {
                     api_key: APIkey,
                     language: 'en-US',
                 },
+            }),
+            axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+                params: {
+                    api_key: APIkey,
+                },
             })
         ])
 
-        const responseData = responseEN.data
+        const movieData = movieResponseEN.data;
 
         const title = {
-            ua: responseUA.data.title ? responseUA.data.title : responseEN.data.title,
-            en: responseEN.data.title
+            ua: movieResponseUA.data.title || movieResponseEN.data.title,
+            en: movieResponseEN.data.title,
         }
 
         const overview = {
-            ua: responseUA.data.overview ? responseUA.data.overview : responseEN.data.overview,
-            en: responseEN.data.overview
+            ua: movieResponseUA.data.overview || movieResponseEN.data.overview,
+            en: movieResponseEN.data.overview,
         }
 
-        const result = { ...responseData, title, overview }
+        const credits = creditsResponse.data
 
-        console.log('result', result);
+        const actors = credits.cast.slice(0, 10).map(actor => ({
+            id: actor.id,
+            name: actor.name,
+            character: actor.character,
+            profile_path: actor.profile_path,
+        }))
 
+        const crew = credits.crew
+        const directors = crew.filter(member => member.job === 'Director').map(director => ({
+            id: director.id,
+            name: director.name,
+        }))
 
-        return result
+        const writers = crew.filter(member => member.job === 'Screenplay' || member.job === 'Writer').map(writer => ({
+            id: writer.id,
+            name: writer.name,
+        }))
+
+        const result = {
+            ...movieData,
+            title,
+            overview,
+            credits: {
+                actors,
+                directors,
+                writers,
+            },
+        };
+
+        // console.log('result', result);
+
+        return result;
     } catch (error) {
-        console.error('Error fetching movie details:', error.message)
+        console.error('Error fetching movie details:', error.message);
     }
 }
 
@@ -306,6 +339,58 @@ export async function fetchMoviesByParams(method) {
         return formattedMovies
     } catch (error) {
         // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
+        console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchMoviesByGenres(genres) {
+    try {
+        const fetchPromises = await Promise.all([
+            axios.get("https://api.themoviedb.org/3/discover/movie", {
+                params: {
+                    api_key: APIkey,
+                    sort_by: "popularity.desc",
+                    with_original_language: "en",
+                    language: 'uk-UA',
+                    with_genres: genres,
+                    page: 1,
+                    vote_count: 500000
+                },
+            })
+        ])
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data.results)
+
+        const formattedMovies = movies[0].map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+
+        console.log('formattedMovies', formattedMovies);
+
+        return formattedMovies
+    } catch (error) {
         console.error("Ошибка при запросе фильмов:", error.message)
     }
 }

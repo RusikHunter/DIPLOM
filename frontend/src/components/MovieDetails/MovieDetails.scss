@@ -93,6 +93,10 @@
         @include fluid-text(18, 14);
         @include font('Arial', 500, 1);
         color: var(--color-text);
+        
+        & span {
+            margin-right: 10px;
+        }
     }
 
     &__column--2 {
@@ -345,6 +349,13 @@
     &__review {
         display: flex;
         gap: var(--indent-minimum);
+    }
+
+    &__review--no-reviews {
+        @include fluid-text(18, 14);
+        @include font('Arial', 500, 1);
+        color: var(--color-text);
+        text-align: center;
     }
 
     &__review-image {

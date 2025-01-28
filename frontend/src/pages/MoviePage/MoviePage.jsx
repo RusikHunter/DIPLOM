@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage, setIsBurgerOpen } from '../../store/reducers/clientReducer'
 import { useQuery } from '@tanstack/react-query';
-import { fetchMovieByID } from '../../api/fetchFunctions';
+import { fetchMovieByID, fetchMoviesByGenres } from '../../api/fetchFunctions';
 import { useParams } from 'react-router-dom';
 import IntroDetails from '../../components/IntroDetails/IntroDetails';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
+import FilmCardSlider from '../../components/FilmCardSlider/FilmCardSlider';
 import { rootPath } from '../../api/config';
 import translationsJSON from '../../assets/translations.json'
 import { getGenresByIDs } from '../../api/fetchFunctions';
@@ -27,8 +28,20 @@ export default function MoviePage() {
         queryFn: () => fetchMovieByID(id),
     })
 
+    const { dataToSlider, isLoadingToSlider, errorToSlider } = useQuery({
+        queryKey: ['movies-to-slider'],
+        queryFn: () => fetchMoviesByGenres(`${data.genres[0].id},${data.genres[1].id}`),
+        enabled: !!data
+    })
+
     if (isLoading) return <div>Loading...</div>
     if (error) return <div>Error occurred while fetching data: {error.message}</div>
+
+    if (isLoadingToSlider) return <div>Loading...</div>
+    if (errorToSlider) return <div>Error occurred while fetching data: {error.message}</div>
+
+    console.log('dataToSlider', dataToSlider);
+
 
     const movieData = {
         id: data.id,
@@ -43,16 +56,21 @@ export default function MoviePage() {
         description: language === "en" ? data.overview.en : data.overview.ua,
         likes: Math.ceil(data.vote_count * 0.85),
         dislikes: data.vote_count - Math.ceil(data.vote_count * 0.85),
-        genres: getGenresByIDs(data.genres)
+        genres: getGenresByIDs(data.genres),
+        directors: data.credits.directors,
+        writers: data.credits.writers,
+        actors: data.credits.actors,
+        countries: data.production_countries,
+        languages: data.spoken_languages,
+        reviewsCount: data.vote_count > 500 ? Math.floor(data.vote_count / 10) : 0
     }
-
-
 
     return (
         <>
             <main className="main">
                 <IntroDetails data={movieData} />
-                <MovieDetails />
+                <MovieDetails data={movieData} />
+                {/* <FilmCardSlider /> */}
             </main>
         </>
     )
