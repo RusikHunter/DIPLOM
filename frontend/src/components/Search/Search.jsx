@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import translationsJSON from '../../assets/translations.json'
+import './Search.scss'
 
 export default function Search() {
     const translations = translationsJSON
@@ -15,23 +16,27 @@ export default function Search() {
                     </div>
                     <div className="search__row search__row--2 row">
                         <form className='search__form'>
-                            <input type="text" className="search__form-title" placeholder='Пошук' />
+                            <input type="text" className="search__form-input" placeholder='Пошук' />
                         </form>
 
                         <button type="button" className="search__button--filter">
-                            Фильтр
+                            <span>Фильтр</span>
+
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                         </button>
                     </div>
                     <div className="search__row search__row--3 row">
                         <div className="search__column search__column--1 column">
-                            <details className="search__dropdown search__dropdown--sort">
-                                <summary className="search__dropdown-title search__dropdown-title--sort">
-                                    Сортирувати за
+                            <div className="search__dropdown search__dropdown--sort">
+                                <div className="search__dropdown-title search__dropdown-title--sort">
+                                    <span>Сортирувати за</span>
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </summary>
+                                </div>
                                 <div className="search__dropdown-interactive search__dropdown-interactive--sort">
                                     <label className="search__dropdown-element search__dropdown-element--sort">
                                         <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
@@ -76,16 +81,16 @@ export default function Search() {
                                         </svg>
                                     </label>
                                 </div>
-                            </details>
+                            </div>
 
-                            <details className="search__dropdown search__dropdown--genre">
-                                <summary className="search__dropdown-title search__dropdown-title--genre">
-                                    Жанр
+                            <div className="search__dropdown search__dropdown--genre">
+                                <div className="search__dropdown-title search__dropdown-title--genre">
+                                    <span>Жанр</span>
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </summary>
+                                </div>
                                 <div className="search__dropdown-interactive search__dropdown-interactive--genre">
                                     <label className="search__dropdown-element search__dropdown-element--genre">
                                         <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
@@ -102,16 +107,16 @@ export default function Search() {
                                         Криминал
                                     </label>
                                 </div>
-                            </details>
+                            </div>
 
-                            <details className="search__dropdown search__dropdown--country">
-                                <summary className="search__dropdown-title search__dropdown-title--country">
-                                    Краина
+                            <div className="search__dropdown search__dropdown--country">
+                                <div className="search__dropdown-title search__dropdown-title--country">
+                                    <span>Краина</span>
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </summary>
+                                </div>
                                 <div className="search__dropdown-interactive search__dropdown-interactive--country">
                                     <label className="search__dropdown-element search__dropdown-element--country">
                                         <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
@@ -125,32 +130,67 @@ export default function Search() {
 
                                     <label className="search__dropdown-element search__dropdown-element--country">
                                         <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
-                                        Центрально Африканская Республика
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--country">
+                                        <input className="search__dropdown-input search__dropdown-input--country" type="checkbox" name="country" value="relevance" />
+                                        Германия
                                     </label>
                                 </div>
-                            </details>
+                            </div>
 
-                            <details className="search__dropdown search__dropdown--year">
-                                <summary className="search__dropdown-title search__dropdown-title--year">
-                                    Год
+                            <div className="search__dropdown search__dropdown--year">
+                                <div className="search__dropdown-title search__dropdown-title--year">
+                                    <span>Год</span>
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </summary>
+                                </div>
                                 <div className="search__dropdown-interactive search__dropdown-interactive--year">
                                     <input className="search__dropdown-input search__dropdown-input--year" type="range" min="1900" max="2025" step="1" value="1970" />
-                                    <div class="search__dropdown-span-year">1970</div>
+                                    <span class="search__dropdown-span-year">1970</span>
 
                                     <button className="search__dropdown-button--year">
                                         Застосувати
                                     </button>
                                 </div>
-                            </details>
+                            </div>
                         </div>
                         <div className="search__column search__column--2 column">
                             <button className="search__button--clear">
-                                Очистити фільтр
+                                <span>Очистити фільтр</span>
                             </button>
                         </div>
                     </div>
@@ -159,3 +199,4 @@ export default function Search() {
         </main>
     )
 }
+
