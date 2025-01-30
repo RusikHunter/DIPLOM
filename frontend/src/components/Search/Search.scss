@@ -141,7 +141,7 @@
             padding-top: var(--indent-minimum);
             height: auto;
 
-            & input {
+            & input[type="radio"], input[type="checkbox"] {
                 width: 24px;
                 height: 24px;
                 background-color: var(--color-white);
@@ -225,7 +225,7 @@
             /* Полностью скрываем ползунок */
             &::-webkit-scrollbar-thumb {
                 background: var(--color-gray);
-                border-radius: 5px;
+                border-radius: var(--border-radius-small);
             }
 
             /* Скрываем кнопки (вверх/вниз) */
@@ -241,7 +241,7 @@
 		}
 
 		&__dropdown--year {
-            height: 185px;
+            height: 230px;
 		}
 
 		&__dropdown-title--year {
@@ -250,16 +250,61 @@
         // ! todo ---> + todo фикс дефолтного скроллбара
 
 		&__dropdown-interactive--year {
-            
+            gap: var(--indent-small);
 		}
 
 		&__dropdown-input--year {
+            -webkit-appearance: none; /* Убираем стандартные стили браузера */
+            appearance: none;
+            width: 100%;
+            height: 5px;
+            background: var(--color-gray);
+            border-radius: 5px;
+            outline: none;
+            pointer-events: auto;
+
+            /* Для WebKit-браузеров (Chrome, Safari, Edge) */
+            &::-webkit-slider-runnable-track {
+                height: 5px;
+                border-radius: 5px;
+                background: var(--color-orange); /* Цвет незаполненной полосы */
+            }
+
+            /* Ползунок */
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 17px;
+                height: 17px;
+                background: var(--color-white); /* Цвет ползунка */
+                border-radius: 50%;
+                cursor: pointer;
+                position: relative;
+                margin-top: -6px; /* Центрируем по треку */
+            }
 		}
 
 		&__dropdown-span-year {
+            text-align: center;
+            width: 56px;
+            height: 30px;
+            background-color: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            margin-inline: auto;
 		}
 
 		&__dropdown-button--year {
+            border-radius: 5px;
+            background-color: var(--color-orange);
+            width: 160px;
+            padding: 9px var(--indent-small);
+            @include fluid-text(16, 16);
+            @include font('Arial', 700, 1);
+            color: var(--color-white);
+            margin-inline: auto;
 		}
 
 		&__column--2 {

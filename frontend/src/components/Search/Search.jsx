@@ -209,7 +209,7 @@ export default function Search() {
                                     </svg>
                                 </div>
                                 <div className="search__dropdown-interactive search__dropdown-interactive--year">
-                                    <input className="search__dropdown-input search__dropdown-input--year" type="range" min="1900" max="2025" step="1" value="1970" />
+                                    <input className="search__dropdown-input search__dropdown-input--year" type="range" min="1900" max="2025" step="1" />
                                     <span class="search__dropdown-span-year">1970</span>
 
                                     <button className="search__dropdown-button--year">
@@ -219,7 +219,7 @@ export default function Search() {
                             </div>
                         </div>
                         <div className="search__column search__column--2 column">
-                            <button className="search__button--clear">
+                            <button type="button" className="search__button--clear">
                                 <span>Очистити фільтр</span>
                             </button>
                         </div>
