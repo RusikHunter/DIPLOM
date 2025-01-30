@@ -90,11 +90,6 @@
             background-color: var(--color-black);
             padding: 20px var(--indent-minimum);
             border-radius: var(--border-radius-small);
-            overflow: hidden;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
 
             span {
                 @include fluid-text(16, 16);
@@ -145,23 +140,6 @@
             gap: 10px;
             padding-top: var(--indent-minimum);
             height: auto;
-            overflow-y: scroll;
-            scrollbar-width: thin;
-            scrollbar-color: #c1c1c1 transparent;
-
-            &::-webkit-scrollbar {
-                width: 10px;
-                height: 100px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background-color: #c1c1c1;
-                border-radius: 10px;
-            }
-
-            &::-webkit-scrollbar-track {
-                background: transparent;
-            }
 
             & input {
                 width: 24px;
@@ -216,13 +194,9 @@
 
 		&__dropdown--genre {
             height: 350px;
-            overflow: scroll;
 		}
 
 		&__dropdown-title--genre {
-		}
-
-		&__dropdown-interactive--genre {
 		}
 
 		&__dropdown-element--genre {
@@ -233,13 +207,31 @@
 
 		&__dropdown--country {
             height: 350px;
-            overflow: scroll;
 		}
 
 		&__dropdown-title--country {
 		}
 
-		&__dropdown-interactive--country {
+		&__dropdown-interactive--genre, &__dropdown-interactive--country {
+            overflow-y: scroll;
+
+            /* Основной трек скроллбара */
+            &::-webkit-scrollbar {
+                width: 10px; /* Ширина скроллбара */
+                height: 100px; /* Высота (но обычно для горизонтального скролла) */
+                background: var(--color-black); /* Цвет фона */
+            }
+
+            /* Полностью скрываем ползунок */
+            &::-webkit-scrollbar-thumb {
+                background: var(--color-gray);
+                border-radius: 5px;
+            }
+
+            /* Скрываем кнопки (вверх/вниз) */
+            &::-webkit-scrollbar-button {
+                display: none;
+            }
 		}
 
 		&__dropdown-element--country {
@@ -258,49 +250,7 @@
         // ! todo ---> + todo фикс дефолтного скроллбара
 
 		&__dropdown-interactive--year {
-            & input[type="range"] {
-                -webkit-appearance: none; /* Убираем стандартное оформление */
-                appearance: none;
-                width: 100%; /* Ширина полосы */
-                height: 5px; /* Высота полосы */
-                background: #c1c1c1; /* Цвет незаполненной части */
-                border-radius: 5px; /* Закругленные углы полосы */
-                outline: none; /* Убираем обводку */
-            }
             
-            /* Стиль для заполненной части */
-            & input[type="range"]::-webkit-slider-runnable-track {
-                background: #fba919; /* Цвет заполненной части */
-                height: 5px;
-                border-radius: 5px;
-            }
-            
-            & input[type="range"]::-moz-range-track {
-                background: #fba919; /* Цвет заполненной части */
-                height: 5px;
-                border-radius: 5px;
-            }
-            
-            /* Стиль для ползунка */
-            & input[type="range"]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 17px; /* Ширина ползунка */
-                height: 17px; /* Высота ползунка */
-                background: #ffffff; /* Белый цвет ползунка */
-                border-radius: 50%; /* Круглый ползунок */
-                margin-top: -6px; /* Центрируем ползунок по оси Y */
-                cursor: pointer;
-            }
-            
-            & input[type="range"]::-moz-range-thumb {
-                width: 17px; /* Ширина ползунка */
-                height: 17px; /* Высота ползунка */
-                background: #ffffff; /* Белый цвет ползунка */
-                border-radius: 50%; /* Круглый ползунок */
-                border: 2px solid #fba919; /* Граница вокруг ползунка */
-                cursor: pointer;
-            }
 		}
 
 		&__dropdown-input--year {

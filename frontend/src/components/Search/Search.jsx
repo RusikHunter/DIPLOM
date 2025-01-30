@@ -106,6 +106,36 @@ export default function Search() {
                                         <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
                                         Криминал
                                     </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Екшн
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Драма
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Криминал
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Екшн
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Драма
+                                    </label>
+
+                                    <label className="search__dropdown-element search__dropdown-element--genre">
+                                        <input className="search__dropdown-input search__dropdown-input--genre" type="checkbox" name="genre" value="relevance" />
+                                        Криминал
+                                    </label>
                                 </div>
                             </div>
 
