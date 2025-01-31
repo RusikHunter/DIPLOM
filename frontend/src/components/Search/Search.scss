@@ -98,6 +98,10 @@
             
 		}
 
+        &__row--disabled {
+            display: none !important;
+        }
+
 		&__column {
 		}
 
@@ -123,6 +127,7 @@
 
 
 		&__dropdown {
+            cursor: pointer;
             display: flex; 
             flex-direction: column;
             gap: 10px;
@@ -197,20 +202,20 @@
             border-radius: var(--border-radius-small);
         }
 
-        &__dropdown-content-wrap--sort {
+        &__dropdown-content-wrap--disabled {
             display: none;
+        }
+
+        &__dropdown-content-wrap--sort {
         }
 
         &__dropdown-content-wrap--genre {
-            display: none;
         }
 
         &__dropdown-content-wrap--country {
-            display: none;
         }
 
         &__dropdown-content-wrap--year {
-            display: none;
             height: 170px;
         }
 
