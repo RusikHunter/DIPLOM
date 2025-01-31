@@ -10,6 +10,23 @@
             width: 100%;
             padding-inline: 200px;
             padding-top: var(--indent-small);
+
+            @include laptop {
+                padding-inline: 100px;
+            }
+    
+            @include tablet {
+                padding-inline: var(--indent-medium);
+            }
+    
+            @include mobile {
+                padding-inline: var(--indent-small);
+                padding-top: var(--indent-small);
+            }
+    
+            @include mobile-small {
+                padding-inline: var(--indent-minimum);
+            }
 		}
 
 		&__row--1 {
@@ -23,6 +40,10 @@
 
 		&__row--2 {
             gap: var(--indent-minimum);
+
+            @include mobile-small {
+                flex-direction: column;
+            }
 		}
 
 		&__form {
@@ -67,6 +88,10 @@
                 position: relative;
                 top: -5px;
             }
+
+            @include mobile-small {
+                width: 116px;
+            }
 		}
 
 		&__row--3 {
@@ -76,17 +101,33 @@
 		&__column {
 		}
 
+
+
+
+
 		&__column--1 {
             flex-direction: row !important;
             gap: var(--indent-minimum);
+
+            @include tablet {
+                flex-wrap: wrap;
+                margin-right: var(--indent-small);
+            }
+
+            @include mobile-small {
+                flex-direction: column;
+            }
 		}
 
+
+
+
 		&__dropdown {
-            display: flex;
+            display: flex; 
             flex-direction: column;
             gap: 10px;
             width: 250px;
-            height: auto;
+            height: 65px !important; // ! temp
             background-color: var(--color-black);
             padding: 20px var(--indent-minimum);
             border-radius: var(--border-radius-small);
@@ -110,35 +151,82 @@
             }
 		}
 
-		&__dropdown--sort {
-            height: 290px;
-		}
 
-		&__dropdown-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+
+
+
+
+
+		&__dropdown {
+            position: relative;
+            display: flex; 
+            flex-direction: row;
+            gap: 10px;
+            width: auto;
+            height: 65px;
+            background-color: var(--color-black);
+            padding: 20px var(--indent-minimum);
+            border-radius: var(--border-radius-small);
 
             span {
-                user-select: none;
-            }
-
-            svg {
+                @include fluid-text(16, 16);
+                @include font("Arial", 500, 1);
+                color: var(--color-white);
                 position: relative;
                 top: 2px;
             }
+
+            svg {
+                background-color: transparent;
+                position: relative;
+                top: -1px;
+            }
 		}
 
-		&__dropdown-title--sort {
 
-		}
 
-		&__dropdown-interactive {
+        &__dropdown-content-wrap {
+            padding: var(--indent-minimum);
+            position: absolute;
+            top: 80px;
+            left: 0;
+            display: flex;
+            width: 250px;
+            height: 230px;
+            background-color: var(--color-black);
+            border-radius: var(--border-radius-small);
+        }
+
+        &__dropdown-content-wrap--sort {
+            display: none;
+        }
+
+        &__dropdown-content-wrap--genre {
+            display: none;
+        }
+
+        &__dropdown-content-wrap--country {
+            display: none;
+        }
+
+        &__dropdown-content-wrap--year {
+            display: none;
+            height: 170px;
+        }
+
+
+
+
+
+
+		&__dropdown-content {
+            background-color: var(--color-black);
+            display: flex;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding-top: var(--indent-minimum);
+            width: 250px;
+            // padding: var(--indent-minimum);
             height: auto;
 
             & input[type="radio"], input[type="checkbox"] {
@@ -164,56 +252,9 @@
             }
 		}
 
-		&__dropdown-interactive--sort {
-            
-		}
-
-		&__dropdown-element {
-            display: flex;
-            @include fluid-text(16, 16);
-            @include font("Arial", 500, 1.5);
-            color: var(--color-text);
-            align-items: center;
-            white-space: nowrap;
-		}
-
-		&__dropdown-element--sort {
-            position: relative;
-
-            svg {
-                position: absolute;
-                right: 0;
-            }
-		}
-
-		&__dropdown-input {
-		}
-
-		&__dropdown-input--sort {
-		}
-
-		&__dropdown--genre {
-            height: 350px;
-		}
-
-		&__dropdown-title--genre {
-		}
-
-		&__dropdown-element--genre {
-		}
-
-		&__dropdown-input--genre {
-		}
-
-		&__dropdown--country {
-            height: 350px;
-		}
-
-		&__dropdown-title--country {
-		}
-
-		&__dropdown-interactive--genre, &__dropdown-interactive--country {
+        &__dropdown-content--genre, &__dropdown-content--country {
             overflow-y: scroll;
+            height: 200px;
 
             /* Основной трек скроллбара */
             &::-webkit-scrollbar {
@@ -234,24 +275,38 @@
             }
 		}
 
-		&__dropdown-element--country {
-		}
-
-		&__dropdown-input--country {
-		}
-
-		&__dropdown--year {
-            height: 230px;
-		}
-
-		&__dropdown-title--year {
-		}
-
-        // ! todo ---> + todo фикс дефолтного скроллбара
-
-		&__dropdown-interactive--year {
+        &__dropdown-content--year {
             gap: var(--indent-small);
+            padding: 20px;
 		}
+
+
+
+
+
+
+		&__dropdown-element {
+            display: flex;
+            @include fluid-text(16, 16);
+            @include font("Arial", 500, 1.5);
+            color: var(--color-text);
+            align-items: center;
+            white-space: nowrap;
+		}
+
+		&__dropdown-element--sort {
+            position: relative;
+
+            svg {
+                position: absolute;
+                right: 0;
+            }
+		}
+
+
+        
+
+	
 
 		&__dropdown-input--year {
             -webkit-appearance: none; /* Убираем стандартные стили браузера */
@@ -306,6 +361,15 @@
             color: var(--color-white);
             margin-inline: auto;
 		}
+
+
+
+
+
+
+
+
+
 
 		&__column--2 {
 		}
