@@ -62,6 +62,23 @@
             "showMore": "Показати ще",
             "noReviews": "Нема відгуків"
         },
+        "search": {
+            "search": "Пошук",
+            "filter": "Фільтр",
+            "sortBy": "Сорторувати за",
+            "genre": "Жанр",
+            "country": "Країна",
+            "year": "Рік",
+            "clear": "Очистити фільтр",
+            "byRelevance": "За релевантністю",
+            "byTMDBRating": "За оцінкою TMDB",
+            "byDate": "За датою виходу",
+            "us": "США",
+            "ge": "Німеччина",
+            "ro": "Румунія",
+            "pl": "Польща",
+            "ua": "Україна"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -143,6 +160,23 @@
             "send": "Send",
             "showMore": "Show more",
             "noReviews": "No reviews"
+        },
+        "search": {
+            "search": "Search",
+            "filter": "Filter",
+            "sortBy": "Sort by",
+            "genre": "Genre",
+            "country": "Country",
+            "year": "Year",
+            "clear": "Clear filter",
+            "byRelevance": "By relevance",
+            "byTMDBRating": "By TMDB rating",
+            "byDate": "By date",
+            "us": "USA",
+            "ge": "Germany",
+            "ro": "Romania",
+            "pl": "Poland",
+            "ua": "Ukraine"
         },
         "footer": {
             "linksPrepayments": "Prepayments",
