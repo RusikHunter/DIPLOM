@@ -41,7 +41,7 @@ export default function MoviePage() {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error occurred while fetching data: {error.message}</div>;
 
-    dispatch(setSimilarGenres(`${data.genres[0].id},${data.genres[1].id}`))
+    // dispatch(setSimilarGenres(`${data.genres[0].id},${data.genres[1].id}`))
 
     const movieData = {
         id: data.id,

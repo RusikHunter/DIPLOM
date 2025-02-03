@@ -31,6 +31,7 @@ export default function App() {
                 <Route path="/category" element={<NotFoundPage />} />
                 <Route path="/category/:title" element={<CategoryPage />} />
                 <Route path='/movie' element={<NotFoundPage />} />
+                <Route path='/404' element={<NotFoundPage />} />
                 <Route path='/movie/:id' element={<MoviePage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/auth" element={<AuthPage />} />
