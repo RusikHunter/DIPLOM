@@ -2,6 +2,9 @@ import React from "react"
 import '../Intro/Intro.scss'
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
+import backgroundFilmCard from '../../assets/icons/backgroundFilmCard.png'
+import backgroundIntro from '../../assets/icons/backgroundIntro.png'
+
 
 export default function IntroDetails({ data }) {
     const translations = translationsJSON
@@ -10,11 +13,11 @@ export default function IntroDetails({ data }) {
     const movieData = data
 
     return (
-        <section className="section section__intro intro" style={{ backgroundImage: `url(${movieData.backDropPath})` }}>
+        <section className="section section__intro intro" style={{ backgroundImage: `url(${movieData.backDropPath !== "https://www.themoviedb.org/t/p/original/null" ? movieData.backDropPath : backgroundIntro})` }}>
             <div className="intro__inner container">
                 <div className="intro__row row">
                     <div className="intro__column intro__column--1 column">
-                        <img src={movieData.posterPath} width={345} height={511} alt="temp" />
+                        <img src={movieData.posterPath !== "https://www.themoviedb.org/t/p/original/null" ? movieData.posterPath : backgroundFilmCard} width={345} height={511} alt="temp" />
                     </div>
                     <div className="intro__column intro__column--2 column">
                         <div className="intro__title-wrap">

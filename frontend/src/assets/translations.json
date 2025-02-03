@@ -39,6 +39,7 @@
             "forYou": "Вам сподобається",
             "top": "Популярні",
             "similar": "Схожі",
+            "oftenSearch": "Часто шукають",
             "showMore": "Показати ще"
         },
         "filmCardSlider": {
@@ -61,6 +62,25 @@
             "send": "Надіслати",
             "showMore": "Показати ще",
             "noReviews": "Нема відгуків"
+        },
+        "search": {
+            "search": "Пошук",
+            "filter": "Фільтр",
+            "sortBy": "Сорторувати за",
+            "genre": "Жанр",
+            "country": "Країна",
+            "year": "Рік",
+            "clear": "Очистити фільтр",
+            "byRelevance": "За релевантністю",
+            "byTMDBRating": "За оцінкою TMDB",
+            "byDate": "За датою виходу",
+            "en": "США",
+            "de": "Німеччина",
+            "ro": "Румунія",
+            "pl": "Польща",
+            "es": "Іспанія",
+            "forRequest": "За запитом",
+            "nothingFound": "нічого не знайдено"
         },
         "footer": {
             "linksPrepayments": "Передоплати",
@@ -121,6 +141,7 @@
             "forYou": "You will like it",
             "top": "Popular",
             "similar": "Similar",
+            "oftenSearch": "Often search",
             "showMore": "Show more"
         },
         "filmCardSlider": {
@@ -143,6 +164,25 @@
             "send": "Send",
             "showMore": "Show more",
             "noReviews": "No reviews"
+        },
+        "search": {
+            "search": "Search",
+            "filter": "Filter",
+            "sortBy": "Sort by",
+            "genre": "Genre",
+            "country": "Country",
+            "year": "Year",
+            "clear": "Clear filter",
+            "byRelevance": "By relevance",
+            "byTMDBRating": "By TMDB rating",
+            "byDate": "By date",
+            "en": "USA",
+            "de": "Germany",
+            "ro": "Romania",
+            "pl": "Poland",
+            "es": "Spain",
+            "forRequest": "Nothing found for request",
+            "nothingFound": null
         },
         "footer": {
             "linksPrepayments": "Prepayments",
