@@ -161,7 +161,7 @@ export default function Search() {
                                 <span>{translations[language].search.sortBy}</span>
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
                                 <div ref={refsArr[0]} className="search__dropdown-content-wrap search__dropdown-content-wrap--sort" onClick={(e) => e.stopPropagation()}>
@@ -170,42 +170,42 @@ export default function Search() {
                                             <input ref={sortTypeFirstInputRef} className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byRelevance}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byRelevanceDOWN')}>
                                             <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byRelevance}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byTMDBRatingUP')}>
                                             <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byTMDBRating}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byTMDBRatingDOWN')}>
                                             <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byTMDBRating}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byDateUP')}>
                                             <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byDate}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8.22273 13.0641L12.2002 9.74951L16.1777 13.0641" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byDateDOWN')}>
                                             <input className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
                                             {translations[language].search.byDate}
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M15.7773 10.9359L11.7998 14.2505L7.82227 10.9359" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </label>
                                     </div>
@@ -239,7 +239,7 @@ export default function Search() {
                                 <span>{translations[language].search.genre}</span>
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
                                 <div ref={refsArr[1]} className="search__dropdown-content-wrap search__dropdown-content-wrap--genre" onClick={(e) => e.stopPropagation()}>
@@ -286,7 +286,7 @@ export default function Search() {
                                 <span>{translations[language].search.country}</span>
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
                                 <div ref={refsArr[2]} className="search__dropdown-content-wrap search__dropdown-content-wrap--country" onClick={(e) => e.stopPropagation()}>
@@ -325,7 +325,7 @@ export default function Search() {
                                 <span>{translations[language].search.year}</span>
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
                                 <div ref={refsArr[3]} className="search__dropdown-content-wrap search__dropdown-content-wrap--year" onClick={(e) => e.stopPropagation()}>
@@ -337,7 +337,7 @@ export default function Search() {
                                             step="1"
                                             value={year}
                                             onInput={handleYearChange} />
-                                        <span class="search__dropdown-span-year">{year}</span>
+                                        <span className="search__dropdown-span-year">{year}</span>
 
                                         <button className="search__dropdown-button--year" onClick={handleYearParamChange}>
                                             Застосувати
