@@ -24,6 +24,9 @@ export default function Category({ title }) {
         case 'top':
             method = 'top'
             break
+        case 'oftenSearch':
+            method = 'top'
+            break
         case 'similar':
             method = 'similar'
             break

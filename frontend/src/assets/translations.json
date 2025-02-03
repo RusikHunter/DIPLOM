@@ -39,6 +39,7 @@
             "forYou": "Вам сподобається",
             "top": "Популярні",
             "similar": "Схожі",
+            "oftenSearch": "Часто шукають",
             "showMore": "Показати ще"
         },
         "filmCardSlider": {
@@ -77,7 +78,9 @@
             "de": "Німеччина",
             "ro": "Румунія",
             "pl": "Польща",
-            "es": "Іспанія"
+            "es": "Іспанія",
+            "forRequest": "За запитом",
+            "nothingFound": "нічого не знайдено"
         },
         "footer": {
             "linksPrepayments": "Передоплати",
@@ -138,6 +141,7 @@
             "forYou": "You will like it",
             "top": "Popular",
             "similar": "Similar",
+            "oftenSearch": "Often search",
             "showMore": "Show more"
         },
         "filmCardSlider": {
@@ -176,7 +180,9 @@
             "de": "Germany",
             "ro": "Romania",
             "pl": "Poland",
-            "es": "Spain"
+            "es": "Spain",
+            "forRequest": "Nothing found for request",
+            "nothingFound": null
         },
         "footer": {
             "linksPrepayments": "Prepayments",

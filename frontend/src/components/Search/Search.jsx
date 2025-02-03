@@ -7,6 +7,8 @@ import { getGenresByIDs } from "../../api/fetchFunctions.js";
 import { genresIDs } from '../../api/config.js'
 import { fetchMoviesByParamObject } from '../../api/fetchFunctions.js'
 import { useQuery } from '@tanstack/react-query'
+import Category from '../Category/Category'
+import FilmCardSlider from '../FilmCardSlider/FilmCardSlider';
 
 export default function Search() {
     const translations = translationsJSON
@@ -15,6 +17,7 @@ export default function Search() {
     const genres = getGenresByIDs(genresIDs, language)
     const countries = ['en', 'de', 'ro', 'pl', 'es']
 
+    const searchInputRef = useRef()
     const sortTypeFirstInputRef = useRef()
     const [sortType, setSortType] = useState('byRelevanceUP')
     const [year, setYear] = useState(1970)
@@ -26,7 +29,7 @@ export default function Search() {
         query: "",
         with_genres: [],
         with_original_language: [],
-        primary_release_year: 1970
+        primary_release_year: ""
     })
 
 
@@ -159,13 +162,15 @@ export default function Search() {
         setParams({
             with_genres: [],
             with_original_language: [],
-            primary_release_year: 1970
+            primary_release_year: "",
+            query: ""
         })
 
         document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
             input.checked = false
         })
 
+        searchInputRef.current.value = ""
         setYear(1970)
         sortTypeFirstInputRef.current.checked = "true"
         setSortType('byRelevanceUP')
@@ -185,7 +190,7 @@ export default function Search() {
                     </div>
                     <div className="search__row search__row--2 row">
                         <form className='search__form'>
-                            <input type="text" className="search__form-input" placeholder={translations[language].search.search} onChange={handleChangeTitle} />
+                            <input ref={searchInputRef} type="text" className="search__form-input" placeholder={translations[language].search.search} onChange={handleChangeTitle} />
                         </form>
 
                         <button type="button" className="search__button--filter" onClick={handleToggleFiltersRow}>
@@ -198,17 +203,6 @@ export default function Search() {
                     </div>
                     <div ref={filtersRowRef} className="search__row search__row--3 row search__row--disabled">
                         <div className="search__column search__column--1 column">
-
-
-
-
-
-
-
-
-
-
-
                             <div className="search__dropdown search__dropdown--sort" onClick={() => handleToggleFilter(0)}>
                                 <span>{translations[language].search.sortBy}</span>
 
@@ -262,30 +256,7 @@ export default function Search() {
                                         </label>
                                     </div>
                                 </div>
-
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             <div className="search__dropdown search__dropdown--genre" onClick={() => handleToggleFilter(1)}>
                                 <span>{translations[language].search.genre}</span>
@@ -307,32 +278,7 @@ export default function Search() {
                                         })}
                                     </div>
                                 </div>
-
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             <div className="search__dropdown search__dropdown--country" onClick={() => handleToggleFilter(2)}>
                                 <span>{translations[language].search.country}</span>
@@ -355,23 +301,6 @@ export default function Search() {
                                 </div>
 
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             <div className="search__dropdown search__dropdown--year" onClick={() => handleToggleFilter(3)}>
                                 <span>{translations[language].search.year}</span>
@@ -396,24 +325,26 @@ export default function Search() {
                                         </button>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
-
-
-
-
-
-
-
                         </div>
                         <div className="search__column search__column--2 column">
                             <button type="button" className="search__button--clear" onClick={handleClearFilters}>
                                 <span>{translations[language].search.clear}</span>
                             </button>
                         </div>
+                    </div>
+
+                    <div className="search__row search__row--4 row">
+                        {typeof data !== 'undefined' && data.length > 0
+                            ? <FilmCardSlider title={'oftenSearch'} movies={data} />
+                            : params.query.length > 0
+                                ? <p className="search__text-404">{translations[language].search.forRequest} "{params.query}" {translations[language].search.nothingFound}</p>
+                                : null
+                        }
+                    </div>
+
+                    <div className="search__row search__row--5 row">
+                        <Category title={'oftenSearch'} />
                     </div>
                 </div>
             </section>
