@@ -5,53 +5,113 @@ import translationsJSON from '../../assets/translations.json'
 import './Search.scss'
 import { getGenresByIDs } from "../../api/fetchFunctions.js";
 import { genresIDs } from '../../api/config.js'
+import { fetchMoviesByParamObject } from '../../api/fetchFunctions.js'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Search() {
     const translations = translationsJSON
     const language = useSelector((state) => state.client.language)
 
     const genres = getGenresByIDs(genresIDs, language)
-    const countries = ['us', 'ge', 'ro', 'pl', 'ua']
+    const countries = ['en', 'de', 'ro', 'pl', 'es']
 
     const sortTypeFirstInputRef = useRef()
     const [sortType, setSortType] = useState('byRelevanceUP')
     const [year, setYear] = useState(1970)
 
+    const filtersRowRef = useRef()
+    const filterRefsArr = Array.from({ length: 4 }, () => useRef(null))
+
     const [params, setParams] = useState({
+        query: "",
         with_genres: [],
         with_original_language: [],
         primary_release_year: 1970
     })
 
-    const filtersRowRef = useRef()
-    const refsArr = Array.from({ length: 4 }, () => useRef(null))
+
+
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
-        filtersRowRef.current.classList.add('search__row--disabled')
+        console.log(params)
+    }, [params])
 
-        refsArr.forEach(ref => {
-            if (ref.current) {
-                ref.current.classList.add('search__dropdown-content-wrap--disabled')
-            }
-        })
+    useEffect(() => {
+        console.log(sortType)
+    }, [sortType])
+
+    useEffect(() => {
+        if (sortTypeFirstInputRef.current) {
+            sortTypeFirstInputRef.current.checked = true;
+        }
     }, [])
+
+
+
+
+
+
+
+
+
+
+
+    const { data } = useQuery({
+        queryKey: ['movies-by-filter', params],
+        queryFn: async () => fetchMoviesByParamObject(params),
+    })
+
+    console.log(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const handleToggleFiltersRow = () => {
         filtersRowRef.current.classList.toggle('search__row--disabled')
     }
 
     const handleToggleFilter = (id) => {
-        const isAlreadyOpen = !refsArr[id].current.classList.contains('search__dropdown-content-wrap--disabled')
+        const isAlreadyOpen = !filterRefsArr[id].current.classList.contains('search__dropdown-content-wrap--disabled')
 
-        refsArr.forEach((ref, index) => {
+        filterRefsArr.forEach((ref, index) => {
             if (ref.current) {
                 ref.current.classList.add('search__dropdown-content-wrap--disabled')
             }
         })
 
         if (!isAlreadyOpen) {
-            refsArr[id].current.classList.remove('search__dropdown-content-wrap--disabled')
+            filterRefsArr[id].current.classList.remove('search__dropdown-content-wrap--disabled')
         }
+    }
+
+    const handleChangeTitle = (event) => {
+        setParams((prevParams) => {
+            return {
+                ...prevParams,
+                query: event.target.value
+            }
+        })
     }
 
     const handleGenreClick = (selectedGenre) => {
@@ -111,17 +171,9 @@ export default function Search() {
         setSortType('byRelevanceUP')
     }
 
-    useEffect(() => {
-        console.log(params)
-    }, [params])
 
-    useEffect(() => {
-        console.log(sortType)
-    }, [sortType])
 
-    useEffect(() => {
-        sortTypeFirstInputRef.current.checked = "true"
-    }, [])
+
 
 
     return (
@@ -133,7 +185,7 @@ export default function Search() {
                     </div>
                     <div className="search__row search__row--2 row">
                         <form className='search__form'>
-                            <input type="text" className="search__form-input" placeholder={translations[language].search.search} />
+                            <input type="text" className="search__form-input" placeholder={translations[language].search.search} onChange={handleChangeTitle} />
                         </form>
 
                         <button type="button" className="search__button--filter" onClick={handleToggleFiltersRow}>
@@ -144,7 +196,7 @@ export default function Search() {
                             </svg>
                         </button>
                     </div>
-                    <div ref={filtersRowRef} className="search__row search__row--3 row">
+                    <div ref={filtersRowRef} className="search__row search__row--3 row search__row--disabled">
                         <div className="search__column search__column--1 column">
 
 
@@ -164,7 +216,7 @@ export default function Search() {
                                     <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
-                                <div ref={refsArr[0]} className="search__dropdown-content-wrap search__dropdown-content-wrap--sort" onClick={(e) => e.stopPropagation()}>
+                                <div ref={filterRefsArr[0]} className="search__dropdown-content-wrap search__dropdown-content-wrap--sort search__dropdown-content-wrap--disabled" onClick={(e) => e.stopPropagation()}>
                                     <div className="search__dropdown-content search__dropdown-content--sort">
                                         <label className="search__dropdown-element search__dropdown-element--sort" onChange={() => handleChangeSortType('byRelevanceUP')}>
                                             <input ref={sortTypeFirstInputRef} className="search__dropdown-input search__dropdown-input--sort" type="radio" name="sort" value="relevance" />
@@ -242,7 +294,7 @@ export default function Search() {
                                     <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
-                                <div ref={refsArr[1]} className="search__dropdown-content-wrap search__dropdown-content-wrap--genre" onClick={(e) => e.stopPropagation()}>
+                                <div ref={filterRefsArr[1]} className="search__dropdown-content-wrap search__dropdown-content-wrap--genre search__dropdown-content-wrap--disabled" onClick={(e) => e.stopPropagation()}>
                                     <div className="search__dropdown-content search__dropdown-content--genre">
                                         {genres.map((genre, index) => {
                                             return (
@@ -289,7 +341,7 @@ export default function Search() {
                                     <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
-                                <div ref={refsArr[2]} className="search__dropdown-content-wrap search__dropdown-content-wrap--country" onClick={(e) => e.stopPropagation()}>
+                                <div ref={filterRefsArr[2]} className="search__dropdown-content-wrap search__dropdown-content-wrap--country search__dropdown-content-wrap--disabled" onClick={(e) => e.stopPropagation()}>
                                     <div className="search__dropdown-content search__dropdown-content--country">
                                         {countries.map((country, index) => {
                                             return (
@@ -328,7 +380,7 @@ export default function Search() {
                                     <path d="M15.7773 10.936L11.7998 14.2505L7.82227 10.936" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
 
-                                <div ref={refsArr[3]} className="search__dropdown-content-wrap search__dropdown-content-wrap--year" onClick={(e) => e.stopPropagation()}>
+                                <div ref={filterRefsArr[3]} className="search__dropdown-content-wrap search__dropdown-content-wrap--year search__dropdown-content-wrap--disabled" onClick={(e) => e.stopPropagation()}>
                                     <div className="search__dropdown-content search__dropdown-content--year">
                                         <input className="search__dropdown-input search__dropdown-input--year"
                                             type="range"

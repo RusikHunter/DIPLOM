@@ -402,3 +402,49 @@ export async function fetchMoviesByGenres(genres) {
         console.error("Ошибка при запросе фильмов:", error.message)
     }
 }
+
+
+
+
+export async function fetchMoviesByParamObject(params) {
+    const fetchParams = {
+        api_key: APIkey,
+        sort_by: "popularity.desc",
+        language: 'uk-UA',
+        page: 1,
+        with_genres: params.with_genres.join(','),
+        with_original_language: params.with_original_language.join(','),
+        primary_release_year: params.primary_release_year,
+        query: params.query
+    }
+
+    console.log('params', fetchParams)
+
+
+    try {
+        const fetchPromises = await Promise.all([
+            axios.get("https://api.themoviedb.org/3/search/movie", {
+                params: fetchParams,
+            })
+        ])
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data.results)
+
+        const formattedMovies = movies[0].map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+
+        return formattedMovies
+    } catch (error) {
+        console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}

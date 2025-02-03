@@ -73,11 +73,11 @@
             "byRelevance": "За релевантністю",
             "byTMDBRating": "За оцінкою TMDB",
             "byDate": "За датою виходу",
-            "us": "США",
-            "ge": "Німеччина",
+            "en": "США",
+            "de": "Німеччина",
             "ro": "Румунія",
             "pl": "Польща",
-            "ua": "Україна"
+            "es": "Іспанія"
         },
         "footer": {
             "linksPrepayments": "Передоплати",
@@ -172,11 +172,11 @@
             "byRelevance": "By relevance",
             "byTMDBRating": "By TMDB rating",
             "byDate": "By date",
-            "us": "USA",
-            "ge": "Germany",
+            "en": "USA",
+            "de": "Germany",
             "ro": "Romania",
             "pl": "Poland",
-            "ua": "Ukraine"
+            "es": "Spain"
         },
         "footer": {
             "linksPrepayments": "Prepayments",
