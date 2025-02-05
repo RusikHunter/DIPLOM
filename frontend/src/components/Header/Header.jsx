@@ -88,11 +88,11 @@ export default function Header() {
 
                         {isLogged
                             ?
-                            <Link to="/account">
+                            <Link to="/account" className='header__link--account'>
                                 <img className='header__image--account' src={avatarIcon} alt='Account' />
                             </Link>
                             :
-                            <Link to="/auth">
+                            <Link to="/auth" className='header__link--enter'>
                                 <button className='header__button--enter'>{translations[language].header.accountButton}</button>
                             </Link>
                         }
