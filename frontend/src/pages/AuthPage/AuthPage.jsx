@@ -15,7 +15,7 @@ export default function AuthPage() {
 
     return (
         <>
-            <Registration />
+            {/* <Registration /> */}
             <Authorization />
         </>
     )
