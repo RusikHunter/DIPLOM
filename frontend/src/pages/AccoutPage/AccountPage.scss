@@ -4,6 +4,10 @@
     &__inner {
         flex-direction: column;
         padding-bottom: var(--indent-big);
+
+        @include mobile {
+            padding-bottom: var(--indent-medium);
+        }
     }
 
     &__row {}
@@ -11,6 +15,18 @@
     &__row--1 {
         padding-top: var(--indent-small);
         padding-inline: 200px;
+
+        @include laptop {
+            padding-inline: 100px;
+        }
+
+        @include mobile {
+            padding-inline: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-inline: var(--indent-minimum);
+        }
     }
 
     &__title {
@@ -23,6 +39,12 @@
         padding-top: var(--indent-medium);
         justify-content: center;
         gap: var(--indent-medium);
+
+        @include mobile {
+            padding-top: var(--indent-small);
+            flex-direction: column;
+            gap: var(--indent-small);
+        }
     }
 
     &__column {}
@@ -33,11 +55,23 @@
         width: 200px;
         height: 200px;
         border-radius: 50%;
+
+        @include mobile {
+            margin-inline: auto;
+        }
     }
 
     &__column--2 {
         width: 380px;
         gap: var(--indent-small);
+
+        @include mobile {
+            margin-inline: auto;
+        }
+
+        @include mobile-small {
+            width: 320px;
+        }
     }
 
     &__details-wrap {
