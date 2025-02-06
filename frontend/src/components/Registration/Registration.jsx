@@ -1,39 +1,39 @@
 import React from "react"
-import './Registration.scss'
+import './AccountForm.scss'
 
-export default function Registration() {
+export default function Registration({ handleChangeToAuth }) {
     return (
-        <section className="registration">
-            <div className="registration__inner container">
-                <div className="registration__row row">
-                    <div className="registration__column column">
-                        <h1 className="registration__title">Регистрация</h1>
+        <section className="account-form">
+            <div className="account-form__inner container">
+                <div className="account-form__row row">
+                    <div className="account-form__column column">
+                        <h1 className="account-form__title">Регистрация</h1>
 
-                        <form className="registration__form">
-                            <label htmlFor="registrationEmail" className="registration__label registration__label--email">
-                                <input className="registration__input registration__input--email" type="email" name="registrationEmail" required autocomplete="email" />
+                        <form className="account-form__form">
+                            <label htmlFor="accountFormEmail" className="account-form__label account-form__label--email">
+                                <input className="account-form__input account-form__input--email" type="email" name="accountFormEmail" required autoComplete="email" placeholder="Електронна пошта" />
                             </label>
 
-                            <label htmlFor="registrationUsername" className="registration__label registration__label--username">
-                                <input className="registration__input registration__input--username" type="text" name="registrationUsername" required autocomplete="nickname" />
+                            <label htmlFor="accountFormUsername" className="account-form__label account-form__label--username">
+                                <input className="account-form__input account-form__input--username" type="text" name="accountFormUsername" required autoComplete="nickname" placeholder="Придумайте псевдонім" />
                             </label>
 
-                            <label htmlFor="registrationPassword" className="registration__label registration__label--password">
-                                <input className="registration__input registration__input--password" type="password" name="registrationPassword" required minlength="6" />
+                            <label htmlFor="accountFormPassword" className="account-form__label account-form__label--password">
+                                <input className="account-form__input account-form__input--password" type="password" name="accountFormPassword" required minLength="6" placeholder="Пароль" />
                             </label>
 
-                            <label htmlFor="registrationConfirmPassword" className="registration__label registration__label--confirm-password">
-                                <input className="registration__input registration__input--confirm-password" type="password" name="registrationConfirmPassword" required minlength="6" />
+                            <label htmlFor="accountFormConfirmPassword" className="account-form__label account-form__label--confirm-password">
+                                <input className="account-form__input account-form__input--confirm-password" type="password" name="accountFormConfirmPassword" required minLength="6" placeholder="Підтвердити пароль" />
                             </label>
 
-                            <button type="submit" className="registration__button registration__button--submit">
+                            <button type="submit" className="account-form__button account-form__button--submit">
                                 Зарегистрироваться
                             </button>
                         </form>
 
-                        <span className="registration__text--to-auth">
+                        <span className="account-form__text--to-auth">
                             Уже имеете аккаунт на Vibix?
-                            <a href="#" className="registration__link--to-auth">Войдите</a>
+                            <a href="#" className="account-form__link--to-auth" onClick={handleChangeToAuth}>Войдите</a>
                         </span>
                     </div>
                 </div>
