@@ -82,6 +82,29 @@
             "forRequest": "За запитом",
             "nothingFound": "нічого не знайдено"
         },
+        "accountForm": {
+            "registration": "Реєстрація",
+            "authorization": "Авторизація",
+            "email": "Електронна пошта",
+            "username": "Придумайте псевдонім",
+            "password": "Пароль",
+            "repeatPassword": "Підтвердити пароль",
+            "signUp": "Зареєструватись",
+            "logIn": "Увійти",
+            "alreadyRegistered": "Вже маєте аккаунт на Vibix?",
+            "noAccount": "Уперше на Vibix?"
+        },
+        "account": {
+            "userAccount": "Аккаунт користувача",
+            "userData": "Дані користувача",
+            "username": "Псевдонім",
+            "change": "Змінити",
+            "plan": "План",
+            "selectAnotherPlan": "Обрати інший план",
+            "planBasic": "Базовий",
+            "planStandart": "Стандартний",
+            "planPremium": "Преміум"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -183,6 +206,29 @@
             "es": "Spain",
             "forRequest": "Nothing found for request",
             "nothingFound": null
+        },
+        "accountForm": {
+            "registration": "Registration",
+            "authorization": "Authorization",
+            "email": "Email",
+            "username": "Write username",
+            "password": "Password",
+            "repeatPassword": "Confirm password",
+            "signUp": "Sign up",
+            "logIn": "Login",
+            "alreadyRegistered": "Already have an account on Vibix?",
+            "noAccount": "First time on Vibix?"
+        },
+        "account": {
+            "userAccount": "User account",
+            "userData": "User data",
+            "username": "Username",
+            "change": "Change",
+            "plan": "Plan",
+            "selectAnotherPlan": "Change another plan",
+            "planBasic": "Basic",
+            "planStandart": "Standart",
+            "planPremium": "Premium"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

@@ -6,7 +6,7 @@
     &__row {
         width: 100%;
         padding-block: var(--indent-small) var(--indent-big);
-        justify-content: center;
+        justify-content: center !important;
 
         @include mobile-small {
             padding-bottom: var(--indent-medium);
