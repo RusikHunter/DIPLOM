@@ -37,6 +37,13 @@
         gap: var(--indent-minimum);
     }
 
+    &__error-text {
+        margin-top: 10px;
+        @include fluid-text(14, 14);
+        @include font('Arial', 400, 1);
+        color: var(--color-red);
+    }
+
     &__label {}
 
     &__label--email {}

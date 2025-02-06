@@ -5,6 +5,7 @@
             "navFilms": "Фільми",
             "navFavorites": "Збережене",
             "accountButton": "Увійти",
+            "exitButton": "Вийти",
             "burgerSearch": "Пошук",
             "burgerTheme": "Тема",
             "burgerLanguage": "Мова"
@@ -130,6 +131,7 @@
             "navFilms": "Films",
             "navFavorites": "Favorites",
             "accountButton": "LogIn",
+            "exitButton": "LogOut",
             "burgerSearch": "Search",
             "burgerTheme": "Theme",
             "burgerLanguage": "Language"

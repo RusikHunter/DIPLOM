@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import "./Header.scss"
 import logoVibixImage from '../../assets/icons/logo.svg';
-import avatarIcon from '../../assets/icons/avatar.png'
+import avatarIcon from '../../assets/icons/useravatar.png'
 import { setLanguage, setTheme, setIsLogged } from '../../store/reducers/clientReducer'
 import { useDispatch } from 'react-redux';
 import BurgerButton from './BurgerButton/BurgerButton';
@@ -52,9 +52,16 @@ export default function Header() {
                                     </Link>
                                 </li>
                                 <li className="header__list-item">
-                                    <Link to="/favorites">
-                                        <p className="header__link">{translations[language].header.navFavorites}</p>
-                                    </Link>
+                                    {isLogged === true
+                                        ?
+                                        <Link to="/favorites">
+                                            <p className="header__link">{translations[language].header.navFavorites}</p>
+                                        </Link>
+                                        :
+                                        <Link to="/auth">
+                                            <p className="header__link">{translations[language].header.navFavorites}</p>
+                                        </Link>
+                                    }
                                 </li>
                             </ul>
                         </nav>
@@ -87,11 +94,23 @@ export default function Header() {
                         </div>
 
                         {isLogged
-                            ?
+                            && currentPage === "account"
+                            &&
+                            <Link to="/auth" className='header__link--exit'>
+                                <button className='header__button--exit'>{translations[language].header.exitButton}</button>
+                            </Link>
+                        }
+
+                        {isLogged
+                            && currentPage !== "account"
+                            &&
                             <Link to="/account" className='header__link--account'>
                                 <img className='header__image--account' src={avatarIcon} alt='Account' />
                             </Link>
-                            :
+                        }
+
+                        {!isLogged
+                            &&
                             <Link to="/auth" className='header__link--enter'>
                                 <button className='header__button--enter'>{translations[language].header.accountButton}</button>
                             </Link>

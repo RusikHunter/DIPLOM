@@ -6,7 +6,7 @@ const clientSlice = createSlice({
         language: 'ua', // локализация для всего приложения
         currentPage: 'main', // текущая страница
         theme: 'dark', // текущая тема
-        isLogged: false, // авторизирован ли пользователь
+        isLogged: true, // авторизирован ли пользователь
         isBurgerOpen: false, // открыто ли бургер меню
         filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
         similarGenres: '', // строка похожих жанров на MoviePage 

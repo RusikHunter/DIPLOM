@@ -161,7 +161,8 @@
         }
     }
 
-    &__button--enter {
+    &__button--enter,
+    &__button--exit {
         border-radius: var(--border-radius-small);
         width: 48px;
         background-color: var(--color-orange);
@@ -271,7 +272,8 @@
         display: none;
     }
 
-    &__link--enter {
+    &__link--enter,
+    &__link--exit {
         display: none;
     }
 

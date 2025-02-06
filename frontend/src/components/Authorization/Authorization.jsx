@@ -2,10 +2,27 @@ import React from "react"
 import '../Registration/AccountForm.scss'
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
+import { useForm } from "react-hook-form";
 
 export default function Authorization({ handleChangeToReg }) {
     const language = useSelector(state => state.client.language)
     const translations = translationsJSON
+
+    // form
+
+    const {
+        register,
+        handleSubmit,
+        watch, // Слежение за полями
+        formState: { errors }
+    } = useForm()
+
+    const onSubmit = (data) => {
+        console.log("Данные формы:", data)
+    };
+
+    // Получаем значение пароля для сравнения
+    const password = watch("password")
 
     return (
         <section className="account-form">
@@ -14,15 +31,39 @@ export default function Authorization({ handleChangeToReg }) {
                     <div className="account-form__column column">
                         <h1 className="account-form__title">{translations[language].accountForm.authorization}</h1>
 
-                        <form className="account-form__form">
-                            <label htmlFor="accountFormEmail" className="account-form__label account-form__label--email">
-                                <input className="account-form__input account-form__input--email" type="email" name="accountFormEmail" required autoComplete="email" placeholder={translations[language].accountForm.email} />
+                        <form className="account-form__form" onSubmit={handleSubmit(onSubmit)}>
+                            {/* Email */}
+                            <label htmlFor="accountFormEmail">
+                                <input
+                                    {...register("email", {
+                                        required: "Введите email",
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                            message: "Некорректный email"
+                                        }
+                                    })}
+                                    className="account-form__input account-form__input--email"
+                                    type="email"
+                                    placeholder={translations[language].accountForm.email}
+                                />
+                                {errors.email && <p className="account-form__error-text">{errors.email.message}</p>}
                             </label>
 
-                            <label htmlFor="accountFormPassword" className="account-form__label account-form__label--password">
-                                <input className="account-form__input account-form__input--password" type="password" name="accountFormPassword" required minLength="6" placeholder={translations[language].accountForm.password} />
+                            {/* Password */}
+                            <label htmlFor="accountFormPassword">
+                                <input
+                                    {...register("password", {
+                                        required: "Введите пароль",
+                                        minLength: { value: 6, message: "Минимум 6 символов" }
+                                    })}
+                                    className="account-form__input account-form__input--password"
+                                    type="password"
+                                    placeholder={translations[language].accountForm.password}
+                                />
+                                {errors.password && <p className="account-form__error-text">{errors.password.message}</p>}
                             </label>
 
+                            {/* Submit Button */}
                             <button type="submit" className="account-form__button account-form__button--submit">
                                 {translations[language].accountForm.logIn}
                             </button>
