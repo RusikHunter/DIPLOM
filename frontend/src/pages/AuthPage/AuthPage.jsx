@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCurrentPage } from '../../store/reducers/clientReducer'
 import Registration from '../../components/Registration/Registration'
@@ -8,15 +8,26 @@ import Authorization from '../../components/Authorization/Authorization'
 
 export default function AuthPage() {
     const dispatch = useDispatch()
+    const [currentForm, setCurrentForm] = useState('reg')
 
     useEffect(() => {
         dispatch(setCurrentPage('auth'))
     }, [])
 
+    const handleChangeToAuth = () => {
+        setCurrentForm('auth')
+    }
+
+    const handleChangeToReg = () => {
+        setCurrentForm('reg')
+    }
+
     return (
         <>
-            {/* <Registration /> */}
-            <Authorization />
+            {currentForm === "reg"
+                ? <Registration handleChangeToAuth={handleChangeToAuth} />
+                : <Authorization handleChangeToReg={handleChangeToReg} />
+            }
         </>
     )
 }

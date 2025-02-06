@@ -1,5 +1,6 @@
 import React from "react"
 import '../Intro/Intro.scss'
+import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import backgroundFilmCard from '../../assets/icons/backgroundFilmCard.png'
@@ -9,6 +10,7 @@ import backgroundIntro from '../../assets/icons/backgroundIntro.png'
 export default function IntroDetails({ data }) {
     const translations = translationsJSON
     const language = useSelector(state => state.client.language)
+    const isLogged = useSelector(state => state.client.isLogged)
 
     const movieData = data
 
@@ -49,9 +51,20 @@ export default function IntroDetails({ data }) {
                         </div>
 
                         <div className="intro__tools">
-                            <button className="intro__button--play">
-                                {translations[language].intro.view}
-                            </button>
+                            {isLogged
+                                ?
+                                <Link>
+                                    <button className="intro__button--play">
+                                        {translations[language].intro.view}
+                                    </button>
+                                </Link>
+                                :
+                                <Link to="/auth">
+                                    <button className="intro__button--play">
+                                        {translations[language].intro.view}
+                                    </button>
+                                </Link>
+                            }
 
                             <button className="intro__button--add-to-favorites">
                                 <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">

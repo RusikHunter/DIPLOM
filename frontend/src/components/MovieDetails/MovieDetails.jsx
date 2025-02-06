@@ -5,10 +5,13 @@ import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import tempBG from '../../assets/icons/bg-temp.png'
 import avatar from '../../assets/icons/avatar.png'
+import { Link } from "react-router-dom"
 
 export default function MovieDetails({ data }) {
     const language = useSelector(state => state.client.language)
     const translations = translationsJSON
+    const isLogged = useSelector(state => state.client.isLogged)
+
     const movieData = data
     const reviewsProSite = 5
 
@@ -143,9 +146,20 @@ export default function MovieDetails({ data }) {
 
                                 <input className="movie-details__review-input--text" type="text" placeholder={translations[language].movieDetails.writeReview} />
 
-                                <button className="movie-details__review-button--submit">
-                                    {translations[language].movieDetails.send}
-                                </button>
+                                {isLogged
+                                    ?
+                                    <Link>
+                                        <button className="movie-details__review-button--submit" >
+                                            {translations[language].movieDetails.send}
+                                        </button>
+                                    </Link>
+                                    :
+                                    <Link to="/auth">
+                                        <button className="movie-details__review-button--submit" >
+                                            {translations[language].movieDetails.send}
+                                        </button>
+                                    </Link>
+                                }
                             </form>
 
                             <ul className="movie-details__review-list">
