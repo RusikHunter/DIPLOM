@@ -5,8 +5,9 @@ const clientSlice = createSlice({
     initialState: {
         language: 'ua', // локализация для всего приложения
         currentPage: 'main', // текущая страница
+        currentUser: {},
         theme: 'dark', // текущая тема
-        isLogged: true, // авторизирован ли пользователь
+        isLogged: false, // авторизирован ли пользователь
         isBurgerOpen: false, // открыто ли бургер меню
         filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
         similarGenres: '', // строка похожих жанров на MoviePage 
@@ -17,6 +18,9 @@ const clientSlice = createSlice({
         },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload
+        },
+        setCurrentUser: (state, action) => {
+            state.currentUser = action.payload
         },
         setTheme: (state) => {
             state.theme = state.theme === 'light' ? 'dark' : 'light'
@@ -42,6 +46,7 @@ const clientSlice = createSlice({
 export const {
     setLanguage,
     setCurrentPage,
+    setCurrentUser,
     setTheme,
     setIsLogged,
     setIsBurgerOpen,

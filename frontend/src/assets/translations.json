@@ -93,7 +93,17 @@
             "signUp": "Зареєструватись",
             "logIn": "Увійти",
             "alreadyRegistered": "Вже маєте аккаунт на Vibix?",
-            "noAccount": "Уперше на Vibix?"
+            "noAccount": "Уперше на Vibix?",
+            "userNotFound": "Користувач не знайден або невірні дані",
+            "enterEmail": "Уведiть email",
+            "enterPassword": "Уведiть пароль",
+            "enterUsername": "Уведiть iм'я",
+            "incorrectData": "Некоректний логін або пароль",
+            "passwordDontMatch": "Паролі не збігаються",
+            "incorrectEmail": "Некоректний email",
+            "min3Letters": "Мінімум 3 літери",
+            "min6Letters": "Мінімум 6 літер",
+            "dataAlreadyTaken": "Email або ім'я вже зайняті"
         },
         "account": {
             "userAccount": "Аккаунт користувача",
@@ -219,7 +229,17 @@
             "signUp": "Sign up",
             "logIn": "Login",
             "alreadyRegistered": "Already have an account on Vibix?",
-            "noAccount": "First time on Vibix?"
+            "noAccount": "First time on Vibix?",
+            "userNotFound": "User not found or incorrect data",
+            "enterEmail": "Enter email",
+            "enterPassword": "Enter password",
+            "incorrectData": "Incorrect login or password",
+            "incorrectEmail": "Incorrect email",
+            "min3Letters": "Minimum 3 letters",
+            "min6Letters": "Minimum 6 letters",
+            "enterUsername": "Enter username",
+            "passwordDontMatch": "Passwords don't match",
+            "dataAlreadyTaken": "Email or username already taken"
         },
         "account": {
             "userAccount": "User account",

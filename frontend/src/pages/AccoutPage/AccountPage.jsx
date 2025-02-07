@@ -9,6 +9,7 @@ import './AccountPage.scss'
 export default function AccountPage() {
     const dispatch = useDispatch()
     const language = useSelector(state => state.client.language)
+    const currentUser = useSelector(state => state.client.currentUser)
     const translations = translationsJSON
 
     useEffect(() => {
@@ -31,12 +32,12 @@ export default function AccountPage() {
                                 <h3 className="account__subtitle">{translations[language].account.userData}</h3>
 
                                 <label htmlFor="accountInputUsername" className='account__label account__label--username'>
-                                    <input type="text" name="accountInputUsername" className="account__input account__input--username" placeholder={translations[language].account.username} value="dmfshove" />
+                                    <input type="text" name="accountInputUsername" className="account__input account__input--username" placeholder={translations[language].account.username} value={currentUser.username} />
                                     <button type="button" className="account__button--change">{translations[language].account.change}</button>
                                 </label>
 
                                 <label htmlFor="accountInputEmail" className='account__label account__label--email'>
-                                    <input type="email" name="accountInputEmail" className="account__input account__input--email" value="funnymoments610@gmail.com" disabled />
+                                    <input type="email" name="accountInputEmail" className="account__input account__input--email" value={currentUser.email} disabled />
                                 </label>
 
                             </div>
@@ -48,8 +49,10 @@ export default function AccountPage() {
                                 </a>
 
                                 <div className="account__plan-block">
-                                    <h6 className="account__plan-title">{translations[language].account.planPremium}</h6>
-                                    <span className="account__plan-details">4K</span>
+                                    {/* <h6 className="account__plan-title">{translations[language].account.planPremium}</h6> */}
+                                    <h6 className="account__plan-title">{currentUser.plan}</h6>
+
+                                    <span className="account__plan-details">{currentUser.favoriteMovies}</span>
                                 </div>
                             </div>
                         </div>

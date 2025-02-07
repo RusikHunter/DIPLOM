@@ -4,14 +4,15 @@ import { useSelector } from 'react-redux';
 import "./Header.scss"
 import logoVibixImage from '../../assets/icons/logo.svg';
 import avatarIcon from '../../assets/icons/useravatar.png'
-import { setLanguage, setTheme, setIsLogged } from '../../store/reducers/clientReducer'
+import { setLanguage, setTheme, setIsLogged, setCurrentUser } from '../../store/reducers/clientReducer'
 import { useDispatch } from 'react-redux';
 import BurgerButton from './BurgerButton/BurgerButton';
 import translationsJSON from "../../assets/translations.json"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const translations = translationsJSON
 
@@ -96,9 +97,15 @@ export default function Header() {
                         {isLogged
                             && currentPage === "account"
                             &&
-                            <Link to="/auth" className='header__link--exit'>
-                                <button className='header__button--exit'>{translations[language].header.exitButton}</button>
-                            </Link>
+                            <button className='header__button--exit'
+                                onClick={() => {
+                                    navigate('/auth')
+                                    dispatch(setCurrentUser({}))
+                                    dispatch(setIsLogged())
+                                }}
+                            >{translations[language].header.exitButton}</button>
+
+
                         }
 
                         {isLogged
