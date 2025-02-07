@@ -8,7 +8,7 @@ import Authorization from '../../components/Authorization/Authorization'
 
 export default function AuthPage() {
     const dispatch = useDispatch()
-    const [currentForm, setCurrentForm] = useState('reg')
+    const [currentForm, setCurrentForm] = useState('auth')
 
     useEffect(() => {
         dispatch(setCurrentPage('auth'))

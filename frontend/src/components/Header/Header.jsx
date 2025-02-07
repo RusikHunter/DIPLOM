@@ -21,6 +21,14 @@ export default function Header() {
     const isLogged = useSelector(state => state.client.isLogged)
     const currentPage = useSelector(state => state.client.currentPage)
 
+    const handleDelete = () => {
+        localStorage.removeItem('user')
+        localStorage.setItem('isLogged', false)
+        dispatch(setCurrentUser({}))
+        dispatch(setIsLogged())
+        navigate('/auth')
+    }
+
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme)
     }, [theme])
@@ -98,11 +106,7 @@ export default function Header() {
                             && currentPage === "account"
                             &&
                             <button className='header__button--exit'
-                                onClick={() => {
-                                    navigate('/auth')
-                                    dispatch(setCurrentUser({}))
-                                    dispatch(setIsLogged())
-                                }}
+                                onClick={handleDelete}
                             >{translations[language].header.exitButton}</button>
 
 

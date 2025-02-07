@@ -54,6 +54,8 @@ export default function Authorization({ handleChangeToReg }) {
             const userToAuthorization = await loginUser(accountToRequest)
 
             // Если пользователь успешно авторизован
+            localStorage.setItem('user', JSON.stringify(userToAuthorization))
+            localStorage.setItem('isLogged', true)
             dispatch(setCurrentUser(userToAuthorization))
             dispatch(setIsLogged())
             navigate('/account')

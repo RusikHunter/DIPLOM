@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setCurrentUser, setIsLogged } from './store/reducers/clientReducer';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import BurgerMenu from "./components/Header/BurgerMenu/BurgerMenu";
+import PrivateRouteAccount from './components/PrivateRoutes/PrivateRouteAccount';
+import PrivateRouteAuth from './components/PrivateRoutes/PrivateRouteAuth';
 import MainPage from './pages/MainPage/MainPage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import FilmsPage from './pages/FilmsPage/FilmsPage';
@@ -21,6 +25,17 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 // ! а затем в scss рендерится ее цвет
 
 export default function App() {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if (user) {
+            dispatch(setIsLogged())
+            dispatch(setCurrentUser(user))
+        }
+    }, [])
+
     return (
         <BrowserRouter>
             <Header />
@@ -34,8 +49,8 @@ export default function App() {
                 <Route path='/404' element={<NotFoundPage />} />
                 <Route path='/movie/:id' element={<MoviePage />} />
                 <Route path="/search" element={<SearchPage />} />
-                <Route path="/auth" element={<AuthPage />} />
-                <Route path="/account" element={<AccountPage />} />
+                <Route path="/auth" element={<PrivateRouteAuth element={<AuthPage />} />} />
+                <Route path="/account" element={<PrivateRouteAccount element={<AccountPage />} />} />
                 <Route path="/favorites" element={<FavoritesPage />} />
                 <Route path="/terms" element={<TermsPage />} />
             </Routes>
