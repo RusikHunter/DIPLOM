@@ -1,18 +1,71 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import '../Intro/Intro.scss'
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import backgroundFilmCard from '../../assets/icons/backgroundFilmCard.png'
 import backgroundIntro from '../../assets/icons/backgroundIntro.png'
+import { setCurrentUser } from "../../store/reducers/clientReducer"
+import axios from "axios"
 
 
 export default function IntroDetails({ data }) {
     const translations = translationsJSON
     const language = useSelector(state => state.client.language)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const isLogged = useSelector(state => state.client.isLogged)
+    const currentUser = useSelector(state => state.client.currentUser)
 
     const movieData = data
+
+    const [isInFavoriteMovies, setIsInFavoriteMovies] = useState(
+        isLogged
+            ?
+            currentUser.favoriteMovies.includes(movieData.id)
+            : false
+    )
+
+    const handleAddToFavorites = async () => {
+        if (isLogged) {
+            const movieID = movieData.id
+            console.log('movieID', movieID)
+
+            // если уже в избранном
+            if (currentUser.favoriteMovies.includes(movieID)) {
+                dispatch(setCurrentUser({
+                    ...currentUser,
+                    favoriteMovies: currentUser.favoriteMovies.filter(movie => movie !== movieID)
+                }))
+
+
+                setIsInFavoriteMovies(false)
+            } else {
+                if (currentUser.favoriteMovies.length < 12) {
+                    console.log(currentUser.favoriteMovies.length)
+                    dispatch(setCurrentUser({
+                        ...currentUser,
+                        favoriteMovies: [...currentUser.favoriteMovies, movieID]
+                    }))
+
+
+                    setIsInFavoriteMovies(true)
+                }
+            }
+        } else {
+            navigate('/auth')
+        }
+    }
+
+    useEffect(() => {
+        if (isLogged) {
+            localStorage.setItem('user', JSON.stringify(currentUser))
+
+            axios.put(`http://localhost:8000/users/${currentUser.email}`, {
+                favoriteMovies: currentUser.favoriteMovies
+            })
+        }
+    }, [currentUser])
 
     return (
         <section className="section section__intro intro" style={{ backgroundImage: `url(${movieData.backDropPath !== "https://www.themoviedb.org/t/p/original/null" ? movieData.backDropPath : backgroundIntro})` }}>
@@ -66,10 +119,17 @@ export default function IntroDetails({ data }) {
                                 </Link>
                             }
 
-                            <button className="intro__button--add-to-favorites">
-                                <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M26.25 19.9989H19.5M19.5 19.9989H12.75M19.5 19.9989V26.7489M19.5 19.9989L19.5 13.2489M37.5 20C37.5 29.9411 29.4411 38 19.5 38C9.55888 38 1.5 29.9411 1.5 20C1.5 10.0589 9.55888 2 19.5 2C29.4411 2 37.5 10.0589 37.5 20Z" stroke="white" strokeWidth="3" strokeLinecap="round" />
-                                </svg>
+                            <button className="intro__button--add-to-favorites" onClick={handleAddToFavorites}>
+                                {isInFavoriteMovies
+                                    ?
+                                    <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.5 2 L24.3 13.9 L37 15.5 L27.2 24.2 L29.9 37 L19.5 30.5 L9.1 37 L11.8 24.2 L2 15.5 L14.7 13.9 Z" stroke="white" strokeWidth="2" strokeLinejoin="round" />
+                                    </svg>
+                                    :
+                                    <svg width="39" height="40" viewBox="0 0 39 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M26.25 19.9989H19.5M19.5 19.9989H12.75M19.5 19.9989V26.7489M19.5 19.9989L19.5 13.2489M37.5 20C37.5 29.9411 29.4411 38 19.5 38C9.55888 38 1.5 29.9411 1.5 20C1.5 10.0589 9.55888 2 19.5 2C29.4411 2 37.5 10.0589 37.5 20Z" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                                    </svg>
+                                }
                             </button>
 
                             <button className="intro__button--like">

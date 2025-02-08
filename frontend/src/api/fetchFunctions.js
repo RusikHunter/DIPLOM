@@ -1,19 +1,6 @@
 import axios from "axios"
 import { APIkey, rootPath } from "./config"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function getGenresByIDs(genres, language) {
     let IDs = null
 
@@ -36,28 +23,6 @@ export function getGenresByIDs(genres, language) {
 
     return selectedGenres
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchMainPageMovie(genres) {
     let genresString = genres
@@ -111,29 +76,11 @@ export async function fetchMainPageMovie(genres) {
             genres: englishMovieDetails.data.genres,
         }
 
-        console.log(movieDetails);
-
-
         return movieDetails
     } catch (error) {
         console.error('Error fetching movie details:', error.message)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchMovieByID(id) {
     try {
@@ -200,34 +147,11 @@ export async function fetchMovieByID(id) {
             },
         };
 
-        // console.log('result', result);
-
         return result;
     } catch (error) {
         console.error('Error fetching movie details:', error.message);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchAllMovies() {
     // Функция для генерации параметров запроса в зависимости от метода (new, genre, top)
@@ -351,19 +275,6 @@ export async function fetchMoviesByParams(method, similarGenres = "18") {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export async function fetchMoviesByGenres(genres) {
     try {
         const fetchPromises = await Promise.all([
@@ -395,16 +306,11 @@ export async function fetchMoviesByGenres(genres) {
             releaseDate: movie.release_date
         }))
 
-        console.log('formattedMovies', formattedMovies);
-
         return formattedMovies
     } catch (error) {
         console.error("Ошибка при запросе фильмов:", error.message)
     }
 }
-
-
-
 
 export async function fetchMoviesByParamObject(params) {
     const fetchParams = {
@@ -417,9 +323,6 @@ export async function fetchMoviesByParamObject(params) {
         primary_release_year: params.primary_release_year,
         query: params.query
     }
-
-    console.log('params', fetchParams)
-
 
     try {
         const fetchPromises = await Promise.all([
@@ -446,5 +349,57 @@ export async function fetchMoviesByParamObject(params) {
         return formattedMovies
     } catch (error) {
         console.error("Ошибка при запросе фильмов:", error.message)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export async function fetchFavoriteMovies(favoriteMovies) {
+    try {
+        const fetchPromises = []
+
+        for (let i = 0; i < favoriteMovies.length; ++i) {
+            fetchPromises.push(axios.get(`https://api.themoviedb.org/3/movie/${favoriteMovies[i]}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'uk-UA',
+                },
+            })
+            )
+        }
+
+        const responses = await Promise.all(fetchPromises)
+
+        const movies = responses.map((response) => response.data)
+
+        const formattedMovies = movies.map((movie, index) => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title ? movie.title : movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genres,
+            releaseDate: movie.release_date
+        }))
+
+        return formattedMovies
+    } catch (error) {
+        console.error('Error fetching movie details:', error.message);
     }
 }

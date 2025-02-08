@@ -30,6 +30,9 @@ export default function Category({ title }) {
         case 'similar':
             method = 'similar'
             break
+        case 'favorites':
+            method = 'favorite'
+            break
         default:
             method = 'new'
     }

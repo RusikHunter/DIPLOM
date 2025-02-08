@@ -41,6 +41,8 @@
             "top": "Популярні",
             "similar": "Схожі",
             "oftenSearch": "Часто шукають",
+            "favorites": "Збережене",
+            "noContent": "Немає збережених фільмів",
             "showMore": "Показати ще"
         },
         "filmCardSlider": {
@@ -179,6 +181,8 @@
             "top": "Popular",
             "similar": "Similar",
             "oftenSearch": "Often search",
+            "favorites": "Favorites",
+            "noContent": "No favorite movies",
             "showMore": "Show more"
         },
         "filmCardSlider": {
