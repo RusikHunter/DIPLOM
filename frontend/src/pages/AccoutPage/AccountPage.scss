@@ -141,6 +141,22 @@
         }
     }
 
+    &__success-text--success {
+        display: none;
+        @include fluid-text(14, 14);
+        @include font('Arial', 400, 1);
+        margin-top: 5px;
+        color: var(--color-green);
+    }
+
+    &__success-text--unsuccess {
+        display: none;
+        @include fluid-text(14, 14);
+        @include font('Arial', 400, 1);
+        margin-top: 5px;
+        color: var(--color-red);
+    }
+
     &__label--email {}
 
     &__input--email {

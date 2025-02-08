@@ -103,7 +103,9 @@
             "incorrectEmail": "Некоректний email",
             "min3Letters": "Мінімум 3 літери",
             "min6Letters": "Мінімум 6 літер",
-            "dataAlreadyTaken": "Email або ім'я вже зайняті"
+            "dataAlreadyTaken": "Email або ім'я вже зайняті",
+            "usernameAlreadyTaken": "Ім'я вже зайнято",
+            "usernameChanged": "Ім'я успішно змінено"
         },
         "account": {
             "userAccount": "Аккаунт користувача",
@@ -239,7 +241,9 @@
             "min6Letters": "Minimum 6 letters",
             "enterUsername": "Enter username",
             "passwordDontMatch": "Passwords don't match",
-            "dataAlreadyTaken": "Email or username already taken"
+            "dataAlreadyTaken": "Email or username already taken",
+            "usernameAlreadyTaken": "Username already taken",
+            "usernameChanged": "Username successfully changed"
         },
         "account": {
             "userAccount": "User account",
