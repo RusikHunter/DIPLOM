@@ -136,6 +136,9 @@
             "qualityBest": "Найкраща",
             "devices": "Телевізор, комп’ютер, мобільний телефон, планшет"
         },
+        "notFound": {
+            "error404": "Помилка 404. Не знайдено"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -291,6 +294,9 @@
             "qualityWonderful": "Wonderful",
             "qualityBest": "The best",
             "devices": "TV, computer, mobile phone, tablet"
+        },
+        "notFound": {
+            "error404": "Error 404. Not found"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

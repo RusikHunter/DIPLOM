@@ -7,7 +7,7 @@ import { fetchMovieByID, fetchMoviesByGenres } from '../../api/fetchFunctions';
 import { useParams } from 'react-router-dom';
 import IntroDetails from '../../components/IntroDetails/IntroDetails';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
-import FilmCardSlider from '../../components/FilmCardSlider/FilmCardSlider';
+import { useNavigate } from 'react-router-dom';
 import { rootPath } from '../../api/config';
 import translationsJSON from '../../assets/translations.json'
 import { getGenresByIDs } from '../../api/fetchFunctions';
@@ -15,6 +15,7 @@ import SliderDetails from '../../components/SliderDetails/SliderDetails';
 
 
 export default function MoviePage() {
+    const navigate = useNavigate()
     const language = useSelector(state => state.client.language)
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -27,7 +28,13 @@ export default function MoviePage() {
     // Запрос для получения данных фильма
     const { data, isLoading, error } = useQuery({
         queryKey: ['movie', id],
-        queryFn: () => fetchMovieByID(id),
+        queryFn: async () => {
+            const movieData = await fetchMovieByID(id);
+            if (!movieData) {
+                navigate('/notfound');
+            }
+            return movieData;
+        },
     })
 
     // Запрос для получения фильмов по жанрам, активируется только после получения `data`

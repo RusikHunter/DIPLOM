@@ -103,21 +103,25 @@ export async function fetchMovieByID(id) {
                     api_key: APIkey,
                     language: 'uk-UA',
                 },
-            }),
+            }), // Обрабатываем ошибку для первого запроса
+
             axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
                 params: {
                     api_key: APIkey,
                     language: 'en-US',
                 },
-            }),
+            }), // Обрабатываем ошибку для второго запроса
+
             axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
                 params: {
                     api_key: APIkey,
                 },
-            })
-        ])
+            }), // Обрабатываем ошибку для запроса на кредиты
+        ]);
 
         const movieData = movieResponseEN.data;
+
+        if (!movieData) return null
 
         const title = {
             ua: movieResponseUA.data.title || movieResponseEN.data.title,
@@ -160,9 +164,9 @@ export async function fetchMovieByID(id) {
             },
         };
 
-        return result;
+        return result
     } catch (error) {
-        console.error('Error fetching movie details:', error.message);
+        return null
     }
 }
 
@@ -220,27 +224,8 @@ export async function fetchAllMovies() {
 
         return result
     } catch (error) {
-        // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
-        console.error("Ошибка при запросе фильмов:", error.message)
-        return { new: [], genre: [], top: [] }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchMoviesByParams(method, similarGenres = "18") {
     const fetchParams = (pageNumber) => ({
@@ -325,14 +310,6 @@ export async function fetchMoviesByGenres(genres) {
     }
 }
 
-
-
-
-
-
-
-
-
 export async function fetchMoviesByParamObject(params) {
     const searchParams = {
         api_key: APIkey,
@@ -388,23 +365,6 @@ export async function fetchMoviesByParamObject(params) {
         return [];
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchFavoriteMovies(favoriteMovies) {
     try {

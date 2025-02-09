@@ -25,17 +25,16 @@ export default function MovieDetails({ data }) {
 
     const { data: reviewsData, isLoading, isError } = useQuery({
         queryKey: ["reviews", movieData.reviewsCount],
-        queryFn: async () => fetchReviews(10),
+        queryFn: async () => fetchReviews(movieData.reviewsCount),
     });
 
-    // Загрузка отзывов с сервера
     useEffect(() => {
         if (reviewsData && reviewsData.length > 0) {
             const reviewsToAdd = reviewsData.map((review) => ({
                 author: review.name,
                 text: review.body,
             }));
-            setReviews(reviewsToAdd); // Устанавливаем отзывы
+            setReviews(reviewsToAdd)
         }
     }, [reviewsData]);
 
@@ -53,15 +52,15 @@ export default function MovieDetails({ data }) {
                 author: currentUser.username,
                 text: inputReviewValue,
             };
-            setReviews([...reviews, newReview]);
+            setReviews([newReview, ...reviews]);
             setInputReviewValue(''); // очищаем поле ввода
         }
     };
 
     const visibleReviews = reviews.slice(0, visibleReviewsCount);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (isError || !reviewsData) return <div>Error loading reviews</div>;
+    if (isLoading) return <React.Fragment />
+    if (isError || !reviewsData) return <React.Fragment />
 
     return (
         <section className="section section__movie-details movie-details">

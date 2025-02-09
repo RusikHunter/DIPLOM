@@ -1,0 +1,34 @@
+.not-found {
+    background-color: var(--color-background);
+    flex-grow: 1;
+
+    &__inner {}
+
+    &__row {
+        padding-inline: 200px;
+        padding-block: var(--indent-medium);
+
+        @include laptop {
+            padding-inline: 100px;
+        }
+
+        @include tablet {
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-inline: var(--indent-small);
+            padding-top: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-inline: var(--indent-minimum);
+        }
+    }
+
+    &__title {
+        @include fluid-text(36, 24);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+    }
+}
