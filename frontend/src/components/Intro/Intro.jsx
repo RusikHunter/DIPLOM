@@ -24,6 +24,7 @@ export default function Intro() {
             localStorage.setItem('user', JSON.stringify(currentUser))
 
             axios.put(`http://localhost:8000/users/${currentUser.email}`, {
+                ...currentUser,
                 favoriteMovies: currentUser.favoriteMovies
             })
         }
@@ -32,7 +33,6 @@ export default function Intro() {
     const handleAddToFavorites = async () => {
         if (isLogged) {
             const movieID = movieData.id
-            console.log('movieID', movieID)
 
             // если уже в избранном
             if (currentUser.favoriteMovies.includes(movieID)) {
@@ -45,7 +45,6 @@ export default function Intro() {
                 setIsInFavoriteMovies(false)
             } else {
                 if (currentUser.favoriteMovies.length < 12) {
-                    console.log(currentUser.favoriteMovies.length)
                     dispatch(setCurrentUser({
                         ...currentUser,
                         favoriteMovies: [...currentUser.favoriteMovies, movieID]

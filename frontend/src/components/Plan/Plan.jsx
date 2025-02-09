@@ -41,6 +41,7 @@ export default function Plan() {
         }))
 
         await axios.put(`http://localhost:8000/users/${currentUser.email}`, {
+            ...currentUser,
             plan: planToChange,
         })
 

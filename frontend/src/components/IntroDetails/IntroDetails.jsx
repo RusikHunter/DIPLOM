@@ -67,6 +67,7 @@ export default function IntroDetails({ data }) {
             localStorage.setItem('user', JSON.stringify(currentUser))
 
             axios.put(`http://localhost:8000/users/${currentUser.email}`, {
+                ...currentUser,
                 favoriteMovies: currentUser.favoriteMovies
             })
         }

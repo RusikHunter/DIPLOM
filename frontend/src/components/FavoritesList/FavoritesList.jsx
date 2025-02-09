@@ -21,6 +21,8 @@ export default function FavoritesList() {
     if (isLoading) return <React.Fragment />
     if (isError || !data) return <React.Fragment />
 
+    console.log(data.length)
+
     const dataToRow1 = data.slice(0, 6)
     const dataToRow2 = data.slice(6)
 
