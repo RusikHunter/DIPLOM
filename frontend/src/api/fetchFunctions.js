@@ -24,6 +24,19 @@ export function getGenresByIDs(genres, language) {
     return selectedGenres
 }
 
+export const fetchReviews = async (n) => {
+    try {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/comments`, {
+            params: { _limit: n }
+        })
+
+        return response.data
+    } catch (error) {
+        console.error("Error fetching reviews:", error)
+        throw error
+    }
+};
+
 export async function fetchMainPageMovie(genres) {
     let genresString = genres
 

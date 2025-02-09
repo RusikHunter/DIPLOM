@@ -1,11 +1,13 @@
 import React from "react"
 import './MovieDetails.scss'
+import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import tempBG from '../../assets/icons/bg-temp.png'
 import avatar from '../../assets/icons/avatar.png'
 import { Link } from "react-router-dom"
+import { fetchReviews } from '../../api/fetchFunctions'
 
 export default function MovieDetails({ data }) {
     const language = useSelector(state => state.client.language)
@@ -19,10 +21,20 @@ export default function MovieDetails({ data }) {
 
     const reviews = []
 
+    const { data: reviewsData, isLoading, isError } = useQuery({
+        queryKey: ["reviews", movieData.reviewsCount],
+        queryFn: async () => fetchReviews(movieData.reviewsCount),
+    })
+
+    if (isLoading) return <p>abc</p>
+    if (isError || !reviewsData) return <p>error</p>
+
+    console.log('reviewsData', reviewsData)
+
     for (let i = 0; i < movieData.reviewsCount; ++i) {
         reviews.push({
-            author: 'author123',
-            text: `Nice movie`
+            author: reviewsData[i].name,
+            text: reviewsData[i].body
         })
     }
 
