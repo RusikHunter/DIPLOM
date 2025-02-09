@@ -312,43 +312,67 @@ export async function fetchMoviesByGenres(genres) {
     }
 }
 
+
+
+
+
+
+
+
+
 export async function fetchMoviesByParamObject(params) {
-    const fetchParams = {
+    const searchParams = {
         api_key: APIkey,
-        sort_by: "popularity.desc",
         language: 'uk-UA',
         page: 1,
+        query: params.query
+    };
+
+    const filterParams = {
+        api_key: APIkey,
+        language: 'uk-UA',
+        page: 1,
+        sort_by: "popularity.desc",
         with_genres: params.with_genres.join(','),
         with_original_language: params.with_original_language.join(','),
-        primary_release_year: params.primary_release_year,
-        query: params.query
-    }
+        primary_release_year: params.primary_release_year
+    };
 
     try {
-        const fetchPromises = await Promise.all([
-            axios.get("https://api.themoviedb.org/3/search/movie", {
-                params: fetchParams,
-            })
-        ])
+        // Если есть текстовый запрос, ищем по названию
+        let movies = [];
+        if (params.query) {
+            const response = await axios.get("https://api.themoviedb.org/3/search/movie", { params: searchParams });
+            movies = response.data.results;
+        }
 
-        const responses = await Promise.all(fetchPromises)
+        // Если есть фильтры, ищем фильмы по ним
+        if (params.with_genres.length > 0 || params.with_original_language.length > 0 || params.primary_release_year) {
+            const response = await axios.get("https://api.themoviedb.org/3/discover/movie", { params: filterParams });
+            const filteredMovies = response.data.results;
 
-        const movies = responses.map((response) => response.data.results)
+            // Если был текстовый поиск, пересекаем результаты
+            if (movies.length > 0) {
+                const filteredIDs = new Set(filteredMovies.map(movie => movie.id));
+                movies = movies.filter(movie => filteredIDs.has(movie.id));
+            } else {
+                movies = filteredMovies;
+            }
+        }
 
-        const formattedMovies = movies[0].map((movie, index) => ({
+        return movies.map(movie => ({
             id: movie.id,
             posterPath: `${rootPath}${movie.poster_path}`,
             title: {
-                ua: movie.title ? movie.title : movie.original_title,
+                ua: movie.title || movie.original_title,
                 en: movie.original_title
             },
             genres: movie.genre_ids.slice(0, 2),
             releaseDate: movie.release_date
         }))
-
-        return formattedMovies
     } catch (error) {
-        console.error("Ошибка при запросе фильмов:", error.message)
+        console.error("Ошибка при запросе фильмов:", error.message);
+        return [];
     }
 }
 

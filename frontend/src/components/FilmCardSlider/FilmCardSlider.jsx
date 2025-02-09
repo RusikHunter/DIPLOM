@@ -32,9 +32,12 @@ export default function FilmCardSlider({ title, movies }) {
             <div className="film-card-slider__wrap">
                 <div className="film-card-slider__row film-card-slider__row--1 row">
                     <h2 className="film-card-slider__title">{translations[language].collections[title]}</h2>
-                    <Link to={`/category/${title}`} className="film-card-slider__link">
-                        {translations[language].filmCardSlider.seeAll}
-                    </Link>
+
+                    {title !== 'search' &&
+                        <Link to={`/category/${title}`} className="film-card-slider__link">
+                            {translations[language].filmCardSlider.seeAll}
+                        </Link>
+                    }
 
                     <div className="film-card-slider__navigation-wrap">
                         <button className="film-card-slider__navigation-button--left" onClick={handlePrev}>

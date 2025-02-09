@@ -41,6 +41,7 @@
             "top": "Популярні",
             "similar": "Схожі",
             "oftenSearch": "Часто шукають",
+            "search": "Пошук",
             "favorites": "Збережене",
             "noContent": "Немає збережених фільмів",
             "showMore": "Показати ще"
@@ -181,6 +182,7 @@
             "top": "Popular",
             "similar": "Similar",
             "oftenSearch": "Often search",
+            "search": "Search",
             "favorites": "Favorites",
             "noContent": "No favorite movies",
             "showMore": "Show more"
