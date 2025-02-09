@@ -41,6 +41,9 @@
             "top": "Популярні",
             "similar": "Схожі",
             "oftenSearch": "Часто шукають",
+            "search": "Пошук",
+            "favorites": "Збережене",
+            "noContent": "Немає збережених фільмів",
             "showMore": "Показати ще"
         },
         "filmCardSlider": {
@@ -93,7 +96,19 @@
             "signUp": "Зареєструватись",
             "logIn": "Увійти",
             "alreadyRegistered": "Вже маєте аккаунт на Vibix?",
-            "noAccount": "Уперше на Vibix?"
+            "noAccount": "Уперше на Vibix?",
+            "userNotFound": "Користувач не знайден або невірні дані",
+            "enterEmail": "Уведiть email",
+            "enterPassword": "Уведiть пароль",
+            "enterUsername": "Уведiть iм'я",
+            "incorrectData": "Некоректний логін або пароль",
+            "passwordDontMatch": "Паролі не збігаються",
+            "incorrectEmail": "Некоректний email",
+            "min3Letters": "Мінімум 3 літери",
+            "min6Letters": "Мінімум 6 літер",
+            "dataAlreadyTaken": "Email або ім'я вже зайняті",
+            "usernameAlreadyTaken": "Ім'я вже зайнято",
+            "usernameChanged": "Ім'я успішно змінено"
         },
         "account": {
             "userAccount": "Аккаунт користувача",
@@ -105,6 +120,24 @@
             "planBasic": "Базовий",
             "planStandart": "Стандартний",
             "planPremium": "Преміум"
+        },
+        "plan": {
+            "planBasic": "Базовий",
+            "planStandart": "Стандартний",
+            "planPremium": "Преміум",
+            "pricePerMonth": "Ціна за місяць",
+            "quality": "Якість відео й звуку",
+            "divisiveness": "Роздільна здатність",
+            "supportedDevices": "Підтримувані пристрої:",
+            "simultaneouslyDevices": "Пристрої на яких можна дивитися одночасно",
+            "toDownloadDevices": "Пристрої для завантаження",
+            "qualityGood": "Хороша",
+            "qualityWonderful": "Чудова",
+            "qualityBest": "Найкраща",
+            "devices": "Телевізор, комп’ютер, мобільний телефон, планшет"
+        },
+        "notFound": {
+            "error404": "Помилка 404. Не знайдено"
         },
         "footer": {
             "linksPrepayments": "Передоплати",
@@ -167,6 +200,9 @@
             "top": "Popular",
             "similar": "Similar",
             "oftenSearch": "Often search",
+            "search": "Search",
+            "favorites": "Favorites",
+            "noContent": "No favorite movies",
             "showMore": "Show more"
         },
         "filmCardSlider": {
@@ -219,7 +255,19 @@
             "signUp": "Sign up",
             "logIn": "Login",
             "alreadyRegistered": "Already have an account on Vibix?",
-            "noAccount": "First time on Vibix?"
+            "noAccount": "First time on Vibix?",
+            "userNotFound": "User not found or incorrect data",
+            "enterEmail": "Enter email",
+            "enterPassword": "Enter password",
+            "incorrectData": "Incorrect login or password",
+            "incorrectEmail": "Incorrect email",
+            "min3Letters": "Minimum 3 letters",
+            "min6Letters": "Minimum 6 letters",
+            "enterUsername": "Enter username",
+            "passwordDontMatch": "Passwords don't match",
+            "dataAlreadyTaken": "Email or username already taken",
+            "usernameAlreadyTaken": "Username already taken",
+            "usernameChanged": "Username successfully changed"
         },
         "account": {
             "userAccount": "User account",
@@ -231,6 +279,24 @@
             "planBasic": "Basic",
             "planStandart": "Standart",
             "planPremium": "Premium"
+        },
+        "plan": {
+            "planBasic": "Basic",
+            "planStandart": "Standart",
+            "planPremium": "Premium",
+            "pricePerMonth": "Price per month",
+            "quality": "Quality of video and sound",
+            "divisiveness": "Divisiveness",
+            "supportedDevices": "Supported devices",
+            "simultaneouslyDevices": "Devices on which you can watch simultaneously",
+            "toDownloadDevices": "Devices to download",
+            "qualityGood": "Good",
+            "qualityWonderful": "Wonderful",
+            "qualityBest": "The best",
+            "devices": "TV, computer, mobile phone, tablet"
+        },
+        "notFound": {
+            "error404": "Error 404. Not found"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

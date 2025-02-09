@@ -32,18 +32,6 @@ export default function Search() {
         primary_release_year: ""
     })
 
-
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
         console.log(params)
     }, [params])
@@ -58,37 +46,12 @@ export default function Search() {
         }
     }, [])
 
-
-
-
-
-
-
-
-
-
-
     const { data } = useQuery({
         queryKey: ['movies-by-filter', params],
         queryFn: async () => fetchMoviesByParamObject(params),
     })
 
-    console.log(data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log('data', data)
 
     const handleToggleFiltersRow = () => {
         filtersRowRef.current.classList.toggle('search__row--disabled')
@@ -175,27 +138,6 @@ export default function Search() {
         sortTypeFirstInputRef.current.checked = "true"
         setSortType('byRelevanceUP')
     }
-
-
-
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-    // ! пофиксить секцию с результатами
-
 
     return (
         <main className="main">
@@ -352,7 +294,7 @@ export default function Search() {
 
                     <div className="search__row search__row--4 row">
                         {typeof data !== 'undefined' && data.length > 0
-                            ? <FilmCardSlider title={'oftenSearch'} movies={data} />
+                            ? <FilmCardSlider title={'search'} movies={data} />
                             : params.query.length > 0
                                 ? <p className="search__text-404">{translations[language].search.forRequest} "{params.query}" {translations[language].search.nothingFound}</p>
                                 : null

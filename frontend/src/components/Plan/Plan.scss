@@ -1,0 +1,130 @@
+.plan {
+    background-color: var(--color-background);
+
+    &__inner {}
+
+    &__row {
+        padding-inline: 200px;
+        padding-top: var(--indent-medium);
+
+        @include laptop {
+            padding-inline: 100px;
+        }
+
+        @include tablet {
+            padding-inline: var(--indent-medium);
+        }
+
+        @include mobile {
+            padding-inline: var(--indent-small);
+            padding-top: var(--indent-small);
+        }
+
+        @include mobile-small {
+            padding-inline: var(--indent-minimum);
+        }
+    }
+
+    &__row--1 {}
+
+    &__title {
+        @include fluid-text(32, 24);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+        text-align: center;
+        margin-inline: auto;
+    }
+
+    &__row--2 {
+        gap: var(--indent-medium);
+
+        @include laptop {
+            gap: var(--indent-small);
+        }
+
+        @include mobile {
+            flex-direction: column;
+        }
+
+        @include mobile-small {
+            gap: var(--indent-minimum);
+        }
+    }
+
+    &__wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: var(--indent-small);
+        padding: var(--indent-minimum);
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    &__wrap--active {
+        transform: scale(1.05);
+        border-right: 2px solid var(--color-gray);
+        border-bottom: 2px solid var(--color-gray);
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__plan-block {
+        width: 100%;
+        height: 115px;
+        border-radius: 15px;
+        background: var(--gradient-plan);
+        padding: 16px 23px;
+    }
+
+    &__plan-title,
+    &__plan-details {
+        @include fluid-text(24, 24);
+        @include font('Arial', 700, 1.2);
+        color: var(--color-white);
+    }
+
+    &__features-list {
+        .plan__feature-wrap:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__feature-wrap {
+        padding-block: var(--indent-minimum) var(--indent-small);
+        border-bottom: 3px solid var(--color-text);
+    }
+
+    &__feature-term,
+    &__feature-definition {
+        @include fluid-text(18, 16);
+        @include font('Arial', 500, 1);
+        color: var(--color-gray);
+    }
+
+    &__feature-definition {
+        color: var(--color-text);
+        margin-top: 7px;
+    }
+
+    &__row--3 {
+        padding-top: 90px;
+
+        @include mobile {
+            padding-top: var(--indent-medium);
+        }
+    }
+
+    &__button {
+        width: 300px;
+        background-color: var(--color-orange);
+        padding-block: var(--indent-minimum);
+        border-radius: var(--border-radius-small);
+        @include fluid-text(24, 24);
+        @include font('Arial', 700, 1);
+        color: var(--color-text);
+        margin-inline: auto;
+    }
+}

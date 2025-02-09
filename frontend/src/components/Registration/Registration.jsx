@@ -1,14 +1,25 @@
 import React from "react"
+import { useState } from "react"
 import './AccountForm.scss'
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"
+
 
 export default function Registration({ handleChangeToAuth }) {
+    const navigate = useNavigate()
+
     const language = useSelector(state => state.client.language)
     const translations = translationsJSON
 
     // form
+
+    // Состояние для ошибки
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const apiUrl = 'http://127.0.0.1:8000'
 
     const {
         register,
@@ -17,8 +28,39 @@ export default function Registration({ handleChangeToAuth }) {
         formState: { errors }
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log("Данные формы:", data)
+    const createUser = async (registrationData) => {
+        try {
+            const response = await axios.post(`${apiUrl}/users/`, registrationData)
+            console.log('User created successfully:', response.data)
+
+            if (response.status === 200 && response.data) {
+                return response.data
+            } else {
+                throw new Error("error")
+            }
+        } catch (error) {
+            setErrorMessage(translations[language].accountForm.dataAlreadyTaken)
+            throw error
+        }
+    };
+
+    const onSubmit = async (data) => {
+        try {
+            // console.log("Данные формы:", data)
+
+            const userToCreate = {
+                email: data.email,
+                username: data.username,
+                password: data.password,
+                plan: "basic",
+                favoriteMovies: []
+            }
+
+            await createUser(userToCreate)
+
+            handleChangeToAuth()
+        }
+        catch (error) { }
     };
 
     // Получаем значение пароля для сравнения
@@ -35,7 +77,13 @@ export default function Registration({ handleChangeToAuth }) {
                             {/* Email */}
                             <label htmlFor="accountFormEmail">
                                 <input
-                                    {...register("email", { required: "Email обязателен" })}
+                                    {...register("email", {
+                                        required: translations[language].accountForm.enterEmail,
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                            message: translations[language].accountForm.incorrectEmail
+                                        }
+                                    })}
                                     className="account-form__input account-form__input--email"
                                     type="email"
                                     placeholder={translations[language].accountForm.email}
@@ -47,8 +95,8 @@ export default function Registration({ handleChangeToAuth }) {
                             <label htmlFor="accountFormUsername">
                                 <input
                                     {...register("username", {
-                                        required: "Введите имя пользователя",
-                                        minLength: { value: 3, message: "Минимум 3 символа" }
+                                        required: translations[language].accountForm.enterUsername,
+                                        minLength: { value: 3, message: translations[language].accountForm.min3Letters }
                                     })}
                                     className="account-form__input account-form__input--username"
                                     type="text"
@@ -61,8 +109,8 @@ export default function Registration({ handleChangeToAuth }) {
                             <label htmlFor="accountFormPassword">
                                 <input
                                     {...register("password", {
-                                        required: "Введите пароль",
-                                        minLength: { value: 6, message: "Минимум 6 символов" }
+                                        required: translations[language].accountForm.enterPassword,
+                                        minLength: { value: 6, message: translations[language].accountForm.min6Letters }
                                     })}
                                     className="account-form__input account-form__input--password"
                                     type="password"
@@ -75,9 +123,9 @@ export default function Registration({ handleChangeToAuth }) {
                             <label htmlFor="accountFormConfirmPassword">
                                 <input
                                     {...register("confirmPassword", {
-                                        required: "Повторите пароль",
+                                        required: translations[language].accountForm.repeatPassword,
                                         validate: (value) =>
-                                            value === password || "Пароли не совпадают"
+                                            value === password || translations[language].accountForm.passwordDontMatch
                                     })}
                                     className="account-form__input account-form__input--confirm-password"
                                     type="password"
@@ -85,6 +133,11 @@ export default function Registration({ handleChangeToAuth }) {
                                 />
                                 {errors.confirmPassword && <p className="account-form__error-text">{errors.confirmPassword.message}</p>}
                             </label>
+
+                            {/* Error message */}
+                            {errorMessage && (
+                                <p className="account-form__error-text">{errorMessage}</p>
+                            )}
 
                             {/* Submit Button */}
                             <button type="submit" className="account-form__button account-form__button--submit">

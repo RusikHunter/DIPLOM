@@ -7,15 +7,15 @@ import { fetchMovieByID, fetchMoviesByGenres } from '../../api/fetchFunctions';
 import { useParams } from 'react-router-dom';
 import IntroDetails from '../../components/IntroDetails/IntroDetails';
 import MovieDetails from '../../components/MovieDetails/MovieDetails';
-import FilmCardSlider from '../../components/FilmCardSlider/FilmCardSlider';
+import { useNavigate } from 'react-router-dom';
 import { rootPath } from '../../api/config';
 import translationsJSON from '../../assets/translations.json'
 import { getGenresByIDs } from '../../api/fetchFunctions';
 import SliderDetails from '../../components/SliderDetails/SliderDetails';
-import { setSimilarGenres } from '../../store/reducers/clientReducer';
 
 
 export default function MoviePage() {
+    const navigate = useNavigate()
     const language = useSelector(state => state.client.language)
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -28,20 +28,24 @@ export default function MoviePage() {
     // Запрос для получения данных фильма
     const { data, isLoading, error } = useQuery({
         queryKey: ['movie', id],
-        queryFn: () => fetchMovieByID(id),
+        queryFn: async () => {
+            const movieData = await fetchMovieByID(id);
+            if (!movieData) {
+                navigate('/notfound');
+            }
+            return movieData;
+        },
     })
 
     // Запрос для получения фильмов по жанрам, активируется только после получения `data`
     const { data: dataToSlider, isLoading: isLoadingToSlider, error: errorToSlider } = useQuery({
         queryKey: ['movies-to-slider', data?.genres],
-        queryFn: () => fetchMoviesByGenres(`${data.genres[0].id},${data.genres[1].id}`),
-        enabled: !!data && data.genres.length >= 2,
-    });
+        queryFn: () => fetchMoviesByGenres(`${data.genres[0].id}`),
+        enabled: !!data && data.genres.length >= 1,
+    })
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error occurred while fetching data: {error.message}</div>;
-
-    // dispatch(setSimilarGenres(`${data.genres[0].id},${data.genres[1].id}`))
+    if (isLoading) return <React.Fragment />
+    if (error) return <React.Fragment />
 
     const movieData = {
         id: data.id,
@@ -72,9 +76,7 @@ export default function MoviePage() {
                 <MovieDetails data={movieData} />
                 {!isLoadingToSlider && dataToSlider ? (
                     <SliderDetails data={dataToSlider} />
-                ) : (
-                    <div>Loading related movies...</div>
-                )}
+                ) : <React.Fragment />}
             </main>
         </>
     )

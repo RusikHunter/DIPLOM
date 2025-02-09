@@ -1,36 +1,66 @@
-import React from "react"
+import React, { useEffect } from "react"
 import './MovieDetails.scss'
+import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import tempBG from '../../assets/icons/bg-temp.png'
 import avatar from '../../assets/icons/avatar.png'
 import { Link } from "react-router-dom"
+import { fetchReviews } from '../../api/fetchFunctions'
+import { current } from "@reduxjs/toolkit"
 
 export default function MovieDetails({ data }) {
-    const language = useSelector(state => state.client.language)
-    const translations = translationsJSON
-    const isLogged = useSelector(state => state.client.isLogged)
+    const language = useSelector(state => state.client.language);
+    const translations = translationsJSON;
+    const isLogged = useSelector(state => state.client.isLogged);
+    const currentUser = useSelector(state => state.client.currentUser);
 
-    const movieData = data
-    const reviewsProSite = 5
+    const movieData = data;
+    const reviewsProSite = 5;
 
-    const [visibleReviewsCount, setVisibleReviewsCount] = useState(reviewsProSite)
+    const [visibleReviewsCount, setVisibleReviewsCount] = useState(reviewsProSite);
+    const [inputReviewValue, setInputReviewValue] = useState('');
+    const [reviews, setReviews] = useState([]);
 
-    const reviews = []
+    const { data: reviewsData, isLoading, isError } = useQuery({
+        queryKey: ["reviews", movieData.reviewsCount],
+        queryFn: async () => fetchReviews(movieData.reviewsCount),
+    });
 
-    for (let i = 0; i < movieData.reviewsCount; ++i) {
-        reviews.push({
-            author: 'author123',
-            text: `Nice movie`
-        })
-    }
+    useEffect(() => {
+        if (reviewsData && reviewsData.length > 0) {
+            const reviewsToAdd = reviewsData.map((review) => ({
+                author: review.name,
+                text: review.body,
+            }));
+            setReviews(reviewsToAdd)
+        }
+    }, [reviewsData]);
 
     const handleAddMore = () => {
-        setVisibleReviewsCount(prev => prev + reviewsProSite)
-    }
+        setVisibleReviewsCount(prev => prev + reviewsProSite);
+    };
 
-    const visibleReviews = reviews.slice(0, visibleReviewsCount)
+    const handleReviewInputChange = (event) => {
+        setInputReviewValue(event.target.value);
+    };
+
+    const handleAddReview = () => {
+        if (inputReviewValue.trim()) {
+            const newReview = {
+                author: currentUser.username,
+                text: inputReviewValue,
+            };
+            setReviews([newReview, ...reviews]);
+            setInputReviewValue(''); // очищаем поле ввода
+        }
+    };
+
+    const visibleReviews = reviews.slice(0, visibleReviewsCount);
+
+    if (isLoading) return <React.Fragment />
+    if (isError || !reviewsData) return <React.Fragment />
 
     return (
         <section className="section section__movie-details movie-details">
@@ -144,15 +174,13 @@ export default function MovieDetails({ data }) {
                             <form className="movie-details__review-form">
                                 <img src={avatar} className="movie-details__review-image--my-account" alt="avatar" />
 
-                                <input className="movie-details__review-input--text" type="text" placeholder={translations[language].movieDetails.writeReview} />
+                                <input className="movie-details__review-input--text" type="text" placeholder={translations[language].movieDetails.writeReview} value={inputReviewValue} onChange={handleReviewInputChange} />
 
                                 {isLogged
                                     ?
-                                    <Link>
-                                        <button className="movie-details__review-button--submit" >
-                                            {translations[language].movieDetails.send}
-                                        </button>
-                                    </Link>
+                                    <button type="button" className="movie-details__review-button--submit" onClick={handleAddReview}>
+                                        {translations[language].movieDetails.send}
+                                    </button>
                                     :
                                     <Link to="/auth">
                                         <button className="movie-details__review-button--submit" >

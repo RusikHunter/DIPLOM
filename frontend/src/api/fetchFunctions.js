@@ -1,19 +1,6 @@
 import axios from "axios"
 import { APIkey, rootPath } from "./config"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function getGenresByIDs(genres, language) {
     let IDs = null
 
@@ -37,27 +24,18 @@ export function getGenresByIDs(genres, language) {
     return selectedGenres
 }
 
+export const fetchReviews = async (n) => {
+    try {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/comments`, {
+            params: { _limit: n }
+        })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return response.data
+    } catch (error) {
+        console.error("Error fetching reviews:", error)
+        throw error
+    }
+};
 
 export async function fetchMainPageMovie(genres) {
     let genresString = genres
@@ -111,29 +89,11 @@ export async function fetchMainPageMovie(genres) {
             genres: englishMovieDetails.data.genres,
         }
 
-        console.log(movieDetails);
-
-
         return movieDetails
     } catch (error) {
         console.error('Error fetching movie details:', error.message)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchMovieByID(id) {
     try {
@@ -143,21 +103,25 @@ export async function fetchMovieByID(id) {
                     api_key: APIkey,
                     language: 'uk-UA',
                 },
-            }),
+            }), // Обрабатываем ошибку для первого запроса
+
             axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
                 params: {
                     api_key: APIkey,
                     language: 'en-US',
                 },
-            }),
+            }), // Обрабатываем ошибку для второго запроса
+
             axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
                 params: {
                     api_key: APIkey,
                 },
-            })
-        ])
+            }), // Обрабатываем ошибку для запроса на кредиты
+        ]);
 
         const movieData = movieResponseEN.data;
+
+        if (!movieData) return null
 
         const title = {
             ua: movieResponseUA.data.title || movieResponseEN.data.title,
@@ -200,34 +164,11 @@ export async function fetchMovieByID(id) {
             },
         };
 
-        // console.log('result', result);
-
-        return result;
+        return result
     } catch (error) {
-        console.error('Error fetching movie details:', error.message);
+        return null
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchAllMovies() {
     // Функция для генерации параметров запроса в зависимости от метода (new, genre, top)
@@ -283,27 +224,8 @@ export async function fetchAllMovies() {
 
         return result
     } catch (error) {
-        // Обрабатываем ошибки и возвращаем пустые массивы в случае сбоя
-        console.error("Ошибка при запросе фильмов:", error.message)
-        return { new: [], genre: [], top: [] }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function fetchMoviesByParams(method, similarGenres = "18") {
     const fetchParams = (pageNumber) => ({
@@ -351,19 +273,6 @@ export async function fetchMoviesByParams(method, similarGenres = "18") {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export async function fetchMoviesByGenres(genres) {
     try {
         const fetchPromises = await Promise.all([
@@ -395,56 +304,99 @@ export async function fetchMoviesByGenres(genres) {
             releaseDate: movie.release_date
         }))
 
-        console.log('formattedMovies', formattedMovies);
-
         return formattedMovies
     } catch (error) {
         console.error("Ошибка при запросе фильмов:", error.message)
     }
 }
 
-
-
-
 export async function fetchMoviesByParamObject(params) {
-    const fetchParams = {
+    const searchParams = {
         api_key: APIkey,
-        sort_by: "popularity.desc",
         language: 'uk-UA',
         page: 1,
+        query: params.query
+    };
+
+    const filterParams = {
+        api_key: APIkey,
+        language: 'uk-UA',
+        page: 1,
+        sort_by: "popularity.desc",
         with_genres: params.with_genres.join(','),
         with_original_language: params.with_original_language.join(','),
-        primary_release_year: params.primary_release_year,
-        query: params.query
-    }
-
-    console.log('params', fetchParams)
-
+        primary_release_year: params.primary_release_year
+    };
 
     try {
-        const fetchPromises = await Promise.all([
-            axios.get("https://api.themoviedb.org/3/search/movie", {
-                params: fetchParams,
+        // Если есть текстовый запрос, ищем по названию
+        let movies = [];
+        if (params.query) {
+            const response = await axios.get("https://api.themoviedb.org/3/search/movie", { params: searchParams });
+            movies = response.data.results;
+        }
+
+        // Если есть фильтры, ищем фильмы по ним
+        if (params.with_genres.length > 0 || params.with_original_language.length > 0 || params.primary_release_year) {
+            const response = await axios.get("https://api.themoviedb.org/3/discover/movie", { params: filterParams });
+            const filteredMovies = response.data.results;
+
+            // Если был текстовый поиск, пересекаем результаты
+            if (movies.length > 0) {
+                const filteredIDs = new Set(filteredMovies.map(movie => movie.id));
+                movies = movies.filter(movie => filteredIDs.has(movie.id));
+            } else {
+                movies = filteredMovies;
+            }
+        }
+
+        return movies.map(movie => ({
+            id: movie.id,
+            posterPath: `${rootPath}${movie.poster_path}`,
+            title: {
+                ua: movie.title || movie.original_title,
+                en: movie.original_title
+            },
+            genres: movie.genre_ids.slice(0, 2),
+            releaseDate: movie.release_date
+        }))
+    } catch (error) {
+        console.error("Ошибка при запросе фильмов:", error.message);
+        return [];
+    }
+}
+
+export async function fetchFavoriteMovies(favoriteMovies) {
+    try {
+        const fetchPromises = []
+
+        for (let i = 0; i < favoriteMovies.length; ++i) {
+            fetchPromises.push(axios.get(`https://api.themoviedb.org/3/movie/${favoriteMovies[i]}`, {
+                params: {
+                    api_key: APIkey,
+                    language: 'uk-UA',
+                },
             })
-        ])
+            )
+        }
 
         const responses = await Promise.all(fetchPromises)
 
-        const movies = responses.map((response) => response.data.results)
+        const movies = responses.map((response) => response.data)
 
-        const formattedMovies = movies[0].map((movie, index) => ({
+        const formattedMovies = movies.map((movie, index) => ({
             id: movie.id,
             posterPath: `${rootPath}${movie.poster_path}`,
             title: {
                 ua: movie.title ? movie.title : movie.original_title,
                 en: movie.original_title
             },
-            genres: movie.genre_ids.slice(0, 2),
+            genres: movie.genres,
             releaseDate: movie.release_date
         }))
 
         return formattedMovies
     } catch (error) {
-        console.error("Ошибка при запросе фильмов:", error.message)
+        console.error('Error fetching movie details:', error.message);
     }
 }

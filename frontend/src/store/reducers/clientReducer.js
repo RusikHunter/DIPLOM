@@ -5,11 +5,12 @@ const clientSlice = createSlice({
     initialState: {
         language: 'ua', // локализация для всего приложения
         currentPage: 'main', // текущая страница
+        currentUser: {},
         theme: 'dark', // текущая тема
-        isLogged: true, // авторизирован ли пользователь
+        isLogged: false, // авторизирован ли пользователь
         isBurgerOpen: false, // открыто ли бургер меню
+        isPlayerOpen: false, // открыт ли плеер
         filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
-        similarGenres: '', // строка похожих жанров на MoviePage 
     },
     reducers: {
         setLanguage: (state) => {
@@ -17,6 +18,9 @@ const clientSlice = createSlice({
         },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload
+        },
+        setCurrentUser: (state, action) => {
+            state.currentUser = action.payload
         },
         setTheme: (state) => {
             state.theme = state.theme === 'light' ? 'dark' : 'light'
@@ -27,14 +31,14 @@ const clientSlice = createSlice({
         setIsBurgerOpen: (state) => {
             state.isBurgerOpen = !state.isBurgerOpen
         },
+        setIsPlayerOpen: (state) => {
+            state.isPlayerOpen = !state.isPlayerOpen
+        },
         resetBurgerMenu: (state) => {
             state.isBurgerOpen = false;
         },
         changeFilmsPageGenresArray: (state, action) => {
             state.filmsPageGenresArray = action.payload
-        },
-        setSimilarGenres: (state, action) => {
-            state.similarGenres = action.payload
         }
     },
 })
@@ -42,12 +46,13 @@ const clientSlice = createSlice({
 export const {
     setLanguage,
     setCurrentPage,
+    setCurrentUser,
     setTheme,
     setIsLogged,
     setIsBurgerOpen,
+    setIsPlayerOpen,
     resetBurgerMenu,
     changeFilmsPageGenresArray,
-    setSimilarGenres
 } = clientSlice.actions
 
 export default clientSlice.reducer

@@ -1,15 +1,27 @@
 import React from "react"
+import { useState, useEffect } from "react"
 import '../Registration/AccountForm.scss'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import { useForm } from "react-hook-form";
+import { setCurrentUser, setIsLogged } from "../../store/reducers/clientReducer";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Authorization({ handleChangeToReg }) {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const language = useSelector(state => state.client.language)
     const translations = translationsJSON
 
+    // Состояние для ошибки
+    const [errorMessage, setErrorMessage] = useState('')
+
     // form
 
+    const apiUrl = 'http://127.0.0.1:8000'
+
+    // создание формы
     const {
         register,
         handleSubmit,
@@ -17,9 +29,38 @@ export default function Authorization({ handleChangeToReg }) {
         formState: { errors }
     } = useForm()
 
-    const onSubmit = (data) => {
-        console.log("Данные формы:", data)
+    const loginUser = async (loginData) => {
+        try {
+            const response = await axios.post(`${apiUrl}/users/login`, loginData)
+
+            if (response.status === 200 && response.data) {
+                return response.data
+            } else {
+                throw new Error(translations[language].accountForm.userNotFound)
+            }
+        } catch (error) {
+            setErrorMessage(translations[language].accountForm.incorrectData)
+            throw error
+        }
     };
+
+    const onSubmit = async (data) => {
+        try {
+            const accountToRequest = {
+                email: data.email,
+                password: data.password
+            }
+
+            const userToAuthorization = await loginUser(accountToRequest)
+
+            // Если пользователь успешно авторизован
+            localStorage.setItem('user', JSON.stringify(userToAuthorization))
+            localStorage.setItem('isLogged', true)
+            dispatch(setCurrentUser(userToAuthorization))
+            dispatch(setIsLogged())
+            navigate('/account')
+        } catch (error) { }
+    }
 
     // Получаем значение пароля для сравнения
     const password = watch("password")
@@ -36,10 +77,10 @@ export default function Authorization({ handleChangeToReg }) {
                             <label htmlFor="accountFormEmail">
                                 <input
                                     {...register("email", {
-                                        required: "Введите email",
+                                        required: translations[language].accountForm.enterEmail,
                                         pattern: {
                                             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                                            message: "Некорректный email"
+                                            message: translations[language].accountForm.incorrectEmail
                                         }
                                     })}
                                     className="account-form__input account-form__input--email"
@@ -53,8 +94,8 @@ export default function Authorization({ handleChangeToReg }) {
                             <label htmlFor="accountFormPassword">
                                 <input
                                     {...register("password", {
-                                        required: "Введите пароль",
-                                        minLength: { value: 6, message: "Минимум 6 символов" }
+                                        required: translations[language].accountForm.enterPassword,
+                                        minLength: { value: 6, message: translations[language].accountForm.min6Letters }
                                     })}
                                     className="account-form__input account-form__input--password"
                                     type="password"
@@ -62,6 +103,11 @@ export default function Authorization({ handleChangeToReg }) {
                                 />
                                 {errors.password && <p className="account-form__error-text">{errors.password.message}</p>}
                             </label>
+
+                            {/* Error message */}
+                            {errorMessage && (
+                                <p className="account-form__error-text">{errorMessage}</p>
+                            )}
 
                             {/* Submit Button */}
                             <button type="submit" className="account-form__button account-form__button--submit">

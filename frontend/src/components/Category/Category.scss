@@ -1,6 +1,6 @@
 .category {
     background-color: var(--color-background);
-    
+
     &__inner {
         flex-direction: column;
         padding-inline: 200px;
@@ -37,6 +37,10 @@
         }
     }
 
+    &__row--content-start {
+        justify-content: start !important;
+    }
+
     & .film-card {
         width: calc((100% - 4 * 15px) / 6) !important;
         aspect-ratio: 241 / 457 !important;
@@ -68,5 +72,11 @@
                 height: 18px;
             }
         }
+    }
+
+    &__text--no-content {
+        @include fluid-text(16, 16);
+        @include font('Arial', 500, 1);
+        color: var(--color-text);
     }
 }
