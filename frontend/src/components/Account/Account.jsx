@@ -31,6 +31,7 @@ export default function Account() {
     const handleChangeUsername = async () => {
         try {
             const response = await axios.put(`http://localhost:8000/users/${currentUser.email}`, {
+                ...currentUser,
                 username: usernameInputValue,
             })
 

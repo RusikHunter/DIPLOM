@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, EmailStr
-from typing import Optional
-from typing import List
+from typing import Optional, List
 import sqlite3
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -33,6 +32,7 @@ def init_db():
 
 init_db()
 
+# Модели данных
 class User(BaseModel):
     username: str
     email: EmailStr
@@ -47,6 +47,7 @@ class UserLogin(BaseModel):
 class UserUpdate(BaseModel):
     username: Optional[str] = None
     favoriteMovies: Optional[List[int]] = None
+    plan: Optional[str] = None
 
 @app.post("/users/")
 def create_user(user: User):
@@ -106,18 +107,17 @@ def update_user(email: str, user_update: UserUpdate):
         conn.close()
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Обновляем username, если передан новый
-    new_username = user_update.username if user_update.username else user_data[0]
-
-    # Обновляем favoriteMovies, если передан новый список
+    # Обновляем только те поля, которые были переданы
+    new_username = user_update.username if user_update.username is not None else user_data[0]
     new_favorite_movies = ",".join(map(str, user_update.favoriteMovies)) if user_update.favoriteMovies is not None else user_data[1]
+    new_plan = user_update.plan if user_update.plan is not None else user_data[2]
 
-    # Обновляем план, если передан новый
-    new_plan = user_update.plan if user_update.plan else user_data[2]
-
+    # Формируем SQL запрос с учётом изменений
+    query = """
+        UPDATE users SET username = ?, favoriteMovies = ?, plan = ? WHERE email = ?
+    """
     try:
-        cursor.execute("UPDATE users SET username = ?, favoriteMovies = ?, plan = ? WHERE email = ?", 
-                       (new_username, new_favorite_movies, new_plan, email))
+        cursor.execute(query, (new_username, new_favorite_movies, new_plan, email))
         conn.commit()
     except sqlite3.IntegrityError:
         conn.close()
