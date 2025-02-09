@@ -121,6 +121,21 @@
             "planStandart": "Стандартний",
             "planPremium": "Преміум"
         },
+        "plan": {
+            "planBasic": "Базовий",
+            "planStandart": "Стандартний",
+            "planPremium": "Преміум",
+            "pricePerMonth": "Ціна за місяць",
+            "quality": "Якість відео й звуку",
+            "divisiveness": "Роздільна здатність",
+            "supportedDevices": "Підтримувані пристрої:",
+            "simultaneouslyDevices": "Пристрої на яких можна дивитися одночасно",
+            "toDownloadDevices": "Пристрої для завантаження",
+            "qualityGood": "Хороша",
+            "qualityWonderful": "Чудова",
+            "qualityBest": "Найкраща",
+            "devices": "Телевізор, комп’ютер, мобільний телефон, планшет"
+        },
         "footer": {
             "linksPrepayments": "Передоплати",
             "linksLoyaltyProgram": "Програма лояльності",
@@ -261,6 +276,21 @@
             "planBasic": "Basic",
             "planStandart": "Standart",
             "planPremium": "Premium"
+        },
+        "plan": {
+            "planBasic": "Basic",
+            "planStandart": "Standart",
+            "planPremium": "Premium",
+            "pricePerMonth": "Price per month",
+            "quality": "Quality of video and sound",
+            "divisiveness": "Divisiveness",
+            "supportedDevices": "Supported devices",
+            "simultaneouslyDevices": "Devices on which you can watch simultaneously",
+            "toDownloadDevices": "Devices to download",
+            "qualityGood": "Good",
+            "qualityWonderful": "Wonderful",
+            "qualityBest": "The best",
+            "devices": "TV, computer, mobile phone, tablet"
         },
         "footer": {
             "linksPrepayments": "Prepayments",

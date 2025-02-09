@@ -15,6 +15,7 @@ import MoviePage from './pages/MoviePage/MoviePage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import AccountPage from './pages/AccoutPage/AccountPage';
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
+import PlanPage from './pages/PlanPage/PlanPage';
 import TermsPage from './pages/TermsPage/TermsPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
@@ -52,6 +53,7 @@ export default function App() {
                 <Route path="/auth" element={<PrivateRouteAuth element={<AuthPage />} />} />
                 <Route path="/account" element={<PrivateRouteAccount element={<AccountPage />} />} />
                 <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/plan" element={<PlanPage />} />
                 <Route path="/terms" element={<TermsPage />} />
             </Routes>
             <Footer />
