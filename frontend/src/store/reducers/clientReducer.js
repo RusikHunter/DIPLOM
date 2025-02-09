@@ -9,6 +9,7 @@ const clientSlice = createSlice({
         theme: 'dark', // текущая тема
         isLogged: false, // авторизирован ли пользователь
         isBurgerOpen: false, // открыто ли бургер меню
+        isPlayerOpen: false, // открыт ли плеер
         filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
     },
     reducers: {
@@ -30,6 +31,9 @@ const clientSlice = createSlice({
         setIsBurgerOpen: (state) => {
             state.isBurgerOpen = !state.isBurgerOpen
         },
+        setIsPlayerOpen: (state) => {
+            state.isPlayerOpen = !state.isPlayerOpen
+        },
         resetBurgerMenu: (state) => {
             state.isBurgerOpen = false;
         },
@@ -46,6 +50,7 @@ export const {
     setTheme,
     setIsLogged,
     setIsBurgerOpen,
+    setIsPlayerOpen,
     resetBurgerMenu,
     changeFilmsPageGenresArray,
 } = clientSlice.actions

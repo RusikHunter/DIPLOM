@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import translationsJSON from '../../assets/translations.json'
 import backgroundFilmCard from '../../assets/icons/backgroundFilmCard.png'
 import backgroundIntro from '../../assets/icons/backgroundIntro.png'
-import { setCurrentUser } from "../../store/reducers/clientReducer"
+import { setCurrentUser, setIsPlayerOpen } from "../../store/reducers/clientReducer"
+import Player from '../Player/Player'
 import axios from "axios"
 
 
@@ -55,6 +56,10 @@ export default function IntroDetails({ data }) {
         } else {
             navigate('/auth')
         }
+    }
+
+    const handleOpenPlayer = () => {
+        dispatch(setIsPlayerOpen())
     }
 
     useEffect(() => {
@@ -107,7 +112,7 @@ export default function IntroDetails({ data }) {
                             {isLogged
                                 ?
                                 <Link>
-                                    <button className="intro__button--play">
+                                    <button className="intro__button--play" onClick={handleOpenPlayer}>
                                         {translations[language].intro.view}
                                     </button>
                                 </Link>
@@ -151,6 +156,9 @@ export default function IntroDetails({ data }) {
                     </div>
                 </div>
             </div>
+
+            <div id="player-root"></div>
+            <Player />
         </section>
     )
 }

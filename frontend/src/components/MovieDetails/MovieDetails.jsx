@@ -29,8 +29,6 @@ export default function MovieDetails({ data }) {
     if (isLoading) return <p>abc</p>
     if (isError || !reviewsData) return <p>error</p>
 
-    console.log('reviewsData', reviewsData)
-
     for (let i = 0; i < movieData.reviewsCount; ++i) {
         reviews.push({
             author: reviewsData[i].name,
