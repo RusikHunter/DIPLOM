@@ -47,8 +47,8 @@ export default function Category({ title }) {
 
     const [visibleRows, setVisibleRows] = useState(5)
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError || !data) return <div>Error loading data</div>
+    if (isLoading) return <React.Fragment />
+    if (isError || !data) return <React.Fragment />
 
     const moviesPerRow = 6
     const moviesToRender = data.slice(0, visibleRows * moviesPerRow)

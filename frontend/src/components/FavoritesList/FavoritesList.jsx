@@ -18,14 +18,11 @@ export default function FavoritesList() {
         enabled: currentUser.favoriteMovies !== undefined
     })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError || !data) return <div>Error loading data</div>
+    if (isLoading) return <React.Fragment />
+    if (isError || !data) return <React.Fragment />
 
     const dataToRow1 = data.slice(0, 6)
     const dataToRow2 = data.slice(6)
-
-    console.log(dataToRow1)
-    console.log(dataToRow2)
 
     return (
         <>

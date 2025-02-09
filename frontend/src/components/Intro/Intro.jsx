@@ -76,8 +76,8 @@ export default function Intro() {
 
     // ! todo доделать эти компоненты, потому что когда рендерится, то происходит смещение, ну крч я пойму 100%
     // ! а то щас непонятно объясняю
-    if (isLoading) return <div>Loading...</div>
-    if (error) return <div>Error occurred while fetching data: {error.message}</div>
+    if (isLoading) return <React.Fragment />
+    if (error) return <React.Fragment />
 
     const movieData = {
         id: data.id,

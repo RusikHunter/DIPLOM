@@ -18,8 +18,8 @@ export default function Collections() {
         queryFn: async () => fetchAllMovies(),
     })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError || !data) return <div>Error loading data</div>
+    if (isLoading) return <React.Fragment />
+    if (isError || !data) return <React.Fragment />
 
     const slideSets = [
         {

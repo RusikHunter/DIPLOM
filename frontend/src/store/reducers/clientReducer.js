@@ -10,7 +10,6 @@ const clientSlice = createSlice({
         isLogged: false, // авторизирован ли пользователь
         isBurgerOpen: false, // открыто ли бургер меню
         filmsPageGenresArray: [], // массив жанров, по которым осуществляется поиск в FilmsPage
-        similarGenres: '', // строка похожих жанров на MoviePage 
     },
     reducers: {
         setLanguage: (state) => {
@@ -36,9 +35,6 @@ const clientSlice = createSlice({
         },
         changeFilmsPageGenresArray: (state, action) => {
             state.filmsPageGenresArray = action.payload
-        },
-        setSimilarGenres: (state, action) => {
-            state.similarGenres = action.payload
         }
     },
 })
@@ -52,7 +48,6 @@ export const {
     setIsBurgerOpen,
     resetBurgerMenu,
     changeFilmsPageGenresArray,
-    setSimilarGenres
 } = clientSlice.actions
 
 export default clientSlice.reducer
